@@ -1,0 +1,236 @@
+<cards>
+    <card>
+        <name v="Where Ancients Tread"/>
+        <cost v="4R" />
+        <types>
+            <type v="enchantment" />
+        </types>
+        <text t="Whenever a creature with power 5 or greater enters the battlefield under your control, you may have Where Ancients Tread deal 5 damage to target creature or player." />
+        <script>
+            <trigger zone="battlefield">
+                <on>
+                    <etb>
+                        <what>
+                            <permanent-filter>
+                                <type f="creature" />
+                                <power f=">5" />
+                            </permanent-filter>
+                        </what>
+                    </etb>
+                </on>
+                <target>
+                    <damageable />
+                </target>
+                <effect>
+                    <deal-damage>
+                        <to>
+                            <pop-target />
+                        </to>
+                        <amount v="5"/>
+                    </deal-damage>
+                </effect>
+            </trigger>
+        </script>
+    </card>
+
+    <card>
+        <name v="Prismatic Vista" />
+        <types>
+            <type v="land" />
+        </types>
+        <text v="{T}, Pay 1 life, Sacrifice Prismatic Vista: Search your library for a basic land card, put it onto the battlefield, then shuffle." />
+        <script>
+            <aa zone="battlefield">
+                <costs>
+                    <tap-cost />
+                    <pay-life-cost>
+                        <amount v="1" />
+                    </pay-life-cost>
+                    <sacrifice-cost />
+                </costs>
+                <effect>
+                    <search-and-put-in-zone>
+                        <what>
+                            <card-filter>
+                                <type f="land" />
+                                <supertype f="basic" />
+                            </card-filter>
+                        </what>
+                        <zone v="battlefield" />
+                    </search-and-put-in-zone>
+                    <shuffle />
+                </effect>
+            </aa>
+        </script>
+    </card>
+
+    <card>
+        <name v="Hypervolt Grasp" />
+        <cost v="2R" />
+        <types>
+            <type v="enchantment" />
+            <subtype v="Aura" />
+        </types>
+        <text v="Enchant creature\nEnchante creature has '{T}: This creature deals 1 damage to target creature or player.'\n1U: Return Hypervolt Grasp to its owner's hand." />
+        <script>
+            <enchant-target>
+                <permanent-filter>
+                    <type v="creature" />
+                </permanent-filter>
+                <effect>
+                    <give-ability>
+                        <to>
+                            <enchanted />
+                        </to>
+                        <what>
+                            <aa>
+                                <costs>
+                                    <tap-cost />
+                                </costs>
+                                <target>
+                                    <damageable />
+                                </target>
+                                <effect>
+                                    <deal-damage>
+                                        <to>
+                                            <poptarget />
+                                        </to>
+                                        <amount v="1" />
+                                    </deal-damage>
+                                </effect>
+                            </aa>
+                        </what>
+                    </give-ability>
+                </effect>
+            </enchant-target>
+            <aa zone="battlefield">
+                <zone-change>
+                    <what>
+                        <this />
+                    </what>
+                    <zone v="owners-hand" />
+                </zone-change>
+            </aa>
+        </script>
+    </card>
+
+    <card>
+        <name v="Archdemon of Unx" />
+        <cost v="5BB" />
+        <types>
+            <type v="creature" />
+            <subtype v="Demon" />
+        </types>
+        <text v="Flying, trample\nAt the beginning of your upkeep, sacrifice a non-Zombie creature, then put a 2/2 black Zombe creature token into play." />
+        <script>
+            <static zone="battlefield">
+                <keyword-ability v="flying" />
+                <keyword-ability v="trample" />
+            </static>
+            <trigger zone="battlefield">
+                <on>
+                    <phase-filter>
+                        <phase v="upkeep" />
+                        <ability-owner />
+                    </phase-filter>
+                </on>
+                <effect>
+                    <sacrifice>
+                        <permanent-filter>
+                            <type v="creature" />
+                            <subtype v="!Zombie" />
+                        </permanent-filter>
+                    </sacrifice>
+                    <create-token>
+                        <card>
+                            <name v="Zombie" />
+                            <types>
+                                <type v="creature" />
+                                <subtype v="Zombie" />
+                            </types>
+                            <color v="B" />
+                            <power v="2" />
+                            <toughness v="2" />
+                        </card>
+                    </create-token>
+                </effect>
+            </trigger>
+        </script>
+    </card>
+
+    <card>
+        <name v="Hatefil Eidolon" />
+        <cost v="B" />
+        <types>
+            <type v="enchantment" />
+            <type v="creature" />
+            <subtype v="spirit" />
+        </types>
+        <text v="Lifelink\nWhenever an enchanted creature dies, draw a card for each Aura you controlled that was attached to it." />
+        <script>
+            <static zone="battlefield">
+                <keyword-ability v="lifelink" />
+            </static>
+            <trigger zone="battlefield">
+                <on>
+                    <zone-change from="battlefield" to="graveyard">
+                        <card-filter record="r1">
+                            <type f="creature" />
+                            <aura-count f=">1" />
+                        </card-filter>
+                    </zone-change>
+                    <effect>
+                        <draw-cards>
+                            <amount>
+                                <aura-count>
+                                    <what>
+                                        <get-record v="r1"/>
+                                    </what>
+                                </aura-count>
+                            </amount>
+                        </draw-cards>
+                    </effect>
+                </on>
+            </trigger>
+        </script>
+    </card>
+
+    <card>
+        <name v="Famished Foragers" />
+        <cost v="3R" />
+        <types>
+            <type v="creature" />
+            <subtype v="vampire" />
+        </types>
+        <power v="4" />
+        <toughness v="3" />
+        <text v="When Famished Foragers enters the battlefield, if an opponent lost life this turn, add RRR." />
+        <script>
+            <trigger zone="battlefield">
+                <on>
+                    <etb />
+                </on>
+                <if-clause>
+                    <!-- TODO -->
+                </if-clause>
+                <effect>
+                    <add-mana>
+                        <mana t="R" amount="3" />
+                    </add-mana>
+                </effect>
+            </trigger>
+            <aa zone="battlefield">
+                <costs>
+                    <mana-cost>
+                        <mana t="*" amount="2" />
+                        <mana t="R" amount="R" />
+                    </mana-cost>
+                    <discard-cards-cost amount="1" />
+                </costs>
+                <effect>
+                    <draw-cards amount="1" />
+                </effect>
+            </aa>
+        </script>
+    </card>
+</cards>

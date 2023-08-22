@@ -1,0 +1,12 @@
+{
+    "pipeline": [
+        "pipeline/cardname.tt",
+        "pipeline/append.tt",
+        "pipeline/surround-mana.tt",
+        "pipeline/lowercase.tt",
+        "pipeline/type-surrounder.tt"
+    ],
+    "templates": [
+        "templates/append-front.ttt"
+    ]
+}

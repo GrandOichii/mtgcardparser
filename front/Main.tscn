@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://din77vaj1rxrr"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_8c403"]
+
+[node name="Main" type="CanvasLayer"]
+script = ExtResource("1_8c403")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Cards" type="TabBar" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cards"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="CardNameFilter" type="LineEdit" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+placeholder_text = "Enter card name here"
+clear_button_enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CardsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sample random cards"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+prefix = "Amount: "
+
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sample"
+
+[node name="CardsDownloadProgressBar" type="ProgressBar" parent="VBoxContainer/TabContainer/Cards/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="DownloadCardsButton" type="Button" parent="VBoxContainer/TabContainer/Cards/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Download latest cards"
+
+[node name="BulkDataRequest" type="HTTPRequest" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton"]
+unique_name_in_owner = true
+use_threads = true
+
+[node name="CardsDownloadRequest" type="HTTPRequest" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton"]
+unique_name_in_owner = true
+download_file = "cards.json"
+use_threads = true
+
+[connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton" to="." method="OnDownloadCardsButtonPressed"]
+[connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/BulkDataRequest" to="." method="OnBulkDataRequestRequestCompleted"]
+[connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/CardsDownloadRequest" to="." method="OnCardsDownloadRequestRequestCompleted"]

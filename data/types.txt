@@ -1,0 +1,14 @@
+artifact
+conspiracy
+creature
+dungeon
+enchantment
+instant
+land
+phenomenon
+plane
+planeswalker
+scheme
+sorcery
+tribal
+vanguard

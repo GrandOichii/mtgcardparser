@@ -1,0 +1,8 @@
+{
+    "dotnet.defaultSolution": "core/core.sln",
+
+    "files.associations": {
+        "*.tt": "json",
+        "*.ttt": "json"
+    }
+}

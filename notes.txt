@@ -1,0 +1,22 @@
+-= MTG Card Parser =-
+
+Uses MTG cards and converts them to an XML format, then using that format converts them to scripts (could be used for Forge or some other future engine).
+
+Has to load a project, the projects represents the way the cards are transformed.
+
+Tabs:
+    Cards:
+        The list of all cards, present locally.
+    Text Transformer Pipelines:
+        A list of transformers, applied to the card text, using the whole card. 
+        (Example: replace all card name instances with CARDNAME)
+    Parsing Tree:
+        The actual process of parsing the text, transformed using pipeline into the XML format.
+    Templates:
+        The templates for the main parsing tree. Has the same editor as the main parsing tree.
+
+
+
+Front features:
+    Text transformer result text coloring - a separate tab for configuring all the colors for the surrounders used in the templates
+    (Example: [mana:rrr] -> [color=red]rrr[/color])

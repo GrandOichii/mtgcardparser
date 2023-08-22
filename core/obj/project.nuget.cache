@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "uypk8jkttteLaZQRTJNZGVATJJUAG+NFGzn0A0G9wpnxQl4KBQ9jmxRXm8uD5dg0YDHoQuVjHYWMHFt8vNM5qw==",
+  "success": true,
+  "projectFilePath": "c:\\Users\\ihawk\\code\\mtg-card-parser\\core\\core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ihawk\\.nuget\\packages\\keralua\\1.3.1\\keralua.1.3.1.nupkg.sha512",
+    "C:\\Users\\ihawk\\.nuget\\packages\\nlua\\1.6.0\\nlua.1.6.0.nupkg.sha512"
+  ],
+  "logs": []
+}
