@@ -20,3 +20,17 @@ Tabs:
 Front features:
     Text transformer result text coloring - a separate tab for configuring all the colors for the surrounders used in the templates
     (Example: [mana:rrr] -> [color=red]rrr[/color])
+
+
+Parser:
+    Class list:
+        Node - base class of all nodes, takes in a string.
+        Matcher: Node - takes in a string, runs it through the regex pattern, then passes down the named nodes
+            Template: Matcher?
+            Name: string
+            Pattern: string
+            Children: List<Node>
+        Selector: Node - takes in a string, tries to match with any of the child Matches, passes down to the first matched.
+            Template: Selector?
+            Name: string
+            Children: List<Matcher>

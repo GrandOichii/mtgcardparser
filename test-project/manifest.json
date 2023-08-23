@@ -1,3 +1,4 @@
 {
-    "ttp-dir": "ttp"
+    "ttp-dir": "ttp",
+    "parsers": "parsers"
 }

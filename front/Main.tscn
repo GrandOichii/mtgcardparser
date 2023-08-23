@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Main.cs" id="1_8c403"]
 [ext_resource type="PackedScene" uid="uid://dokm78qayo4n8" path="res://windows/CardViewWindow.tscn" id="2_u3tsi"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="3_c378u"]
-[ext_resource type="PackedScene" uid="uid://b36fxsgiudut2" path="res://tabs/TPPTab.tscn" id="4_6o0jp"]
+[ext_resource type="PackedScene" uid="uid://b36fxsgiudut2" path="res://tabs/TPPTab.tscn" id="4_o111x"]
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_8c403")
@@ -24,6 +24,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Cards" type="TabBar" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -99,7 +100,7 @@ unique_name_in_owner = true
 download_file = "cards.json"
 use_threads = true
 
-[node name="TTP" parent="VBoxContainer/TabContainer" instance=ExtResource("4_6o0jp")]
+[node name="TTP" parent="VBoxContainer/TabContainer" instance=ExtResource("4_o111x")]
 layout_mode = 2
 
 [node name="BakeButton" type="Button" parent="VBoxContainer"]
@@ -114,9 +115,9 @@ layout_mode = 2
 [connection signal="ClearSampled" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="ClearCards"]
 [connection signal="ProjectLoaded" from="." to="VBoxContainer/TabContainer/TTP" method="OnProjectLoaded"]
 [connection signal="close_requested" from="CardViewWindow" to="." method="OnCardViewWindowCloseRequested"]
-[connection signal="ViewCard" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
+[connection signal="CardClicked" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampleRandom" to="." method="OnSampleRandomPressed"]
-[connection signal="ViewCard" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" to="." method="ViewCard"]
+[connection signal="CardClicked" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton" to="." method="OnDownloadCardsButtonPressed"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/BulkDataRequest" to="." method="OnBulkDataRequestRequestCompleted"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/CardsDownloadRequest" to="." method="OnCardsDownloadRequestRequestCompleted"]

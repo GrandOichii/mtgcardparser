@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://b36fxsgiudut2"]
+[gd_scene load_steps=3 format=3 uid="uid://b36fxsgiudut2"]
 
 [ext_resource type="Script" path="res://tabs/TPPTab.cs" id="1_841tq"]
+[ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="2_h5ird"]
 
 [node name="TTPTab" type="TabBar"]
-visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_841tq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -18,66 +25,45 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Pipeline"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="ItemList" type="ItemList" parent="HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="Pipeline" type="TabBar" parent="HBoxContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="TextTransformerList" type="ItemList" parent="HBoxContainer/VBoxContainer/TabContainer/Pipeline"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Templates" type="TabBar" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextTransformerTemplateList" type="ItemList" parent="HBoxContainer/VBoxContainer/TabContainer/Templates"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AddTTButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Add"
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="EditTTButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Edit"
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Remove"
-
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Templates"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ItemList" type="ItemList" parent="HBoxContainer/VBoxContainer/VBoxContainer2/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Add"
-
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Edit"
-
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="RemoveTTButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Remove"
 
@@ -89,9 +75,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="ItemList" type="ItemList" parent="HBoxContainer/VBoxContainer2"]
+[node name="CardsList" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("2_h5ird")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2

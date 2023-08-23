@@ -6,7 +6,7 @@ using System.Threading;
 public partial class CardsList : ItemList
 {
 	[Signal]
-	public delegate void ViewCardEventHandler(SourceCard card);
+	public delegate void CardClickedEventHandler(SourceCard card);
 	
 	private void AddCard(SourceCard card)
 	{
@@ -27,6 +27,6 @@ public partial class CardsList : ItemList
 	public SourceCard this[int i] => GetItemMetadata(i).As<SourceCard>();
 	private void OnItemSelected(int index)
 	{
-		EmitSignal(SignalName.ViewCard, this[index]);
+		EmitSignal(SignalName.CardClicked, this[index]);
 	}
 }
