@@ -8,7 +8,11 @@ using System.Collections.Generic;
 //using Godot.Collections;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using MtgCardParser;
  
+// TODO:
+// Make card list better - add ability to manually add cards to sampled list + removing them
 
 public partial class Main : CanvasLayer
 {
@@ -34,6 +38,10 @@ public partial class Main : CanvasLayer
 	private string _cardSrc;
 	
 	public override void _Ready() {
+		// TODO remove
+		GetNode<TabContainer>("VBoxContainer/TabContainer").CurrentTab = 1;
+		Load("../test-project");
+		
 		#region Node fetching
 		CardViewWindowNode = GetNode<CardViewWindow>("%CardViewWindow");
 		CardsListNode = GetNode<CardsList>("%CardsList");
@@ -47,10 +55,11 @@ public partial class Main : CanvasLayer
 		#endregion
 		
 		#region Card loading
-		if (File.Exists(_cardSrc)) {
-			Thread t = new Thread(() => LoadCards());
-			t.Start();
-		}
+		// TODO add back
+//		if (File.Exists(_cardSrc)) {
+//			Thread t = new Thread(() => LoadCards());
+//			t.Start();
+//		}
 		#endregion
 	}
 	
@@ -152,6 +161,7 @@ public partial class Main : CanvasLayer
 	#endregion
 	
 	#region Random sampling
+	
 	[Signal]
 	public delegate void ClearSampledEventHandler();
 	[Signal]
@@ -168,4 +178,20 @@ public partial class Main : CanvasLayer
 	}
 	
 	#endregion
+	
+	#region Project loading
+	
+	[Signal]
+	public delegate void ProjectLoadedEventHandler(ProjectWrapper project);
+	
+	public void Load(string projectPath) {
+		var project = Project.Load(projectPath);
+		EmitSignal(SignalName.ProjectLoaded, new ProjectWrapper(project));
+	}
+	#endregion
+}
+
+public partial class ProjectWrapper : Node {
+	public Project Project { get; }
+	public ProjectWrapper(Project p) { Project = p; }
 }
