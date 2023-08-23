@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 public partial class SourceCard : Node
 {
 	[JsonPropertyName("name")]
-	public string Name { get; set; }
+	public string CName { get; set; }
 	[JsonPropertyName("image_uris")]
 	public Dictionary<string, string> ImageURIs { get; set; }
 	[JsonPropertyName("mana_cost")]
@@ -19,4 +19,9 @@ public partial class SourceCard : Node
 	public List<string> Colors { get; set; }
 	[JsonPropertyName("typeline")]
 	public string Typeline { get; set; }
+	[JsonPropertyName("power")]
+	public string Power { get; set; }
+	[JsonPropertyName("toughness")]
+	public string Toughness { get; set; }
+	
 }

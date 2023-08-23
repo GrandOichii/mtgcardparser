@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://dokm78qayo4n8"]
+
+[ext_resource type="Script" path="res://windows/CardViewWindow.cs" id="1_b3xen"]
+
+[node name="CardViewWindow" type="Window"]
+initial_position = 2
+size = Vector2i(1000, 800)
+always_on_top = true
+content_scale_mode = 1
+script = ExtResource("1_b3xen")
+
+[node name="ImageRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainContainer" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="CanvasLayer/MainContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/MainContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Card name here"
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/MainContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CostLabel" type="Label" parent="CanvasLayer/MainContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Card cost here"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/MainContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Power: 2"
+
+[node name="ToughnessLabel" type="Label" parent="CanvasLayer/MainContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Toughness: 4"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MainContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextLabel" type="Label" parent="CanvasLayer/MainContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Card text here
+Card text here
+Card text here"
+autowrap_mode = 2
+
+[connection signal="request_completed" from="ImageRequest" to="." method="OnImageRequestRequestCompleted"]

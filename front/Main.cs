@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.IO;
 using System.Threading;
 
@@ -11,28 +12,37 @@ using System.Text.Json.Serialization;
 
 public partial class Main : CanvasLayer
 {
+	private readonly Random Rnd = new Random();
 	private readonly string BULK_DATA_INFO_URL = "https://api.scryfall.com/bulk-data";
 	
 	[Signal]
 	public delegate void CardAddedEventHandler(SourceCard card);
 	
+	public List<SourceCard> Cards { get; private set; }
+	
 	#region Nodes
-	public VBoxContainer CardsListNode { get; private set; }
+	public CardsList CardsListNode { get; private set; }
+	public CardsList SampledCardsListNode { get; private set; }
 	public HttpRequest BulkDataRequestNode { get; private set; }
 	public ProgressBar CardsDownloadProgressBarNode { get; private set; }
 	public Button DownloadCardsButtonNode { get; private set; }
 	public HttpRequest CardsDownloadRequestNode { get; private set; }
+	public CardViewWindow CardViewWindowNode { get; private set; }
+	public SpinBox SampleSizeNode { get; private set; }
 	#endregion
 	
 	private string _cardSrc;
 	
 	public override void _Ready() {
 		#region Node fetching
-		CardsListNode = GetNode<VBoxContainer>("%CardsList");
+		CardViewWindowNode = GetNode<CardViewWindow>("%CardViewWindow");
+		CardsListNode = GetNode<CardsList>("%CardsList");
+		SampledCardsListNode = GetNode<CardsList>("%SampledCardsList");
 		BulkDataRequestNode = GetNode<HttpRequest>("%BulkDataRequest");
 		CardsDownloadProgressBarNode = GetNode<ProgressBar>("%CardsDownloadProgressBar");
 		DownloadCardsButtonNode = GetNode<Button>("%DownloadCardsButton");
 		CardsDownloadRequestNode = GetNode<HttpRequest>("%CardsDownloadRequest");
+		SampleSizeNode = GetNode<SpinBox>("%SampleSize");
 		_cardSrc = CardsDownloadRequestNode.DownloadFile;
 		#endregion
 		
@@ -40,7 +50,6 @@ public partial class Main : CanvasLayer
 		if (File.Exists(_cardSrc)) {
 			Thread t = new Thread(() => LoadCards());
 			t.Start();
-			GD.Print("Called load cards");
 		}
 		#endregion
 	}
@@ -113,23 +122,50 @@ public partial class Main : CanvasLayer
 		// TODO after re-downloading cards within the same session progress bar shows status as 99%, then jumps to zero
 		Downloading = false;
 		
-		GD.Print("Downloaded");
 		LoadCards();
 	}
 	#endregion
 	
 	#region Card loading
 	public void LoadCards() {
-		var cards = JsonSerializer.Deserialize<List<SourceCard>>(File.ReadAllText(_cardSrc));
-		GD.Print("Parsed");
-		foreach (var card in cards)
+		Cards = JsonSerializer.Deserialize<List<SourceCard>>(File.ReadAllText(_cardSrc));
+//		SampleSizeNode.MaxValue = Cards.Count;
+		foreach (var card in Cards)
 			CallDeferred("emit_signal", "CardAdded", card);
 	}
 	#endregion
+
+
+	#region Card viewing
+	
+	private void ViewCard(SourceCard card)
+	{
+		CardViewWindowNode.Load(card);
+		CardViewWindowNode.Show();
+	}
+	
+	private void OnCardViewWindowCloseRequested()
+	{
+		CardViewWindowNode.Hide();
+	}
+	
+	#endregion
+	
+	#region Random sampling
+	[Signal]
+	public delegate void ClearSampledEventHandler();
+	[Signal]
+	public delegate void AddSampleCardEventHandler(SourceCard card);
+	
+	public IEnumerable<SourceCard> SampledCards { get; private set; }
+	
+	private void OnSampleRandomPressed()
+	{
+		EmitSignal(SignalName.ClearSampled);
+		SampledCards = Cards.OrderBy(x => Rnd.Next()).Take((int)SampleSizeNode.Value);
+		foreach (var card in SampledCards)
+			EmitSignal(SignalName.AddSampleCard, card);
+	}
+	
+	#endregion
 }
-
-
-
-
-
-

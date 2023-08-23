@@ -3,25 +3,30 @@ using System;
 using System.Threading;
 
 
-public partial class CardsList : VBoxContainer
+public partial class CardsList : ItemList
 {
-	static readonly PackedScene SelectableCardListItemPS = ResourceLoader.Load("uid://bsqjop3gdbynk") as PackedScene;
-
-	public override void _Ready()
+	[Signal]
+	public delegate void ViewCardEventHandler(SourceCard card);
+	
+	private void AddCard(SourceCard card)
 	{
-	}
-
-	public override void _Process(double delta)
-	{
-	}
-
-	private void OnMainCardAdded(SourceCard card)
-	{
-		// TODO process card changes, if card already exists
 		// TODO freezes at the beginning, very slow
-		var cardNode = SelectableCardListItemPS.Instantiate() as SelectableCardListItem;
-		
-		AddChild(cardNode);
-		cardNode.Load(card);
+		var i = AddItem(card.CName);
+		SetItemMetadata(i, card);
+	}
+	
+	private void UpdateCard(SourceCard card) {
+		// TODO process card changes, if card already exists
+		AddCard(card);
+	}
+	
+	private void ClearCards() {
+		Clear();
+	}
+	
+	public SourceCard this[int i] => GetItemMetadata(i).As<SourceCard>();
+	private void OnItemSelected(int index)
+	{
+		EmitSignal(SignalName.ViewCard, this[index]);
 	}
 }

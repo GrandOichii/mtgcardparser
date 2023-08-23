@@ -1,12 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://din77vaj1rxrr"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_8c403"]
-[ext_resource type="Script" path="res://CardsList.cs" id="2_qdkg0"]
-
-[sub_resource type="GDScript" id="GDScript_8dlkt"]
+[ext_resource type="PackedScene" uid="uid://dokm78qayo4n8" path="res://windows/CardViewWindow.tscn" id="2_u3tsi"]
+[ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="3_c378u"]
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_8c403")
+
+[node name="CardViewWindow" parent="." instance=ExtResource("2_u3tsi")]
+unique_name_in_owner = true
+visible = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
@@ -50,12 +53,9 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="CardsList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
+[node name="CardsList" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer" instance=ExtResource("3_c378u")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("2_qdkg0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -65,14 +65,18 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Sample random cards"
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SampleSize" type="SpinBox" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 prefix = "Amount: "
 
-[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="SampleRandom" type="Button" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Sample"
-script = SubResource("GDScript_8dlkt")
+
+[node name="SampledCardsList" parent="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_c378u")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="CardsDownloadProgressBar" type="ProgressBar" parent="VBoxContainer/TabContainer/Cards/VBoxContainer"]
 unique_name_in_owner = true
@@ -94,7 +98,13 @@ unique_name_in_owner = true
 download_file = "cards.json"
 use_threads = true
 
-[connection signal="CardAdded" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" method="OnMainCardAdded"]
+[connection signal="AddSampleCard" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="AddCard"]
+[connection signal="CardAdded" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" method="UpdateCard"]
+[connection signal="ClearSampled" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="ClearCards"]
+[connection signal="close_requested" from="CardViewWindow" to="." method="OnCardViewWindowCloseRequested"]
+[connection signal="ViewCard" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampleRandom" to="." method="OnSampleRandomPressed"]
+[connection signal="ViewCard" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton" to="." method="OnDownloadCardsButtonPressed"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/BulkDataRequest" to="." method="OnBulkDataRequestRequestCompleted"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/CardsDownloadRequest" to="." method="OnCardsDownloadRequestRequestCompleted"]
