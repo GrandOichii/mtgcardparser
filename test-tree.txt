@@ -1,0 +1,32 @@
+PNode - the main structure of the tree, takes in a string.
+
+manifest.json:
+{
+    "templates": [
+        "templates/aa.pnode",
+        "templates/cost.pnode",
+        "templates/if-clause.pnode"
+    ],
+    "tree": "main.xml"
+}
+
+main.xml:
+<selector name="main">
+    <pattern v="amogus (.+) funny">
+        <matcher name="effect" template="effect" />
+    </pattern>
+    <pattern v="second pattern (.+)">
+        <selector name="smt-else-name" template="smt-else" />
+    </pattern>
+</selector>
+
+aa.xml:
+<matcher name="aa" pattern="whenever (.+), (.+).">
+    <selector name="trigger" template="trigger" />
+    <selector name="effect" template="effect" />
+</matcher>
+
+trigger.xml:
+<selector name="trigger">
+    <matcher 
+</selector>

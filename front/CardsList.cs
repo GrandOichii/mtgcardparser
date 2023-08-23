@@ -25,6 +25,7 @@ public partial class CardsList : ItemList
 	}
 	
 	public SourceCard this[int i] => GetItemMetadata(i).As<SourceCard>();
+	
 	private void OnItemSelected(int index)
 	{
 		EmitSignal(SignalName.CardClicked, this[index]);

@@ -24,7 +24,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Cards" type="TabBar" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -101,6 +100,7 @@ download_file = "cards.json"
 use_threads = true
 
 [node name="TTP" parent="VBoxContainer/TabContainer" instance=ExtResource("4_o111x")]
+visible = false
 layout_mode = 2
 
 [node name="BakeButton" type="Button" parent="VBoxContainer"]
@@ -111,13 +111,14 @@ text = "Bake"
 layout_mode = 2
 
 [connection signal="AddSampleCard" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="AddCard"]
+[connection signal="AddSampleCard" from="." to="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer2/CardsList" method="AddCard"]
 [connection signal="CardAdded" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" method="UpdateCard"]
 [connection signal="ClearSampled" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="ClearCards"]
 [connection signal="ProjectLoaded" from="." to="VBoxContainer/TabContainer/TTP" method="OnProjectLoaded"]
 [connection signal="close_requested" from="CardViewWindow" to="." method="OnCardViewWindowCloseRequested"]
-[connection signal="CardClicked" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampleRandom" to="." method="OnSampleRandomPressed"]
-[connection signal="CardClicked" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton" to="." method="OnDownloadCardsButtonPressed"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/BulkDataRequest" to="." method="OnBulkDataRequestRequestCompleted"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/CardsDownloadRequest" to="." method="OnCardsDownloadRequestRequestCompleted"]
+
+[editable path="VBoxContainer/TabContainer/TTP"]

@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
+using MtgCardParser;
+
+// TODO? add scrolls to lists
+
 public partial class TPPTab : TabBar
 {
 	#region Nodes
@@ -19,9 +23,22 @@ public partial class TPPTab : TabBar
 	
 	private void OnProjectLoaded(ProjectWrapper project)
 	{
-		var p = project.Project;
-		
+		var ttp = project.Project.TTPipeline;
+		// load templates
+		foreach (var template in ttp.CustomTemplates) {
+			AddCustomTemplate(template);
+		}
+	}
+	
+	private void AddCustomTemplate(LuaTextTransformerTemplate template) {
+		var i = TextTransformerTemplateListNode.AddItem(template.Name);
+		TextTransformerTemplateListNode.SetItemMetadata(i, new TTTemplateWrapper(template));
 	}
 	
 	#endregion
+}
+
+public partial class TTTemplateWrapper : Node {
+	public LuaTextTransformerTemplate Value { get; }
+	public TTTemplateWrapper(LuaTextTransformerTemplate v) { Value = v; }
 }
