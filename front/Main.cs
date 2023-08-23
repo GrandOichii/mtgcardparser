@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.IO;
+using System.Threading;
 
 using System.Collections.Generic;
 //using Godot.Collections;
@@ -23,6 +24,8 @@ public partial class Main : CanvasLayer
 	public HttpRequest CardsDownloadRequestNode { get; private set; }
 	#endregion
 	
+	private string _cardSrc;
+	
 	public override void _Ready() {
 		#region Node fetching
 		CardsListNode = GetNode<VBoxContainer>("%CardsList");
@@ -30,6 +33,15 @@ public partial class Main : CanvasLayer
 		CardsDownloadProgressBarNode = GetNode<ProgressBar>("%CardsDownloadProgressBar");
 		DownloadCardsButtonNode = GetNode<Button>("%DownloadCardsButton");
 		CardsDownloadRequestNode = GetNode<HttpRequest>("%CardsDownloadRequest");
+		_cardSrc = CardsDownloadRequestNode.DownloadFile;
+		#endregion
+		
+		#region Card loading
+		if (File.Exists(_cardSrc)) {
+			Thread t = new Thread(() => LoadCards());
+			t.Start();
+			GD.Print("Called load cards");
+		}
 		#endregion
 	}
 	
@@ -101,10 +113,17 @@ public partial class Main : CanvasLayer
 		// TODO after re-downloading cards within the same session progress bar shows status as 99%, then jumps to zero
 		Downloading = false;
 		
-		var path = CardsDownloadRequestNode.DownloadFile;
-		var cards = JsonSerializer.Deserialize<List<SourceCard>>(File.ReadAllText(path));
-//		foreach ()
-		GD.Print(cards.Count);
+		GD.Print("Downloaded");
+		LoadCards();
+	}
+	#endregion
+	
+	#region Card loading
+	public void LoadCards() {
+		var cards = JsonSerializer.Deserialize<List<SourceCard>>(File.ReadAllText(_cardSrc));
+		GD.Print("Parsed");
+		foreach (var card in cards)
+			CallDeferred("emit_signal", "CardAdded", card);
 	}
 	#endregion
 }
