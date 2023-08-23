@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://din77vaj1rxrr"]
+[gd_scene load_steps=5 format=3 uid="uid://din77vaj1rxrr"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_8c403"]
 [ext_resource type="PackedScene" uid="uid://dokm78qayo4n8" path="res://windows/CardViewWindow.tscn" id="2_u3tsi"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="3_c378u"]
+[ext_resource type="PackedScene" uid="uid://b36fxsgiudut2" path="res://tabs/TPPTab.tscn" id="4_6o0jp"]
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_8c403")
@@ -98,107 +99,8 @@ unique_name_in_owner = true
 download_file = "cards.json"
 use_threads = true
 
-[node name="TTP" type="TabBar" parent="VBoxContainer/TabContainer"]
-visible = false
+[node name="TTP" parent="VBoxContainer/TabContainer" instance=ExtResource("4_6o0jp")]
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/TTP"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="Label" type="Label" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Pipeline"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="ItemList" type="ItemList" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Add"
-
-[node name="Button2" type="Button" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Edit"
-
-[node name="Button3" type="Button" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Remove"
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Templates"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ItemList" type="ItemList" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer2/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Add"
-
-[node name="Button2" type="Button" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Edit"
-
-[node name="Button3" type="Button" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Remove"
-
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/TTP/HBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="ItemList" type="ItemList" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="TextBoxes" type="VBoxContainer" parent="VBoxContainer/TabContainer/TTP/HBoxContainer/VBoxContainer2/ScrollContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="BakeButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -210,6 +112,7 @@ layout_mode = 2
 [connection signal="AddSampleCard" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="AddCard"]
 [connection signal="CardAdded" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" method="UpdateCard"]
 [connection signal="ClearSampled" from="." to="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="ClearCards"]
+[connection signal="ProjectLoaded" from="." to="VBoxContainer/TabContainer/TTP" method="OnProjectLoaded"]
 [connection signal="close_requested" from="CardViewWindow" to="." method="OnCardViewWindowCloseRequested"]
 [connection signal="ViewCard" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampleRandom" to="." method="OnSampleRandomPressed"]
