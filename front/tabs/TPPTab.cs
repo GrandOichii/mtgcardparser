@@ -88,6 +88,9 @@ public partial class TPPTab : TabBar
 
 	#endregion
 	
+	[Signal]
+	public delegate void TTTemplateDeletedEventHandler(TTTemplateWrapper templateW);
+	
 	private void OnAddButtonPressed()
 	{
 		// TODO ugly, think of smt other
@@ -129,6 +132,29 @@ public partial class TPPTab : TabBar
 		}
 	}
 	
+	private void OnRemoveButtonPressed()
+	{
+		switch(TTTabContainerNode.CurrentTab) {
+		case 0:
+			// text transformers
+			// TODO
+			return;
+		case 1:
+			// text transformer templates
+			
+			var items = TextTransformerTemplateListNode.GetSelectedItems();
+			if (items.Length == 0) {
+				// TODO notify the user to select a template first
+				return;
+			}
+			// TODO ask the user to confirm deleting the templates
+			var data = TextTransformerTemplateListNode.GetItemMetadata(items[0]);
+			TextTransformerTemplateListNode.RemoveItem(items[0]);
+			EmitSignal(SignalName.TTTemplateDeleted, data);
+			return;
+		}
+	}
+	
 	private List<string> TemplateNames {
 		get {
 			var result = new List<string>();
@@ -139,6 +165,7 @@ public partial class TPPTab : TabBar
 			return result;
 		}
 	}
+
 
 }
 

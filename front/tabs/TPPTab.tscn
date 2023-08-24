@@ -100,3 +100,4 @@ size_flags_vertical = 3
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/TTTabContainer/Templates/TextTransformerTemplateList" to="." method="OnTextTransformerTemplateListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/EditButton" to="." method="OnEditButtonPressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]
