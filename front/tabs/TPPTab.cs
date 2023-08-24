@@ -206,9 +206,38 @@ public partial class TPPTab : TabBar
 		TTEditorNode.Load(ttW);
 		TTEditorNode.Show();
 	}
+
+	private void OnTTEditorTTAdded(Wrapper<TextTransformer> ttW)
+	{
+		AddTT(ttW);
+		RunPipeline();
+	}
+
+	private void OnTTEditorTTUpdated(Wrapper<TextTransformer> newTTW, string oldName)
+	{
+		for (int i = 0; i < TextTransformerListNode.ItemCount; i++) {
+			var itemText = TextTransformerListNode.GetItemText(i);
+			if (itemText == oldName) {
+				TextTransformerListNode.SetItemText(i, newTTW.Value.Name);
+				TextTransformerListNode.SetItemMetadata(i, newTTW);
+				RunPipeline();
+				return;
+			}
+		}
+		GD.Print("WARN: tried to update text transformer list item with name " + oldName + " to " + newTTW.Value.Name + ", but no such item exists");
+
+	}
+
+	#endregion
 	
+	#region Pipeline activation
+	
+	public void RunPipeline() {
+		// TODO
+	}
 	
 	#endregion
 
 
 }
+

@@ -95,5 +95,6 @@ size_flags_horizontal = 3
 text = "Cancel"
 
 [connection signal="close_requested" from="." to="." method="OnCloseRequested"]
+[connection signal="item_selected" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/TemplateOption" to="." method="OnTemplateOptionItemSelected"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="OnCloseRequested"]

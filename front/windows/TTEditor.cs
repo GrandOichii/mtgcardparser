@@ -54,19 +54,22 @@ public partial class TTEditor : Window
 			
 		// template arguments
 		ClearArgumentList();
-		// TODO add only arguments associated with the template
 		foreach (var pair in tt.TemplateArgs) {
 			var argName = pair.Key;
 			var argValue = pair.Value;
-			var child = TTArgListItemPS.Instantiate() as TTArgListItem;
-			ArgumentListNode.AddChild(child);
-			child.Load(argName, argValue);
+			AddTTArgLI(argName, argValue);
 		}
 	}
 	
 	private void ClearArgumentList() {
 		foreach (var child in ArgumentListNode.GetChildren())
 			child.QueueFree();
+	}
+	
+	private void AddTTArgLI(string name, string v) {
+		var child = TTArgListItemPS.Instantiate() as TTArgListItem;
+		ArgumentListNode.AddChild(child);
+		child.Load(name, v);
 	}
 	
 	#endregion
@@ -165,6 +168,25 @@ public partial class TTEditor : Window
 		EmitSignal(SignalName.TTAdded, w);
 		Hide();
 	}
+	
+	#region Arguments
+	
+		
+	private void UpdateArgumentList() {
+		ClearArgumentList();
+		var template = TemplateOptionNode.GetItemMetadata(TemplateOptionNode.Selected).As<Wrapper<TextTransformerTemplate>>().Value;
+		foreach (var arg in template.Args) {
+			AddTTArgLI(arg.Name, "");
+		}
+	}
+	
+	private void OnTemplateOptionItemSelected(int index)
+	{
+		UpdateArgumentList();
+	}
+	#endregion
 }
+
+
 
 
