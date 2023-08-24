@@ -24,7 +24,7 @@ public partial class TPPTab : TabBar
 	public ItemList TextTransformerTemplateListNode { get; private set; }
 	public VBoxContainer TextBoxesNode { get; private set; }
 	public TTTemplateEditor TTTemplateEditorNode { get; private set; }
-	public TTEditor TTEditorNode { get; private set; }	
+	public TTEditor TTEditorNode { get; private set; }
 	public TabContainer TTTabContainerNode { get; private set; }
 	#endregion
 	
@@ -43,9 +43,9 @@ public partial class TPPTab : TabBar
 	
 	#region Project loading
 	
-	private void OnProjectLoaded(ProjectWrapper project)
+	private void OnProjectLoaded(Wrapper<Project> projectW)
 	{
-		var ttp = project.Project.TTPipeline;
+		var ttp = projectW.Value.TTPipeline;
 		// load templates
 		foreach (var template in ttp.CustomTemplates) {
 			AddCustomTemplate(template);

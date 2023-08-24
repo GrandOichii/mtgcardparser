@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b36fxsgiudut2"]
 
 [ext_resource type="Script" path="res://tabs/TPPTab.cs" id="1_841tq"]
-[ext_resource type="PackedScene" uid="uid://c6tvm2f6qeb3f" path="res://windows/TTeditor.tscn" id="2_f0lux"]
+[ext_resource type="PackedScene" uid="uid://dpaok32eyim67" path="res://windows/TTeditor.tscn" id="2_f0lux"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="2_h5ird"]
 [ext_resource type="PackedScene" uid="uid://6tobfwmdkpk4" path="res://windows/TTTemplateEditor.tscn" id="2_o0ilu"]
 

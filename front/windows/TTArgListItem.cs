@@ -10,7 +10,6 @@ public partial class TTArgListItem : Control
 	
 	#endregion
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		#region Node fetching
@@ -19,6 +18,11 @@ public partial class TTArgListItem : Control
 		ArgValueEditNode = GetNode<LineEdit>("%ArgValueEdit");
 		
 		#endregion
+	}
+	
+	public void Load(string argName, string argValue) {
+		ArgNameLabelNode.Text = argName;
+		ArgValueEditNode.Text = argValue;
 	}
 
 }

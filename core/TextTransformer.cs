@@ -114,7 +114,7 @@ public class CardNameTextTransformerTemplate : TextTransformerTemplate
     private readonly string REPLACEMENT_ARG_NAME = "Replacement";
     public CardNameTextTransformerTemplate() {
         Name = "tt-cardname";
-        Description = "TODO";
+        Description = "Replaces all instances of the card name with the specified replacement string";
 
         Args.Add(new (REPLACEMENT_ARG_NAME));
     }
@@ -128,7 +128,7 @@ public class CardNameTextTransformerTemplate : TextTransformerTemplate
 public class LowerCaseTextTransformerTemplate : TextTransformerTemplate {
     public LowerCaseTextTransformerTemplate() {
         Name = "tt-lowercase";
-        Description = "TODO";
+        Description = "Converts all characters to lowercase.";
     }
 
     public override StringBuilder Do(StringBuilder text, Card card, Dictionary<string, string> args)
@@ -161,7 +161,7 @@ public class FormatSurrounderTextTransformerTemplate : RegexSurrounderTransforme
     private readonly string SURROUND_ARG_NAME = "Surround";
     public FormatSurrounderTextTransformerTemplate() {
         Name = "tt-formatsurrounder";
-        Description = "TODO";
+        Description = "Surrounds the words that match the pattern with the specified surround word.";
 
         Args.Add(new(PATTERN_ARG_NAME));
         Args.Add(new(SURROUND_ARG_NAME));
@@ -179,7 +179,7 @@ public class FileSourceSurrounderTextTransformerTemplate : RegexSurrounderTransf
     private readonly string PATTERN_FORMAT = "\\b{0}\\b";
     public FileSourceSurrounderTextTransformerTemplate() {
         Name = "tt-filesourcesurrounder";
-        Description = "TODO";
+        Description = "Surround all the words that are included in the specified file with the specified replacement string.";
 
         Args.Add(new(FILE_PATH_NAME));
         Args.Add(new(SURROUND_ARG_NAME));

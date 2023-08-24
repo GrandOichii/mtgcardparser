@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6tvm2f6qeb3f"]
+[gd_scene load_steps=2 format=3 uid="uid://dpaok32eyim67"]
 
 [ext_resource type="Script" path="res://windows/TTEditor.cs" id="1_l8ny5"]
 
 [node name="TTEditor" type="Window"]
-position = Vector2i(0, 36)
+initial_position = 2
 size = Vector2i(400, 600)
 transient = true
 exclusive = true
@@ -53,13 +53,29 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Arguments"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="ArgumentList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="ArgumentList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -77,3 +93,7 @@ text = "Save"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
+
+[connection signal="close_requested" from="." to="." method="OnCloseRequested"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="OnCloseRequested"]

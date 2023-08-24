@@ -17,6 +17,7 @@ public partial class CardsList : ItemList
 	
 	private void UpdateCard(SourceCard card) {
 		// TODO process card changes, if card already exists
+		// name should always be the same
 		AddCard(card);
 	}
 	

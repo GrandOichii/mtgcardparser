@@ -182,16 +182,11 @@ public partial class Main : CanvasLayer
 	#region Project loading
 	
 	[Signal]
-	public delegate void ProjectLoadedEventHandler(ProjectWrapper project);
+	public delegate void ProjectLoadedEventHandler(Wrapper<Project> projectW);
 	
 	public void Load(string projectPath) {
 		var project = Project.Load(projectPath);
-		EmitSignal(SignalName.ProjectLoaded, new ProjectWrapper(project));
+		EmitSignal(SignalName.ProjectLoaded, new Wrapper<Project>(project));
 	}
 	#endregion
-}
-
-public partial class ProjectWrapper : Node {
-	public Project Project { get; }
-	public ProjectWrapper(Project p) { Project = p; }
 }
