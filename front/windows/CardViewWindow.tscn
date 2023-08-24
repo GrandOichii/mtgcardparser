@@ -5,7 +5,8 @@
 [node name="CardViewWindow" type="Window"]
 initial_position = 2
 size = Vector2i(1000, 800)
-always_on_top = true
+transient = true
+exclusive = true
 content_scale_mode = 1
 script = ExtResource("1_b3xen")
 

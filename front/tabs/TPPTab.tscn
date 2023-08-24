@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b36fxsgiudut2"]
+[gd_scene load_steps=4 format=3 uid="uid://b36fxsgiudut2"]
 
 [ext_resource type="Script" path="res://tabs/TPPTab.cs" id="1_841tq"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="2_h5ird"]
+[ext_resource type="PackedScene" uid="uid://6tobfwmdkpk4" path="res://windows/TTTemplateEditor.tscn" id="2_o0ilu"]
 
 [node name="TTPTab" type="TabBar"]
 anchors_preset = 15
@@ -12,6 +13,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_841tq")
+
+[node name="TTTemplateEditor" parent="." instance=ExtResource("2_o0ilu")]
+unique_name_in_owner = true
+visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -88,3 +93,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[connection signal="item_activated" from="HBoxContainer/VBoxContainer/TabContainer/Templates/TextTransformerTemplateList" to="." method="OnTextTransformerTemplateListItemActivated"]

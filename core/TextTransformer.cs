@@ -18,7 +18,10 @@ public class LuaTextTransformerTemplate : TextTransformerTemplate {
     private static readonly string TRANSFORM_FNAME = "Transform";
     
     public LuaFunction TransformF { get; }
+    public string Script { get; } = "";
     private Lua _lState;
+
+    public LuaTextTransformerTemplate() {}
 
     public LuaTextTransformerTemplate(Lua lState, string path) {
         _lState = lState;
@@ -29,9 +32,11 @@ public class LuaTextTransformerTemplate : TextTransformerTemplate {
         Name = loader.Name;
         Description = loader.Description;
         Args = loader.Args;
-    
-        lState.DoFile(Path.Join(Directory.GetParent(path).FullName, loader.ScriptPath));
+
+        var fPath = Path.Join(Directory.GetParent(path).FullName, loader.ScriptPath);
+        lState.DoFile(fPath);
         TransformF = LuaUtility.GetGlobalF(lState, TRANSFORM_FNAME);
+        Script = File.ReadAllText(fPath);
     }
 
     public override StringBuilder Do(StringBuilder text, Card card, Dictionary<string, string> args)
