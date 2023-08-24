@@ -7,12 +7,12 @@ using MtgCardParser;
 public partial class TTTemplateEditor : Window
 {
 	[Signal]
-	public delegate void TTTemplateAddedEventHandler(TTTemplateWrapper templateW);
+	public delegate void TTTemplateAddedEventHandler(Wrapper<LuaTextTransformerTemplate> templateW);
 	[Signal]
-	public delegate void TTTemplateUpdatedEventHandler(TTTemplateWrapper newTemplateW, string oldTemplateName);
+	public delegate void TTTemplateUpdatedEventHandler(Wrapper<LuaTextTransformerTemplate> newTemplateW, string oldTemplateName);
 	
 	public bool EditMode { get; private set; }
-	public TTTemplateWrapper Last { get; private set; }
+	public Wrapper<LuaTextTransformerTemplate> Last { get; private set; }
 	public List<string> TemplateNames { get; set; }
 	
 	#region Nodes
@@ -36,7 +36,7 @@ public partial class TTTemplateEditor : Window
 		#endregion
 	}
 
-	public void Load(TTTemplateWrapper? ttTemplateW) {
+	public void Load(Wrapper<LuaTextTransformerTemplate>? ttTemplateW) {
 		LuaTextTransformerTemplate template;
 		
 		EditMode = ttTemplateW is not null;
@@ -55,11 +55,9 @@ public partial class TTTemplateEditor : Window
 		// arguments
 		foreach (var arg in template.Args) {
 			var i = ArgumentListNode.AddItem(arg.Name);
-			ArgumentListNode.SetItemMetadata(i, new TTArgWrapper(arg));
+			ArgumentListNode.SetItemMetadata(i, new Wrapper<TTArg>(arg));
 		}
 	}
-	
-	
 	
 	#region Argument list
 	
@@ -80,7 +78,7 @@ public partial class TTTemplateEditor : Window
 			}
 		}
 		var index = ArgumentListNode.AddItem(argName);
-		ArgumentListNode.SetItemMetadata(index, new TTArgWrapper(new(argName)));
+		ArgumentListNode.SetItemMetadata(index, new Wrapper<TTArg>(new(argName)));
 		
 		NewArgumentEditNode.Text = "";
 	}
@@ -126,7 +124,7 @@ public partial class TTTemplateEditor : Window
 		created.Name = name;
 		created.Script = script;
 		
-		var w = new TTTemplateWrapper(created);
+		var w = new Wrapper<LuaTextTransformerTemplate>(created);
 		if (EditMode) {
 			EmitSignal(SignalName.TTTemplateUpdated, w, Last.Value.Name);
 			Hide();
@@ -137,11 +135,6 @@ public partial class TTTemplateEditor : Window
 	}
 	
 	#endregion
-}
-
-public partial class TTArgWrapper : Node {
-	public TTArg Value { get; }
-	public TTArgWrapper(TTArg v) { Value = v; }
 }
 
 

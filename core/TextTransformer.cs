@@ -72,9 +72,10 @@ class TextTransformerTemplateLoader {
 }
 
 public class TextTransformer {
-    public string Name { get; set; }
-    public Dictionary<string, string> TemplateArgs { get; }
+    public string Name { get; set; } = "";
+    public Dictionary<string, string> TemplateArgs { get; } = new();
     public TextTransformerTemplate Template { get; set; }
+    public TextTransformer() {}
     public TextTransformer(TextTransformerPipeline pipeline, string path) {
         var text = File.ReadAllText(path);
         var loader = TextTransformerLoader.FromJSON(text);

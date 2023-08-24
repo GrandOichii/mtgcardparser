@@ -7,10 +7,14 @@ using MtgCardParser;
 // TODO? add scrolls to lists
 
 
-public partial class TTTemplateWrapper : Node {
-	public LuaTextTransformerTemplate Value { get; }
-	public TTTemplateWrapper(LuaTextTransformerTemplate v) { Value = v; }
-}
+//public partial class Wrapper<LuaTextTransformerTemplate> : Node {
+//	public LuaTextTransformerTemplate Value { get; }
+//	public TTTemplateWrapper(LuaTextTransformerTemplate v) { Value = v; }
+//}
+//
+//public partial class TTWrapper : Node {
+//
+//}
 
 
 public partial class TPPTab : TabBar
@@ -20,6 +24,7 @@ public partial class TPPTab : TabBar
 	public ItemList TextTransformerTemplateListNode { get; private set; }
 	public VBoxContainer TextBoxesNode { get; private set; }
 	public TTTemplateEditor TTTemplateEditorNode { get; private set; }
+	public TTEditor TTEditorNode { get; private set; }	
 	public TabContainer TTTabContainerNode { get; private set; }
 	#endregion
 	
@@ -30,6 +35,7 @@ public partial class TPPTab : TabBar
 		TextTransformerTemplateListNode = GetNode<ItemList>("%TextTransformerTemplateList");
 		TextBoxesNode = GetNode<VBoxContainer>("%TextBoxes");
 		TTTemplateEditorNode = GetNode<TTTemplateEditor>("%TTTemplateEditor");
+		TTEditorNode = GetNode<TTEditor>("%TTEditor");
 		TTTabContainerNode = GetNode<TabContainer>("%TTTabContainer");
 		
 		#endregion
@@ -44,15 +50,29 @@ public partial class TPPTab : TabBar
 		foreach (var template in ttp.CustomTemplates) {
 			AddCustomTemplate(template);
 		}
+		
+		// load pipeline
+		foreach (var tt in ttp.Pipeline) {
+			AddTT(tt);
+		}
 	}
 	
 	private void AddCustomTemplate(LuaTextTransformerTemplate template) {
-		AddCustomTemplate(new TTTemplateWrapper(template));
+		AddCustomTemplate(new Wrapper<LuaTextTransformerTemplate>(template));
 	}
 	
-	private void AddCustomTemplate(TTTemplateWrapper templateW) {
+	private void AddCustomTemplate(Wrapper<LuaTextTransformerTemplate> templateW) {
 		var i = TextTransformerTemplateListNode.AddItem(templateW.Value.Name);
 		TextTransformerTemplateListNode.SetItemMetadata(i, templateW);
+	}
+	
+	private void AddTT(TextTransformer tt) {
+		AddTT(new Wrapper<TextTransformer>(tt));
+	}
+	
+	private void AddTT(Wrapper<TextTransformer> ttW) {
+		var i = TextTransformerListNode.AddItem(ttW.Value.Name);
+		TextTransformerListNode.SetItemMetadata(i, ttW);
 	}
 	
 	#endregion
@@ -61,18 +81,18 @@ public partial class TPPTab : TabBar
 	
 	private void OnTextTransformerTemplateListItemActivated(int index)
 	{
-		var ttTemplateW = TextTransformerTemplateListNode.GetItemMetadata(index).As<TTTemplateWrapper>();
+		var ttTemplateW = TextTransformerTemplateListNode.GetItemMetadata(index).As<Wrapper<LuaTextTransformerTemplate>>();
 		TTTemplateEditorNode.TemplateNames = TemplateNames;
 		TTTemplateEditorNode.Load(ttTemplateW);
 		TTTemplateEditorNode.Show();
 	}
 
-	private void OnTTTemplateEditorTTTemplateAdded(TTTemplateWrapper templateW)
+	private void OnTTTemplateEditorTTTemplateAdded(Wrapper<LuaTextTransformerTemplate> templateW)
 	{
 		AddCustomTemplate(templateW);
 	}
 
-	private void OnTTTemplateEditorTTTemplateUpdated(TTTemplateWrapper newTemplateW, string oldTemplateName)
+	private void OnTTTemplateEditorTTTemplateUpdated(Wrapper<LuaTextTransformerTemplate> newTemplateW, string oldTemplateName)
 	{
 		for (int i = 0; i < TextTransformerTemplateListNode.ItemCount; i++) {
 			var itemText = TextTransformerTemplateListNode.GetItemText(i);
@@ -89,7 +109,7 @@ public partial class TPPTab : TabBar
 	#endregion
 	
 	[Signal]
-	public delegate void TTTemplateDeletedEventHandler(TTTemplateWrapper templateW);
+	public delegate void TTTemplateDeletedEventHandler(Wrapper<LuaTextTransformerTemplate> templateW);
 	
 	private void OnAddButtonPressed()
 	{
@@ -124,7 +144,7 @@ public partial class TPPTab : TabBar
 				// TODO notify the user to select a template first
 				return;
 			}
-			var data = TextTransformerTemplateListNode.GetItemMetadata(items[0]).As<TTTemplateWrapper>();
+			var data = TextTransformerTemplateListNode.GetItemMetadata(items[0]).As<Wrapper<LuaTextTransformerTemplate>>();
 			TTTemplateEditorNode.TemplateNames = TemplateNames;
 			TTTemplateEditorNode.Load(data);
 			TTTemplateEditorNode.Show();
@@ -165,15 +185,30 @@ public partial class TPPTab : TabBar
 			return result;
 		}
 	}
+	
+	private List<string> TTNames {
+		get {
+			var result = new List<string>();
+			for (int i = 0; i < TextTransformerListNode.ItemCount; i++) {
+				var itemText = TextTransformerListNode.GetItemText(i);
+				result.Add(itemText);
+			}
+			return result;
+		}
+	}
+	
+	#region Text transformers
+	
+	private void OnTextTransformerListItemActivated(int index)
+	{
+		var ttW = TextTransformerListNode.GetItemMetadata(index).As<Wrapper<TextTransformer>>();
+		TTEditorNode.TTNames = TTNames;
+		TTEditorNode.Load(ttW);
+		TTEditorNode.Show();
+	}
+	
+	
+	#endregion
 
 
 }
-
-
-
-
-
-
-
-
-

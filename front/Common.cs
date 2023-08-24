@@ -5,6 +5,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 
+public partial class Wrapper<T> : Node {
+	public T Value { get; }
+	public Wrapper(T v) { Value = v; }
+}
+
 public partial class SourceCard : Node
 {
 	[JsonPropertyName("name")]

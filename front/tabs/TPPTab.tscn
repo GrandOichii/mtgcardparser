@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b36fxsgiudut2"]
+[gd_scene load_steps=5 format=3 uid="uid://b36fxsgiudut2"]
 
 [ext_resource type="Script" path="res://tabs/TPPTab.cs" id="1_841tq"]
+[ext_resource type="PackedScene" uid="uid://c6tvm2f6qeb3f" path="res://windows/TTeditor.tscn" id="2_f0lux"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="2_h5ird"]
 [ext_resource type="PackedScene" uid="uid://6tobfwmdkpk4" path="res://windows/TTTemplateEditor.tscn" id="2_o0ilu"]
 
@@ -13,6 +14,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_841tq")
+
+[node name="TTEditor" parent="." instance=ExtResource("2_f0lux")]
+unique_name_in_owner = true
+visible = false
 
 [node name="TTTemplateEditor" parent="." instance=ExtResource("2_o0ilu")]
 unique_name_in_owner = true
@@ -96,7 +101,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="TTTemplateAdded" from="TTTemplateEditor" to="." method="OnTTTemplateEditorTTTemplateAdded"]
+[connection signal="TTTemplateAdded" from="TTTemplateEditor" to="TTEditor" method="OnTTTemplateEditorTTTemplateAdded"]
 [connection signal="TTTemplateUpdated" from="TTTemplateEditor" to="." method="OnTTTemplateEditorTTTemplateUpdated"]
+[connection signal="item_activated" from="HBoxContainer/VBoxContainer/TTTabContainer/Pipeline/TextTransformerList" to="." method="OnTextTransformerListItemActivated"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/TTTabContainer/Templates/TextTransformerTemplateList" to="." method="OnTextTransformerTemplateListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/EditButton" to="." method="OnEditButtonPressed"]
