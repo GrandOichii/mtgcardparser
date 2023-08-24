@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using MtgCardParser;
 
-// TODO add signal handlers for template updating and removing
+// TODO add signal handlers for updating and removing templates
 
 public partial class TTEditor : Window
 {
@@ -13,6 +13,8 @@ public partial class TTEditor : Window
 	public List<string> TTNames { get; set; }
 	private bool _editMode;
 	private Wrapper<TextTransformer> _last;
+	
+	private List<LuaTextTransformerTemplate> _templates=new();
 	
 	#region Nodes
 	
@@ -82,7 +84,7 @@ public partial class TTEditor : Window
 	{
 		TemplateOptionNode.AddItem(templateW.Value.Name);
 		var index = IndexOf(templateW.Value.Name);
-		// TODO add metadata
+		TemplateOptionNode.SetItemMetadata(index, templateW);
 	}
 	
 	#endregion
@@ -99,12 +101,12 @@ public partial class TTEditor : Window
 		foreach (var template in projectW.Value.TTPipeline.Templates) {
 			TemplateOptionNode.AddItem(template.Name);
 			var index = IndexOf(template.Name);
-			// TODO add metadata
+			TemplateOptionNode.SetItemMetadata(index, new Wrapper<TextTransformerTemplate>(template));
 		}
 		foreach (var template in projectW.Value.TTPipeline.CustomTemplates) {
 			TemplateOptionNode.AddItem(template.Name);
 			var index = IndexOf(template.Name);
-			// TODO add metadata 
+			TemplateOptionNode.SetItemMetadata(index, new Wrapper<TextTransformerTemplate>(template));
 		}
 	}
 	
@@ -118,10 +120,12 @@ public partial class TTEditor : Window
 	private void OnSaveButtonPressed()
 	{
 		var name = NameEditNode.Text;
+		
 		if (name.Length == 0) {
 			// TODO notify that can't save without name
 			return;
 		}
+		
 		// check that a template with the same name doesn't already exist
 		var allowed = 0;
 		if (_editMode && _last.Value.Name == name) ++allowed;
@@ -136,10 +140,15 @@ public partial class TTEditor : Window
 			}
 		}
 		
-		// TODO add template
+		var templateI = TemplateOptionNode.Selected;
+		if (templateI == -1) {
+			// TODO notify user to pick template first
+			return;
+		}
+		
 		var created = new TextTransformer();
 		created.Name = name;
-		// TODO template
+		created.Template = TemplateOptionNode.GetItemMetadata(templateI).As<Wrapper<TextTransformerTemplate>>().Value;
 		foreach (var childNode in ArgumentListNode.GetChildren()) {
 			var child = childNode as TTArgListItem;
 			created.TemplateArgs.Add(
