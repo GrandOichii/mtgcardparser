@@ -17,7 +17,7 @@ using MtgCardParser;
 //}
 
 
-public partial class TPPTab : TabBar
+public partial class TTPTab : TabBar
 {
 	#region Nodes
 	public ItemList TextTransformerListNode { get; private set; }
@@ -55,6 +55,8 @@ public partial class TPPTab : TabBar
 		foreach (var tt in ttp.Pipeline) {
 			AddTT(tt);
 		}
+		
+		RunPipeline();
 	}
 	
 	private void AddCustomTemplate(LuaTextTransformerTemplate template) {
@@ -260,15 +262,49 @@ public partial class TPPTab : TabBar
 	
 	#region Pipeline activation
 	
+	public TextTransformerPipeline BakedPipeline {
+		get {
+			var result = new TextTransformerPipeline();
+			
+			// custom templates
+			for (int i = 0; i < TextTransformerTemplateListNode.ItemCount; i++) {
+				var template = TextTransformerTemplateListNode.GetItemMetadata(i).As<Wrapper<LuaTextTransformerTemplate>>().Value;
+				result.CustomTemplates.Add(template);
+
+				template.LState = result.LState;
+				template.Script = template.Script;
+			}
+			
+			// pipeline
+			for (int i = 0; i < TextTransformerListNode.ItemCount; i++) {
+				var tt = TextTransformerListNode.GetItemMetadata(i).As<Wrapper<TextTransformer>>().Value;
+				result.Pipeline.Add(tt);
+			}
+			
+			return result;
+		}
+	}
+	
+	[Signal]
+	public delegate void RunTTPipelineEventHandler();
+	
 	public void RunPipeline() {
-		// TODO
-		
+		EmitSignal(SignalName.RunTTPipeline);
 	}
 	
 	#endregion
 
+	[Signal]
+	public delegate void TransformCardTextEventHandler(SourceCard card);
+	
+	private void OnCardsListCardClicked(SourceCard card)
+	{
+		EmitSignal(SignalName.TransformCardText, card);
+	}
 
 }
+
+
 
 
 

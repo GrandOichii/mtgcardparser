@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using NLua;
 
 using MtgCardParser;
 
@@ -122,6 +123,7 @@ public partial class TTTemplateEditor : Window
 		// TODO check that the script has a function Transform(text, card, args)
 		var created = new LuaTextTransformerTemplate();
 		created.Name = name;
+		created.LState = new();
 		created.Script = script;
 		
 		var w = new Wrapper<LuaTextTransformerTemplate>(created);

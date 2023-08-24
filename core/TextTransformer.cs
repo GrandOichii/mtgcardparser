@@ -17,14 +17,23 @@ public abstract class TextTransformerTemplate {
 public class LuaTextTransformerTemplate : TextTransformerTemplate {
     private static readonly string TRANSFORM_FNAME = "Transform";
     
-    public LuaFunction TransformF { get; }
-    public string Script { get; set; } = "";
-    private Lua _lState;
+    public LuaFunction TransformF { get; private set; }
+    private string _script  = "";
+    public string Script { 
+        get => _script;
+        set {
+            _script = value;
+            LState.DoString(value);
+            TransformF = LuaUtility.GetGlobalF(LState, TRANSFORM_FNAME);
+        }
+    }
+
+    public Lua LState { get; set; }
 
     public LuaTextTransformerTemplate() {}
 
     public LuaTextTransformerTemplate(Lua lState, string path) {
-        _lState = lState;
+        LState = lState;
 
         var text = File.ReadAllText(path);
         var loader = TextTransformerTemplateLoader.FromJSON(text);
@@ -34,14 +43,14 @@ public class LuaTextTransformerTemplate : TextTransformerTemplate {
         Args = loader.Args;
 
         var fPath = Path.Join(Directory.GetParent(path).FullName, loader.ScriptPath);
-        lState.DoFile(fPath);
-        TransformF = LuaUtility.GetGlobalF(lState, TRANSFORM_FNAME);
+        // lState.DoFile(fPath);
+        // TransformF = LuaUtility.GetGlobalF(lState, TRANSFORM_FNAME);
         Script = File.ReadAllText(fPath);
     }
 
     public override StringBuilder Do(StringBuilder text, Card card, Dictionary<string, string> args)
     {
-        var returned = TransformF.Call(text.ToString(), card.ToLuaTable(_lState), LuaUtility.CreateTable(_lState, args));
+        var returned = TransformF.Call(text.ToString(), card.ToLuaTable(LState), LuaUtility.CreateTable(LState, args));
         return new(LuaUtility.GetReturnAs<string>(returned));
     }
 }

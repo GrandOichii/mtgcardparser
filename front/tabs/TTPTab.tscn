@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b36fxsgiudut2"]
 
-[ext_resource type="Script" path="res://tabs/TPPTab.cs" id="1_841tq"]
+[ext_resource type="Script" path="res://tabs/TTPTab.cs" id="1_bhetl"]
 [ext_resource type="PackedScene" uid="uid://dpaok32eyim67" path="res://windows/TTeditor.tscn" id="2_f0lux"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="2_h5ird"]
 [ext_resource type="PackedScene" uid="uid://6tobfwmdkpk4" path="res://windows/TTTemplateEditor.tscn" id="2_o0ilu"]
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_841tq")
+script = ExtResource("1_bhetl")
 
 [node name="TTEditor" parent="." instance=ExtResource("2_f0lux")]
 unique_name_in_owner = true
@@ -128,3 +128,4 @@ size_flags_vertical = 3
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/EditButton" to="." method="OnEditButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]
+[connection signal="CardClicked" from="HBoxContainer/VBoxContainer2/CardsList" to="." method="OnCardsListCardClicked"]

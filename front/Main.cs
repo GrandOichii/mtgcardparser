@@ -25,6 +25,7 @@ public partial class Main : CanvasLayer
 	public List<SourceCard> Cards { get; private set; }
 	
 	#region Nodes
+	
 	public CardsList CardsListNode { get; private set; }
 	public CardsList SampledCardsListNode { get; private set; }
 	public HttpRequest BulkDataRequestNode { get; private set; }
@@ -33,15 +34,13 @@ public partial class Main : CanvasLayer
 	public HttpRequest CardsDownloadRequestNode { get; private set; }
 	public CardViewWindow CardViewWindowNode { get; private set; }
 	public SpinBox SampleSizeNode { get; private set; }
+	public TTPTab TTPNode { get; private set; }
+	
 	#endregion
 	
 	private string _cardSrc;
 	
 	public override void _Ready() {
-		// TODO remove
-		GetNode<TabContainer>("VBoxContainer/TabContainer").CurrentTab = 1;
-		Load("../test-project");
-		
 		#region Node fetching
 		CardViewWindowNode = GetNode<CardViewWindow>("%CardViewWindow");
 		CardsListNode = GetNode<CardsList>("%CardsList");
@@ -51,17 +50,27 @@ public partial class Main : CanvasLayer
 		DownloadCardsButtonNode = GetNode<Button>("%DownloadCardsButton");
 		CardsDownloadRequestNode = GetNode<HttpRequest>("%CardsDownloadRequest");
 		SampleSizeNode = GetNode<SpinBox>("%SampleSize");
+		TTPNode = GetNode<TTPTab>("%TTP");
+		
 		_cardSrc = CardsDownloadRequestNode.DownloadFile;
 		#endregion
 		
 		#region Card loading
 		
 		if (File.Exists(_cardSrc)) {
-			Thread t = new Thread(() => LoadCards());
-			t.Start();
+			// TODO move back to threads
+//			Thread t = new Thread(() => LoadCards());
+//			t.Start();
+			LoadCards();
 		}
 		
 		#endregion
+		
+		// TODO remove
+		GetNode<TabContainer>("VBoxContainer/TabContainer").CurrentTab = 1;
+		SampleSizeNode.Value = 100;
+		OnSampleRandomPressed();
+		Load("../test-project");
 	}
 	
 	public override void _Process(double delta) {
@@ -134,15 +143,18 @@ public partial class Main : CanvasLayer
 		
 		LoadCards();
 	}
+	
 	#endregion
 	
 	#region Card loading
+	
 	public void LoadCards() {
 		Cards = JsonSerializer.Deserialize<List<SourceCard>>(File.ReadAllText(_cardSrc));
 //		SampleSizeNode.MaxValue = Cards.Count;
 		foreach (var card in Cards)
 			CallDeferred("emit_signal", "CardAdded", card);
 	}
+	
 	#endregion
 
 
@@ -168,12 +180,13 @@ public partial class Main : CanvasLayer
 	[Signal]
 	public delegate void AddSampleCardEventHandler(SourceCard card);
 	
-	public IEnumerable<SourceCard> SampledCards { get; private set; }
+	public List<SourceCard> SampledCards { get; private set; }
 	
 	private void OnSampleRandomPressed()
 	{
+		GD.Print("SAMPLED");
 		EmitSignal(SignalName.ClearSampled);
-		SampledCards = Cards.OrderBy(x => Rnd.Next()).Take((int)SampleSizeNode.Value);
+		SampledCards = Cards.OrderBy(x => Rnd.Next()).Take((int)SampleSizeNode.Value).ToList();
 		foreach (var card in SampledCards)
 			EmitSignal(SignalName.AddSampleCard, card);
 	}
@@ -191,4 +204,44 @@ public partial class Main : CanvasLayer
 	}
 	
 	#endregion
+	
+	
+	#region Text transformer pipeline
+	
+	private void OnTTPRunTTPipeline()
+	{
+//		var pipeline = TTPNode.BakedPipeline;
+//		foreach (var sourceCard in SampledCards) {
+//			var card = sourceCard.ToCard();
+//			var result = pipeline.Do(card);
+//			GD.Print(card.Name);
+////			GD.Print(card.Name);
+////			GD.Print(card.Text);
+////			GD.Print("|");
+////			GD.Print("v");
+////			GD.Print(result);
+////			GD.Print("");
+////			GD.Print("");
+////			GD.Print("");
+//		}
+//		GD.Print("");
+//		GD.Print("");
+		
+	}
+	
+	private void OnTTPTransformCardText(SourceCard card)
+	{
+		GD.Print(card.CName);
+		var pipeline = TTPNode.BakedPipeline;
+		var result = pipeline.DoDetailed(card.ToCard());
+		foreach (var stage in result)
+			GD.Print(stage);
+		GD.Print("");
+	}
+	
+	#endregion
 }
+
+
+
+

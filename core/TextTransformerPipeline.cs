@@ -47,9 +47,19 @@ public class TextTransformerPipeline {
         Console.WriteLine("Initial: " + result);
         foreach (var transformer in Pipeline) {
             result = transformer.Do(result, card);
-            Console.WriteLine(result);
         }
 
+        return result;
+    }
+
+    public List<string> DoDetailed(Card card) {
+        var result = new List<string>();
+        var text = card.Text;
+        result.Add(text);
+        foreach (var transformer in Pipeline) {
+            text = transformer.Do(text, card);
+            result.Add(text);
+        }
         return result;
     }
 }

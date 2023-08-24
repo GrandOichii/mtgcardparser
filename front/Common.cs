@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using MtgCardParser;
+
 
 public partial class Wrapper<T> : Node {
 	public T Value { get; }
@@ -29,4 +31,5 @@ public partial class SourceCard : Node
 	[JsonPropertyName("toughness")]
 	public string Toughness { get; set; }
 	
+	public Card ToCard() => new Card(CName, Text);
 }
