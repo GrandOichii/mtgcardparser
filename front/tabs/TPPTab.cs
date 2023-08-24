@@ -228,6 +228,33 @@ public partial class TPPTab : TabBar
 
 	}
 
+	private void OnMoveTTUpButtonPressed()
+	{
+		MoveSelectedTTLI(-1);
+	}
+
+	private void OnMoveTTDownButtonPressed()
+	{
+		MoveSelectedTTLI(1);
+	}
+	
+	private void MoveSelectedTTLI(int amount) {
+		var items = TextTransformerListNode.GetSelectedItems();
+		if (items.Length == 0) {
+			// TODO notify the user to select a template first
+			return;
+		}
+		var fromI = items[0];
+		var toI = items[0] + amount;
+		
+		// TODO? wrap around
+		if (toI < 0 || toI >= TextTransformerListNode.ItemCount)
+			return;
+		
+		TextTransformerListNode.MoveItem(fromI, toI);
+		RunPipeline();
+	}
+	
 	#endregion
 	
 	#region Pipeline activation
@@ -240,4 +267,7 @@ public partial class TPPTab : TabBar
 
 
 }
+
+
+
 
