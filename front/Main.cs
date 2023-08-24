@@ -55,11 +55,12 @@ public partial class Main : CanvasLayer
 		#endregion
 		
 		#region Card loading
-		// TODO add back
-//		if (File.Exists(_cardSrc)) {
-//			Thread t = new Thread(() => LoadCards());
-//			t.Start();
-//		}
+		
+		if (File.Exists(_cardSrc)) {
+			Thread t = new Thread(() => LoadCards());
+			t.Start();
+		}
+		
 		#endregion
 	}
 	
@@ -188,5 +189,6 @@ public partial class Main : CanvasLayer
 		var project = Project.Load(projectPath);
 		EmitSignal(SignalName.ProjectLoaded, new Wrapper<Project>(project));
 	}
+	
 	#endregion
 }

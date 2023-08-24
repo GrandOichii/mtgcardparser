@@ -244,6 +244,7 @@ public partial class TPPTab : TabBar
 			// TODO notify the user to select a template first
 			return;
 		}
+		
 		var fromI = items[0];
 		var toI = items[0] + amount;
 		
@@ -261,6 +262,7 @@ public partial class TPPTab : TabBar
 	
 	public void RunPipeline() {
 		// TODO
+		
 	}
 	
 	#endregion
