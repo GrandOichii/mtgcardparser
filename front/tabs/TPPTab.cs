@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 using MtgCardParser;
 
@@ -61,6 +62,7 @@ public partial class TPPTab : TabBar
 	private void OnTextTransformerTemplateListItemActivated(int index)
 	{
 		var ttTemplateW = TextTransformerTemplateListNode.GetItemMetadata(index).As<TTTemplateWrapper>();
+		TTTemplateEditorNode.TemplateNames = TemplateNames;
 		TTTemplateEditorNode.Load(ttTemplateW);
 		TTTemplateEditorNode.Show();
 	}
@@ -89,22 +91,58 @@ public partial class TPPTab : TabBar
 	private void OnAddButtonPressed()
 	{
 		// TODO ugly, think of smt other
-		if (TTTabContainerNode.CurrentTab == 0) {
+		switch(TTTabContainerNode.CurrentTab) {
+		case 0:
 			// text transformers
 			// TODO
 			return;
-		}
-		if (TTTabContainerNode.CurrentTab == 1) {
+		case 1:
 			// text transformer templates
-			
+			TTTemplateEditorNode.TemplateNames = TemplateNames;
 			TTTemplateEditorNode.Load(null);
 			TTTemplateEditorNode.Show();
 			return;
 		}
 	}
 	
+	private void OnEditButtonPressed()
+	{
+		// TODO ugly, think of smt other
+		switch(TTTabContainerNode.CurrentTab) {
+		case 0:
+			// text transformers
+			// TODO
+			return;
+		case 1:
+			// text transformer templates
+			
+			var items = TextTransformerTemplateListNode.GetSelectedItems();
+			if (items.Length == 0) {
+				// TODO notify the user to select a template first
+				return;
+			}
+			var data = TextTransformerTemplateListNode.GetItemMetadata(items[0]).As<TTTemplateWrapper>();
+			TTTemplateEditorNode.TemplateNames = TemplateNames;
+			TTTemplateEditorNode.Load(data);
+			TTTemplateEditorNode.Show();
+			return;
+		}
+	}
+	
+	private List<string> TemplateNames {
+		get {
+			var result = new List<string>();
+			for (int i = 0; i < TextTransformerTemplateListNode.ItemCount; i++) {
+				var itemText = TextTransformerTemplateListNode.GetItemText(i);
+				result.Add(itemText);
+			}
+			return result;
+		}
+	}
 
 }
+
+
 
 
 

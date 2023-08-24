@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 using MtgCardParser;
 
@@ -12,6 +13,7 @@ public partial class TTTemplateEditor : Window
 	
 	public bool EditMode { get; private set; }
 	public TTTemplateWrapper Last { get; private set; }
+	public List<string> TemplateNames { get; set; }
 	
 	#region Nodes
 	public LineEdit NameEditNode { get; private set; }
@@ -57,6 +59,8 @@ public partial class TTTemplateEditor : Window
 		}
 	}
 	
+	
+	
 	#region Argument list
 	
 	private void OnArgumentListItemActivated(int index)
@@ -97,6 +101,21 @@ public partial class TTTemplateEditor : Window
 			// TODO notify that can't save without name
 			return;
 		}
+		
+		// check that a template with the same name doesn't already exist
+		var allowed = 0;
+		if (EditMode && Last.Value.Name == name) ++allowed;
+		var current = 0;
+		foreach (var tName in TemplateNames) {
+			if (tName != name) continue;
+			
+			++current;
+			if (current > allowed) {
+				// TODO notify the user that can't add
+				return;
+			}
+		}
+		
 		var script = ScriptEditNode.Text;
 		if (script.Length == 0) {
 			// TODO notify that can't save without script
@@ -109,7 +128,6 @@ public partial class TTTemplateEditor : Window
 		
 		var w = new TTTemplateWrapper(created);
 		if (EditMode) {
-			GD.Print(Last.Name);
 			EmitSignal(SignalName.TTTemplateUpdated, w, Last.Value.Name);
 			Hide();
 			return;
