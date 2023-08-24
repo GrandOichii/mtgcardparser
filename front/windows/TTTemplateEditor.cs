@@ -8,9 +8,10 @@ public partial class TTTemplateEditor : Window
 	[Signal]
 	public delegate void TTTemplateAddedEventHandler(TTTemplateWrapper templateW);
 	[Signal]
-	public delegate void TTTemplateUpdatedEventHandler(TTTemplateWrapper templateW);
+	public delegate void TTTemplateUpdatedEventHandler(TTTemplateWrapper newTemplateW, string oldTemplateName);
 	
 	public bool EditMode { get; private set; }
+	public TTTemplateWrapper Last { get; private set; }
 	
 	#region Nodes
 	public LineEdit NameEditNode { get; private set; }
@@ -36,12 +37,13 @@ public partial class TTTemplateEditor : Window
 	public void Load(TTTemplateWrapper? ttTemplateW) {
 		LuaTextTransformerTemplate template;
 		
-		EditMode = ttTemplateW is null;
+		EditMode = ttTemplateW is not null;
 		if (EditMode) {
-			template = new();
+			template = ttTemplateW?.Value;
+			Last = ttTemplateW;
 		}
 		else {
-			template = ttTemplateW?.Value;
+			template = new();
 		}
 		
 		NameEditNode.Text = template.Name;
@@ -90,7 +92,30 @@ public partial class TTTemplateEditor : Window
 		
 	private void OnSaveButtonPressed()
 	{
+		var name = NameEditNode.Text;
+		if (name.Length == 0) {
+			// TODO notify that can't save without name
+			return;
+		}
+		var script = ScriptEditNode.Text;
+		if (script.Length == 0) {
+			// TODO notify that can't save without script
+			return;
+		}
+		// TODO check that the script has a function Transform(text, card, args)
+		var created = new LuaTextTransformerTemplate();
+		created.Name = name;
+		created.Script = script;
 		
+		var w = new TTTemplateWrapper(created);
+		if (EditMode) {
+			GD.Print(Last.Name);
+			EmitSignal(SignalName.TTTemplateUpdated, w, Last.Value.Name);
+			Hide();
+			return;
+		}
+		EmitSignal(SignalName.TTTemplateAdded, w);
+		Hide();
 	}
 	
 	#endregion

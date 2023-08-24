@@ -18,7 +18,7 @@ public class LuaTextTransformerTemplate : TextTransformerTemplate {
     private static readonly string TRANSFORM_FNAME = "Transform";
     
     public LuaFunction TransformF { get; }
-    public string Script { get; } = "";
+    public string Script { get; set; } = "";
     private Lua _lState;
 
     public LuaTextTransformerTemplate() {}
