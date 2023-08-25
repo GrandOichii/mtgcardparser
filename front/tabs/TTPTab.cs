@@ -294,12 +294,35 @@ public partial class TTPTab : TabBar
 	
 	#endregion
 
-	[Signal]
-	public delegate void TransformCardTextEventHandler(SourceCard card);
-	
 	private void OnCardsListCardClicked(SourceCard card)
 	{
-		EmitSignal(SignalName.TransformCardText, card);
+//		EmitSignal(SignalName.TransformCardText, card);
+		var pipeline = BakedPipeline;
+		var result = pipeline.DoDetailed(card.ToCard());
+		// foreach (var stage in result)
+		// 	GD.Print(stage);
+		
+		SetTTResultLayers(result);
+	}
+
+	static readonly PackedScene TTResultLayerPS = ResourceLoader.Load("res://TTResultLayer.tscn") as PackedScene;
+//	static readonly PackedScene TTResultLayerSeparatorPS = ResourceLoader.Load("res://TTResultLayerSeparator.cs") as PackedScene;
+	
+	private void SetTTResultLayers(List<string> texts) {
+		foreach (var child in TextBoxesNode.GetChildren())
+			child.QueueFree();
+		for (int i = 0; i < texts.Count; i++)
+			AddTTResultLayer(i, texts);
+	}
+	
+	private void AddTTResultLayer(int i, List<string> texts) {
+		bool addSeparator = i == 0;
+		string name = "Base text";
+		if (!addSeparator) name = TextTransformerListNode.GetItemText(i-1);
+		
+		var child = TTResultLayerPS.Instantiate() as TTResultLayer;
+		TextBoxesNode.AddChild(child);
+		child.Load(name, texts[i]);
 	}
 
 }

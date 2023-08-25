@@ -184,7 +184,6 @@ public partial class Main : CanvasLayer
 	
 	private void OnSampleRandomPressed()
 	{
-		GD.Print("SAMPLED");
 		EmitSignal(SignalName.ClearSampled);
 		SampledCards = Cards.OrderBy(x => Rnd.Next()).Take((int)SampleSizeNode.Value).ToList();
 		foreach (var card in SampledCards)
@@ -227,16 +226,6 @@ public partial class Main : CanvasLayer
 //		GD.Print("");
 //		GD.Print("");
 		
-	}
-	
-	private void OnTTPTransformCardText(SourceCard card)
-	{
-		GD.Print(card.CName);
-		var pipeline = TTPNode.BakedPipeline;
-		var result = pipeline.DoDetailed(card.ToCard());
-		foreach (var stage in result)
-			GD.Print(stage);
-		GD.Print("");
 	}
 	
 	#endregion
