@@ -285,11 +285,8 @@ public partial class TTPTab : TabBar
 		}
 	}
 	
-	[Signal]
-	public delegate void RunTTPipelineEventHandler();
-	
 	public void RunPipeline() {
-		EmitSignal(SignalName.RunTTPipeline);
+		// TODO update currently selected card
 	}
 	
 	#endregion
@@ -299,14 +296,12 @@ public partial class TTPTab : TabBar
 //		EmitSignal(SignalName.TransformCardText, card);
 		var pipeline = BakedPipeline;
 		var result = pipeline.DoDetailed(card.ToCard());
-		// foreach (var stage in result)
-		// 	GD.Print(stage);
 		
 		SetTTResultLayers(result);
 	}
 
 	static readonly PackedScene TTResultLayerPS = ResourceLoader.Load("res://TTResultLayer.tscn") as PackedScene;
-//	static readonly PackedScene TTResultLayerSeparatorPS = ResourceLoader.Load("res://TTResultLayerSeparator.cs") as PackedScene;
+	static readonly PackedScene TTResultLayerSeparatorPS = ResourceLoader.Load("res://TTResultLayerSeparator.tscn") as PackedScene;
 	
 	private void SetTTResultLayers(List<string> texts) {
 		foreach (var child in TextBoxesNode.GetChildren())
@@ -316,9 +311,13 @@ public partial class TTPTab : TabBar
 	}
 	
 	private void AddTTResultLayer(int i, List<string> texts) {
-		bool addSeparator = i == 0;
+		bool addSeparator = i != 0;
 		string name = "Base text";
-		if (!addSeparator) name = TextTransformerListNode.GetItemText(i-1);
+		if (addSeparator) { 
+			name = TextTransformerListNode.GetItemText(i-1);
+			var sep = TTResultLayerSeparatorPS.Instantiate();
+				TextBoxesNode.AddChild(sep);
+		}
 		
 		var child = TTResultLayerPS.Instantiate() as TTResultLayer;
 		TextBoxesNode.AddChild(child);

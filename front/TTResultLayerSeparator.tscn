@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn3b4s0casxu1"]
+
+[ext_resource type="Texture2D" uid="uid://mgorf0olgwdh" path="res://assets/arrow_down.png" id="1_617h1"]
+
+[node name="TTResultLayerSeparator" type="HBoxContainer"]
+offset_right = 162.0
+offset_bottom = 48.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_617h1")

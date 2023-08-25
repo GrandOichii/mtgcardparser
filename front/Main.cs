@@ -205,30 +205,6 @@ public partial class Main : CanvasLayer
 	#endregion
 	
 	
-	#region Text transformer pipeline
-	
-	private void OnTTPRunTTPipeline()
-	{
-//		var pipeline = TTPNode.BakedPipeline;
-//		foreach (var sourceCard in SampledCards) {
-//			var card = sourceCard.ToCard();
-//			var result = pipeline.Do(card);
-//			GD.Print(card.Name);
-////			GD.Print(card.Name);
-////			GD.Print(card.Text);
-////			GD.Print("|");
-////			GD.Print("v");
-////			GD.Print(result);
-////			GD.Print("");
-////			GD.Print("");
-////			GD.Print("");
-//		}
-//		GD.Print("");
-//		GD.Print("");
-		
-	}
-	
-	#endregion
 }
 
 

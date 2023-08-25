@@ -116,8 +116,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="TTAdded" from="TTEditor" to="." method="OnTTEditorTTAdded"]
-[connection signal="TTUpdated" from="TTEditor" to="." method="OnTTEditorTTUpdated"]
 [connection signal="TTTemplateAdded" from="TTTemplateEditor" to="." method="OnTTTemplateEditorTTTemplateAdded"]
 [connection signal="TTTemplateAdded" from="TTTemplateEditor" to="TTEditor" method="OnTTTemplateEditorTTTemplateAdded"]
 [connection signal="TTTemplateUpdated" from="TTTemplateEditor" to="." method="OnTTTemplateEditorTTTemplateUpdated"]

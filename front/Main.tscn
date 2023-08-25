@@ -124,6 +124,5 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton" to="." method="OnDownloadCardsButtonPressed"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/BulkDataRequest" to="." method="OnBulkDataRequestRequestCompleted"]
 [connection signal="request_completed" from="VBoxContainer/TabContainer/Cards/VBoxContainer/DownloadCardsButton/CardsDownloadRequest" to="." method="OnCardsDownloadRequestRequestCompleted"]
-[connection signal="RunTTPipeline" from="VBoxContainer/TabContainer/TTP" to="." method="OnTTPRunTTPipeline"]
 
 [editable path="VBoxContainer/TabContainer/TTP"]
