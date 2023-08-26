@@ -147,12 +147,12 @@ public class LowerCaseTextTransformerTemplate : TextTransformerTemplate {
 }
 
 public class SimpleReplacerTextTransformerTemplate : TextTransformerTemplate {
-    private readonly string REGEX_PATTERN_FORMAT = "\\b{0}\\b";
-    private readonly string REPLACED_PHRASE_ARG_NAME = "Replace";
+    private readonly string REGEX_PATTERN_FORMAT = "{0}";
+    private readonly string REPLACED_PHRASE_ARG_NAME = "Pattern";
     private readonly string REPLACEMENT_PHRASE_ARG_NAME = "Replacement";
     public SimpleReplacerTextTransformerTemplate() {
         Name = "tt-simple-replacer";
-        Description = "Replaces all instances of a word/phrase with another word/phrase";
+        Description = "Replaces all matches of the pattern with another string";
 
         Args.Add(new(REPLACED_PHRASE_ARG_NAME));
         Args.Add(new(REPLACEMENT_PHRASE_ARG_NAME));
@@ -173,7 +173,7 @@ public class SimpleReplacerTextTransformerTemplate : TextTransformerTemplate {
             );
 
         }
-        return new(text.ToString().ToLower());
+        return text;
     }
 
 }

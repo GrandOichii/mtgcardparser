@@ -23,7 +23,5 @@ public partial class TTResultLayer : Control
 	public void Load(string name, string text) {
 		TTNameNode.Text = name;
 		TTTextNode.Text = text;
-		
-		GD.Print(text);
 	}
 }
