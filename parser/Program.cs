@@ -11,3 +11,10 @@ class Program {
         );
     }
 }
+
+/*
+Enters with an indestructable counter if you are flying with a +1/+1 counter.
+
+\b\w+\b counter - keyword counters
+[\+|\-]\d\/[\+|\-]\d counter - +x/+x counters
+*/
