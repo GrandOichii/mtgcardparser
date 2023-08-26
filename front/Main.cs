@@ -26,6 +26,7 @@ public partial class Main : CanvasLayer
 	
 	#region Nodes
 	
+	public Control MainControlNode { get; private set; }
 	public CardsList CardsListNode { get; private set; }
 	public CardsList SampledCardsListNode { get; private set; }
 	public HttpRequest BulkDataRequestNode { get; private set; }
@@ -44,6 +45,8 @@ public partial class Main : CanvasLayer
 	
 	public override void _Ready() {
 		#region Node fetching
+		
+		MainControlNode = GetNode<Control>("%MainControl");
 		CardViewWindowNode = GetNode<CardViewWindow>("%CardViewWindow");
 		CardsListNode = GetNode<CardsList>("%CardsList");
 		SampledCardsListNode = GetNode<CardsList>("%SampledCardsList");
@@ -69,10 +72,10 @@ public partial class Main : CanvasLayer
 		#endregion
 		
 		// TODO remove
-		GetNode<TabContainer>("VBoxContainer/TabContainer").CurrentTab = 1;
+		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 1;
 		SampleSizeNode.Value = 100;
 		OnSampleRandomPressed();
-		Load("../test-project");
+		Load("../project");
 	}
 	
 	public override void _Process(double delta) {
@@ -81,10 +84,24 @@ public partial class Main : CanvasLayer
 		}
 	}
 	
+	private readonly static int SIZE_MOD = 5;
 	public override void _Input(InputEvent e) {
 		if (e.IsActionPressed("save"))
 			SaveAction();
+		if (e.IsActionPressed("inc-size"))
+			ModFont(SIZE_MOD);
+		if (e.IsActionPressed("dec-size"))
+			ModFont(-SIZE_MOD);
 	}
+	
+	#region Font size
+	
+	private void ModFont(int v) {
+		// TODO i don't think this should be done this way
+		MainControlNode.Theme.DefaultFontSize += v;
+	}
+	
+	#endregion
 	
 	#region Actions
 	
@@ -95,6 +112,7 @@ public partial class Main : CanvasLayer
 		}
 		
 		var project = BakedProject;
+		project.SaveTo(ProjectPath);
 	}
 	
 	#endregion
@@ -229,7 +247,6 @@ public partial class Main : CanvasLayer
 		get {
 			var ttp = TTPNode.BakedPipeline;
 			var result = new Project(ttp);
-			GD.Print(result);
 			return result;
 		}
 	}

@@ -1,7 +1,0 @@
-{
-    "name": "Cardname",
-    "template": "tt-cardname",
-    "args": {
-        "Replacement": "[CARDNAME]"
-    }
-}
