@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TTResultLayer : VBoxContainer
+public partial class TTResultLayer : Control
 {
 	#region Nodes
 	

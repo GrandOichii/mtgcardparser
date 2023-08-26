@@ -111,6 +111,8 @@ public partial class TTPTab : TabBar
 	#endregion
 	
 	[Signal]
+	public delegate void TTDeletedEventHandler(Wrapper<TextTransformer> ttW);
+	[Signal]
 	public delegate void TTTemplateDeletedEventHandler(Wrapper<LuaTextTransformerTemplate> templateW);
 	
 	private void OnAddButtonPressed()
@@ -119,7 +121,9 @@ public partial class TTPTab : TabBar
 		switch(TTTabContainerNode.CurrentTab) {
 		case 0:
 			// text transformers
-			// TODO
+			TTEditorNode.TTNames = TTNames;
+			TTEditorNode.Load(null);
+			TTEditorNode.Show();
 			return;
 		case 1:
 			// text transformer templates
@@ -136,19 +140,27 @@ public partial class TTPTab : TabBar
 		switch(TTTabContainerNode.CurrentTab) {
 		case 0:
 			// text transformers
-			// TODO
+			var ttItems = TextTransformerListNode.GetSelectedItems();
+			if (ttItems.Length == 0) {
+				// TODO notify the user to select a template first
+				return;
+			}
+			var ttData = TextTransformerListNode.GetItemMetadata(ttItems[0]).As<Wrapper<TextTransformer>>();
+			TTEditorNode.TTNames = TTNames;
+			TTEditorNode.Load(ttData);
+			TTEditorNode.Show();
 			return;
 		case 1:
 			// text transformer templates
 			
-			var items = TextTransformerTemplateListNode.GetSelectedItems();
-			if (items.Length == 0) {
+			var tttItems = TextTransformerTemplateListNode.GetSelectedItems();
+			if (tttItems.Length == 0) {
 				// TODO notify the user to select a template first
 				return;
 			}
-			var data = TextTransformerTemplateListNode.GetItemMetadata(items[0]).As<Wrapper<LuaTextTransformerTemplate>>();
+			var tttData = TextTransformerTemplateListNode.GetItemMetadata(tttItems[0]).As<Wrapper<LuaTextTransformerTemplate>>();
 			TTTemplateEditorNode.TemplateNames = TemplateNames;
-			TTTemplateEditorNode.Load(data);
+			TTTemplateEditorNode.Load(tttData);
 			TTTemplateEditorNode.Show();
 			return;
 		}
@@ -159,20 +171,28 @@ public partial class TTPTab : TabBar
 		switch(TTTabContainerNode.CurrentTab) {
 		case 0:
 			// text transformers
-			// TODO
+			var ttItems = TextTransformerListNode.GetSelectedItems();
+			if (ttItems.Length == 0) {
+				// TODO notify the user to select a tt first
+				return;
+			}
+			// TODO ask the user to confirm deleting the tt
+			var data = TextTransformerListNode.GetItemMetadata(ttItems[0]);
+			TextTransformerListNode.RemoveItem(ttItems[0]);
+			EmitSignal(SignalName.TTDeleted, data);
 			return;
 		case 1:
 			// text transformer templates
 			
-			var items = TextTransformerTemplateListNode.GetSelectedItems();
-			if (items.Length == 0) {
+			var tttItems = TextTransformerTemplateListNode.GetSelectedItems();
+			if (tttItems.Length == 0) {
 				// TODO notify the user to select a template first
 				return;
 			}
 			// TODO ask the user to confirm deleting the templates
-			var data = TextTransformerTemplateListNode.GetItemMetadata(items[0]);
-			TextTransformerTemplateListNode.RemoveItem(items[0]);
-			EmitSignal(SignalName.TTTemplateDeleted, data);
+			var tttData = TextTransformerTemplateListNode.GetItemMetadata(tttItems[0]);
+			TextTransformerTemplateListNode.RemoveItem(tttItems[0]);
+			EmitSignal(SignalName.TTTemplateDeleted, tttData);
 			return;
 		}
 	}
@@ -323,11 +343,6 @@ public partial class TTPTab : TabBar
 		TextBoxesNode.AddChild(child);
 		child.Load(name, texts[i]);
 	}
-
+	
+	
 }
-
-
-
-
-
-

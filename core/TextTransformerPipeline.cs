@@ -11,7 +11,8 @@ public class TextTransformerPipeline {
         new CardNameTextTransformerTemplate(),
         new LowerCaseTextTransformerTemplate(),
         new FormatSurrounderTextTransformerTemplate(),
-        new FileSourceSurrounderTextTransformerTemplate()
+        new FileSourceSurrounderTextTransformerTemplate(),
+        new SimpleReplacerTextTransformerTemplate()
     };
     public List<LuaTextTransformerTemplate> CustomTemplates { get; } = new();
     public List<TextTransformer> Pipeline { get; } = new();

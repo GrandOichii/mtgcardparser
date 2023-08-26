@@ -13,9 +13,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h0umx")
 
+[node name="HSeparator2" type="HSeparator" parent="."]
+layout_mode = 2
+
 [node name="TTName" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.639216, 0.223529, 1)
 text = "Text transformer name here "
 
 [node name="HSeparator" type="HSeparator" parent="."]
@@ -28,3 +32,6 @@ size_flags_vertical = 3
 text = "TT text here
 TT text here"
 fit_content = true
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+layout_mode = 2

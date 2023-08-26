@@ -146,6 +146,38 @@ public class LowerCaseTextTransformerTemplate : TextTransformerTemplate {
     }
 }
 
+public class SimpleReplacerTextTransformerTemplate : TextTransformerTemplate {
+    private readonly string REGEX_PATTERN_FORMAT = "\\b{0}\\b";
+    private readonly string REPLACED_PHRASE_ARG_NAME = "Replace";
+    private readonly string REPLACEMENT_PHRASE_ARG_NAME = "Replacement";
+    public SimpleReplacerTextTransformerTemplate() {
+        Name = "tt-simple-replacer";
+        Description = "Replaces all instances of a word/phrase with another word/phrase";
+
+        Args.Add(new(REPLACED_PHRASE_ARG_NAME));
+        Args.Add(new(REPLACEMENT_PHRASE_ARG_NAME));
+    }
+
+    public override StringBuilder Do(StringBuilder text, Card card, Dictionary<string, string> args)
+    {
+        var pattern = string.Format(REGEX_PATTERN_FORMAT, args[REPLACED_PHRASE_ARG_NAME]);
+        var replacement = args[REPLACEMENT_PHRASE_ARG_NAME];
+        var m = Regex.Matches(text.ToString(), pattern);
+        for (int i = m.Count - 1; i >= 0; i--) {
+            Match match = m[i];
+            text = text.Replace(
+                match.ToString(),
+                replacement,
+                match.Index,
+                match.ToString().Length
+            );
+
+        }
+        return new(text.ToString().ToLower());
+    }
+
+}
+
 public abstract class RegexSurrounderTransformerTemplate : TextTransformerTemplate {
     private readonly string SURROUND_FORMAT = "[{0}:{1}]";
 

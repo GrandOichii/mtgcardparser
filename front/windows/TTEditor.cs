@@ -59,6 +59,8 @@ public partial class TTEditor : Window
 			var argValue = pair.Value;
 			AddTTArgLI(argName, argValue);
 		}
+		
+		if (!_editMode) OnTemplateOptionItemSelected(TemplateOptionNode.Selected);
 	}
 	
 	private void ClearArgumentList() {
