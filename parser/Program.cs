@@ -2,7 +2,7 @@
 
 class Program {
     public static void Main(String[] args) {
-        var testPath = "../test-project";
+        var testPath = "../saved-project";
         var project = Project.Load(testPath);
 
         var ttp = project.TTPipeline;

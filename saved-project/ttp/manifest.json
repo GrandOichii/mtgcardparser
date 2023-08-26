@@ -1,0 +1,1 @@
+{"pipeline":["pipeline/Cardname.tt","pipeline/Append.tt","pipeline/Surround mana.tt","pipeline/Lowercase.tt","pipeline/Type surrounder.tt"],"templates":["templates/append-front.ttt"]}

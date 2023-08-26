@@ -22,8 +22,35 @@ public class Project {
         return new(ttPipeline);
     }
 
-    private Project(TextTransformerPipeline ttPipeline) {
+    public Project(TextTransformerPipeline ttPipeline) {
         TTPipeline = ttPipeline;
+    }
+
+    private static readonly string TPP_DIR = "ttp";
+    public void SaveTo(string dir) {
+        // delete directory if already exists
+        if (Directory.Exists(dir)) {
+            Directory.Delete(dir, true);
+        }
+
+        // create directory
+        Directory.CreateDirectory(dir);
+
+        // add manifest file
+        var pLoader = new ProjectLoader();
+        pLoader.TTPDir = TPP_DIR;
+        // TODO other
+
+        // save manifest file
+        var pLoaderJ = JsonSerializer.Serialize(pLoader);
+        File.WriteAllText(Path.Combine(dir, MANIFEST_FILE), pLoaderJ);
+
+        var ttpDir = Path.Combine(dir, TPP_DIR);
+
+        // create ttp directory
+        Directory.CreateDirectory(ttpDir);
+
+        TTPipeline.SaveTo(ttpDir);
     }
 }
 

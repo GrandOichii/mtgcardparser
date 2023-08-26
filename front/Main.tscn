@@ -19,6 +19,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MenuBar" type="MenuBar" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="File" type="MenuButton" parent="VBoxContainer/MenuBar"]
+layout_mode = 1
+offset_right = 35.0
+offset_bottom = 31.0
+text = "File"
+
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3

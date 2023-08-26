@@ -45,7 +45,6 @@ public class TextTransformerPipeline {
     public string Do(Card card) {
         var result = card.Text;
 
-        Console.WriteLine("Initial: " + result);
         foreach (var transformer in Pipeline) {
             result = transformer.Do(result, card);
         }
@@ -62,6 +61,43 @@ public class TextTransformerPipeline {
             result.Add(text);
         }
         return result;
+    }
+
+    private static readonly string PIPELINE_DIR = "pipeline";
+    private static readonly string TEMPLATES_DIR = "templates";
+    private static readonly string TEMPLATE_SCRIPTS_DIR = "scripts";
+
+    private static readonly string TEMPLATE_FILE_EXTENSION = ".ttt";
+    private static readonly string TT_FILE_EXTENSION = ".tt";
+    public void SaveTo(string dir) {
+        // create pipeline directory
+        Directory.CreateDirectory(Path.Combine(dir, PIPELINE_DIR));
+
+        // create templates directory
+        Directory.CreateDirectory(Path.Combine(dir, TEMPLATES_DIR));
+
+        // create template scripts directory
+        Directory.CreateDirectory(Path.Combine(dir, TEMPLATES_DIR, LuaTextTransformerTemplate.SCRIPTS_DIR));
+
+        // create manifest file
+        var ttpLoader = new TextTransformerPipelineLoader();
+
+        // save templates
+        foreach (var template in CustomTemplates) {
+            var p = Path.Combine(TEMPLATES_DIR, template.Name + TEMPLATE_FILE_EXTENSION);
+            template.SaveTo(Path.Combine(dir, p));
+            ttpLoader.Templates.Add(p);
+        }
+
+        // save pipeline
+        foreach (var tt in Pipeline) {
+            var p = Path.Combine(PIPELINE_DIR, tt.Name + TT_FILE_EXTENSION);
+            tt.SaveTo(Path.Combine(dir, p));
+            ttpLoader.Pipeline.Add(p);
+        }
+
+        var ttpLoaderJ = JsonSerializer.Serialize(ttpLoader);
+        File.WriteAllText(Path.Combine(dir, MANIFEST_FILE), ttpLoaderJ);
     }
 }
 

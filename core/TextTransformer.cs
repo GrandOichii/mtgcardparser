@@ -53,6 +53,26 @@ public class LuaTextTransformerTemplate : TextTransformerTemplate {
         var returned = TransformF.Call(text.ToString(), card.ToLuaTable(LState), LuaUtility.CreateTable(LState, args));
         return new(LuaUtility.GetReturnAs<string>(returned));
     }
+
+    public static readonly string SCRIPTS_DIR = "scripts";
+    public void SaveTo(string file) {
+        // create loader file
+        var loader = new TextTransformerTemplateLoader();
+        loader.Name = Name;
+        loader.Description = Description;
+        foreach (var arg in Args) {
+            loader.Args.Add(arg);
+        }
+
+        // script
+        loader.ScriptPath = Path.Combine(SCRIPTS_DIR, Name + ".lua");
+        var scriptPath = Path.Combine(Directory.GetParent(file).FullName, loader.ScriptPath);
+        File.WriteAllText(scriptPath, Script);
+
+        // save
+        var ttLoaderJ = JsonSerializer.Serialize(loader);
+        File.WriteAllText(file, ttLoaderJ);
+    }
 }
 
 public class TTArg {
@@ -97,6 +117,18 @@ public class TextTransformer {
     public string Do(string text, Card card) {
         var result = Template.Do(new(text), card, TemplateArgs);
         return result.ToString();
+    }
+
+    public void SaveTo(string file) {
+        // create loader file
+        var loader = new TextTransformerLoader();
+        loader.Name = Name;
+        loader.Template = Template.Name;
+        loader.Args = TemplateArgs;
+
+        // save
+        var loaderJ = JsonSerializer.Serialize(loader);
+        File.WriteAllText(file, loaderJ);
     }
 }
 

@@ -39,6 +39,8 @@ public partial class Main : CanvasLayer
 	#endregion
 	
 	private string _cardSrc;
+
+	public string ProjectPath { get; set; } = "";
 	
 	public override void _Ready() {
 		#region Node fetching
@@ -78,6 +80,24 @@ public partial class Main : CanvasLayer
 			CardsDownloadProgressBarNode.Value = CardsDownloadRequestNode.GetDownloadedBytes() * 8;
 		}
 	}
+	
+	public override void _Input(InputEvent e) {
+		if (e.IsActionPressed("save"))
+			SaveAction();
+	}
+	
+	#region Actions
+	
+	private void SaveAction() {
+		if (ProjectPath.Length == 0) {
+			// TODO
+			return;
+		}
+		
+		var project = BakedProject;
+	}
+	
+	#endregion
 	
 	#region Cards downloading
 	private bool _downloading = false;
@@ -157,7 +177,6 @@ public partial class Main : CanvasLayer
 	
 	#endregion
 
-
 	#region Card viewing
 	
 	private void ViewCard(SourceCard card)
@@ -200,11 +219,20 @@ public partial class Main : CanvasLayer
 	public void Load(string projectPath) {
 		var project = Project.Load(projectPath);
 		EmitSignal(SignalName.ProjectLoaded, new Wrapper<Project>(project));
+
+		ProjectPath = projectPath;
 	}
 	
 	#endregion
 	
-	
+	public Project BakedProject {
+		get {
+			var ttp = TTPNode.BakedPipeline;
+			var result = new Project(ttp);
+			GD.Print(result);
+			return result;
+		}
+	}
 }
 
 
