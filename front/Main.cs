@@ -72,7 +72,7 @@ public partial class Main : CanvasLayer
 		#endregion
 		
 		// TODO remove
-		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 1;
+		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 2;
 		SampleSizeNode.Value = 100;
 		OnSampleRandomPressed();
 		Load("../project");

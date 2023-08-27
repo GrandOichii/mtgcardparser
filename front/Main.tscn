@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://din77vaj1rxrr"]
+[gd_scene load_steps=7 format=3 uid="uid://din77vaj1rxrr"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_8c403"]
 [ext_resource type="PackedScene" uid="uid://dokm78qayo4n8" path="res://windows/CardViewWindow.tscn" id="2_u3tsi"]
 [ext_resource type="PackedScene" uid="uid://b7m2xohxxb2un" path="res://CardsList.tscn" id="3_c378u"]
 [ext_resource type="PackedScene" uid="uid://b36fxsgiudut2" path="res://tabs/TTPTab.tscn" id="4_o111x"]
+[ext_resource type="PackedScene" uid="uid://nrxra0vj74f3" path="res://tabs/ParsersTab.tscn" id="5_yksel"]
 
 [sub_resource type="Theme" id="Theme_jl4x5"]
 default_font_size = 20
@@ -117,6 +118,10 @@ use_threads = true
 
 [node name="TTP" parent="MainControl/TabContainer" instance=ExtResource("4_o111x")]
 unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Parsers" parent="MainControl/TabContainer" instance=ExtResource("5_yksel")]
 visible = false
 layout_mode = 2
 
