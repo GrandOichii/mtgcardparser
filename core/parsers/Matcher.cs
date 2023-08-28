@@ -15,8 +15,6 @@ public class Matcher : PNode {
     public Regex Pattern { get; private set; }
 
     // each one corresponds to it's respective capture group in the pattern
-    public List<PNode> Children { get; } = new();
-
     public int GroupCount => Pattern.GetGroupNames().Length - 1;
 
     public static Matcher FromXml(PNodeLoader loader, XmlElement el) {
@@ -35,11 +33,15 @@ public class Matcher : PNode {
             result.Children.Add(c);
         }
 
-        if (GroupCount != result.Children.Count) {
-            throw new Exception("Inconsistent Matcher: number of groups=" + GroupCount + ", children count=" + result.Children.Count);
-        }
+        result.CheckGroupCount();
 
         return result;
+    }
+
+    public void CheckGroupCount() {
+        if (GroupCount != Children.Count) {
+            throw new Exception("Inconsistent Matcher: number of groups=" + GroupCount + ", children count=" + Children.Count);
+        }
     }
 
     public override string ToString() {
@@ -50,5 +52,27 @@ public class Matcher : PNode {
             result += "\n" + child.ToString();
 
         return result + "\n]";
+    }
+
+    public override bool Do(string text) {
+        CheckGroupCount();
+
+        var match = Pattern.Match(text);
+        if (!match.Success) return false;
+        
+        for (int i = 1; i < match.Groups.Count; i++) {
+            var child = Children[i-1];
+            var group = match.Groups[i];
+            var success = child.Do(group.ToString());
+            if (!success) return false;
+        }
+
+        // Match m = matches[i];
+        // for (int i = 0; i < matches.Count; i++) {
+        //     Match match = matches[i];
+        //     System.Console.WriteLine("\t" + i + " " + match);
+        // }
+        System.Console.WriteLine(Name);
+        return true;
     }
 }

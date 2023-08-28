@@ -1,9 +1,15 @@
 namespace MtgCardParser;
+
 using System.Xml;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 public abstract class PNode {
     public string Name { get; set; }
     public bool IsTemplate { get; set; } = false;
+    public List<PNode> Children { get; } = new();
+    abstract public bool Do(string text);
 }
 
 
@@ -37,15 +43,34 @@ public class PNodeLoader {
         
         // load raw pnodes
         var result = new List<PNode>();
-        result.Add(root);
         var root = LoadTemplate(Path.Combine(dir, loader.RootPath));
+        result.Add(root);
         foreach (var path in loader.TemplatePaths) {
             var template = LoadTemplate(Path.Combine(dir, path));
             result.Add(template);
         }
 
+        // create template name index
+        var tIndex = new Dictionary<string, PNode>();
+        foreach (var node in result) {
+            tIndex.Add(node.Name, node);
+        }
+
+        foreach (var template in result) {
+            ReplaceTemplates(tIndex, template);
+        }
+
         // iterate over all, replace templates
         return result;
+    }
+
+    private void ReplaceTemplates(Dictionary<string, PNode> tIndex, PNode node) {
+        for (int i = 0; i < node.Children.Count; i++) {
+            var child = node.Children[i];
+            if (!child.IsTemplate) continue;
+
+            node.Children[i] = tIndex[child.Name];
+        }
     }
 
     private PNode LoadTemplate(string path) {
@@ -53,7 +78,8 @@ public class PNodeLoader {
         XmlDocument xDoc = new XmlDocument();
         xDoc.LoadXml(text);
 
-        return Load(path);
+        return Load(xDoc.DocumentElement);
+    }
 }
 
 public class PNodePathsLoader {
@@ -63,6 +89,6 @@ public class PNodePathsLoader {
     public string RootPath { get; set; }
 
     public static PNodePathsLoader FromJson(string text) {
-        return JsonSerializer.Deserialize<PNodePathsLoader>(text) ?? throw new Exception("Failed to deserialize json to PNodePathsLoader: " + json);
+        return JsonSerializer.Deserialize<PNodePathsLoader>(text) ?? throw new Exception("Failed to deserialize json to PNodePathsLoader: " + text);
     }
 }

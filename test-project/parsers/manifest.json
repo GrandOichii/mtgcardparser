@@ -3,6 +3,7 @@
         "aa.xml",
         "trigger.xml",
         "effect.xml",
+        "empty-selector.xml",
         "static-effect.xml"
     ],
     "root": "root.xml"

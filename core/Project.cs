@@ -7,6 +7,7 @@ public class Project {
     private static readonly string MANIFEST_FILE = "manifest.json";
 
     public TextTransformerPipeline TTPipeline { get; }
+    public List<PNode> Parsers { get;}
 
     /// <summary>
     /// Loads the project from the specified directory
@@ -19,13 +20,16 @@ public class Project {
         // load text transormer pipeline
         var ttPipeline = TextTransformerPipeline.Load(Path.Join(dir, pLoader.TTPDir));
 
-        
+        // load parsers
+        var pl = new PNodeLoader();
+        var parsers = pl.LoadNodesFromDir(Path.Combine(dir, pLoader.ParsersDir));
 
-        return new(ttPipeline);
+        return new(ttPipeline, parsers);
     }
 
-    public Project(TextTransformerPipeline ttPipeline) {
+    public Project(TextTransformerPipeline ttPipeline, List<PNode> parsers) {
         TTPipeline = ttPipeline;
+        Parsers = parsers;
     }
 
     private static readonly string TPP_DIR = "ttp";
@@ -53,6 +57,15 @@ public class Project {
         Directory.CreateDirectory(ttpDir);
 
         TTPipeline.SaveTo(ttpDir);
+    }
+
+    public PNode Root {
+        get {
+            foreach (var node in Parsers)
+                if (node.Name == "root")
+                    return node;
+            throw new Exception("No root parser present");
+        }
     }
 }
 
