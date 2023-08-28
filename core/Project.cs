@@ -19,6 +19,8 @@ public class Project {
         // load text transormer pipeline
         var ttPipeline = TextTransformerPipeline.Load(Path.Join(dir, pLoader.TTPDir));
 
+        
+
         return new(ttPipeline);
     }
 
@@ -57,6 +59,8 @@ public class Project {
 class ProjectLoader {
     [JsonPropertyName("ttp-dir")]
     public string TTPDir { get; set; } = "";
+    [JsonPropertyName("parsers")]
+    public string ParsersDir { get; set; }
 
     public static ProjectLoader FromJson(string json) {
         var result = JsonSerializer.Deserialize<ProjectLoader>(json) ?? throw new Exception("Failed to deserialize ProjectLoader from JSON: " + json);

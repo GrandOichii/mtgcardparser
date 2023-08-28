@@ -34,8 +34,26 @@ public class PNodeLoader {
     public List<PNode> LoadNodesFromDir(string dir) {
         var loaderT = File.ReadAllText(Path.Combine(dir, MANIFEST_FILE));
         var loader = PNodePathsLoader.FromJson(loaderT);
-        // TODO continue work from here
+        
+        // load raw pnodes
+        var result = new List<PNode>();
+        result.Add(root);
+        var root = LoadTemplate(Path.Combine(dir, loader.RootPath));
+        foreach (var path in loader.TemplatePaths) {
+            var template = LoadTemplate(Path.Combine(dir, path));
+            result.Add(template);
+        }
+
+        // iterate over all, replace templates
+        return result;
     }
+
+    private PNode LoadTemplate(string path) {
+        var text = File.ReadAllText(path);
+        XmlDocument xDoc = new XmlDocument();
+        xDoc.LoadXml(text);
+
+        return Load(path);
 }
 
 public class PNodePathsLoader {
