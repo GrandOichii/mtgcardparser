@@ -1,0 +1,1 @@
+{"name":"three-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bthree\\b","Replacement":"3"}}

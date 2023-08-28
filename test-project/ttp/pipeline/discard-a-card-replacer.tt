@@ -1,0 +1,1 @@
+{"name":"discard-a-card-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bdiscard a card\\b","Replacement":"discard 1 card"}}

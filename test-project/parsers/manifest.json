@@ -1,0 +1,9 @@
+{
+    "templates": [
+        "aa.xml",
+        "trigger.xml",
+        "effect.xml",
+        "static-effect.xml"
+    ],
+    "root": "root.xml"
+}

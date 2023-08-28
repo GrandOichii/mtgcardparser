@@ -1,0 +1,10 @@
+<matcher name="matcher1" pattern="Whenever (.+)">
+    <matcher template="matcher2" />
+    <selector name="selector1">
+        <matcher template="matcher2" />
+        <matcher name="matcher3" pattern="(.+): (.+)">
+            <matcher template="t-matcher1" />
+            <selector template="t-selector1" />
+        </matcher>
+    </selector>
+</matcher>
