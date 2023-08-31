@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://nrxra0vj74f3"]
+[gd_scene load_steps=3 format=3 uid="uid://nrxra0vj74f3"]
 
 [ext_resource type="Script" path="res://tabs/ParsersTab.cs" id="1_d5dnc"]
+[ext_resource type="PackedScene" uid="uid://cajtv5fuxcuk6" path="res://pnodes/PNodeBase.tscn" id="2_miq07"]
 
 [node name="ParsersTab" type="TabBar"]
 anchors_preset = 15
@@ -22,21 +23,19 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GraphNode" type="GraphNode" parent="HBoxContainer/GraphEdit"]
+[node name="PNodeBase" parent="HBoxContainer/GraphEdit" instance=ExtResource("2_miq07")]
 layout_mode = 0
-offset_left = 369.0
-offset_top = 317.0
-offset_right = 762.0
-offset_bottom = 371.0
+offset_left = 52.0
+offset_top = 143.0
+offset_bottom = 223.0
 mouse_filter = 1
-position_offset = Vector2(369, 317)
+position_offset = Vector2(52, 143)
 
-[node name="GraphNode2" type="GraphNode" parent="HBoxContainer/GraphEdit"]
+[node name="PNodeBase2" parent="HBoxContainer/GraphEdit" instance=ExtResource("2_miq07")]
 layout_mode = 0
-offset_left = 139.0
-offset_top = 260.0
-offset_right = 242.0
-offset_bottom = 314.0
+offset_left = 281.0
+offset_top = 155.0
+offset_right = 408.0
+offset_bottom = 231.0
 mouse_filter = 1
-title = "Amogus "
-position_offset = Vector2(139, 260)
+position_offset = Vector2(281, 155)

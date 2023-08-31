@@ -75,7 +75,7 @@ public partial class Main : CanvasLayer
 		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 2;
 		SampleSizeNode.Value = 100;
 		OnSampleRandomPressed();
-		Load("../project");
+		Load("../test-project");
 	}
 	
 	public override void _Process(double delta) {
@@ -111,8 +111,8 @@ public partial class Main : CanvasLayer
 			return;
 		}
 		
-		var project = BakedProject;
-		project.SaveTo(ProjectPath);
+		// var project = BakedProject;
+		// project.SaveTo(ProjectPath);
 	}
 	
 	#endregion
@@ -243,13 +243,14 @@ public partial class Main : CanvasLayer
 	
 	#endregion
 	
-	public Project BakedProject {
-		get {
-			var ttp = TTPNode.BakedPipeline;
-			var result = new Project(ttp);
-			return result;
-		}
-	}
+	// public Project BakedProject {
+	// 	get {
+	// 		var ttp = TTPNode.BakedPipeline;
+	// 		var result = new Project(ttp, new());
+	// 		// TODO
+	// 		return result;
+	// 	}
+	// }
 }
 
 
