@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 
 public abstract class PNode {
-    public string Name { get; set; }
+    public string Name { get; set; } = "";
     public bool IsTemplate { get; set; } = false;
     public List<PNode> Children { get; } = new();
     abstract public bool Do(string text);
@@ -75,18 +75,18 @@ public class PNodeLoader {
 
     private PNode LoadTemplate(string path) {
         var text = File.ReadAllText(path);
-        XmlDocument xDoc = new XmlDocument();
+        XmlDocument xDoc = new();
         xDoc.LoadXml(text);
 
-        return Load(xDoc.DocumentElement);
+        return LoadTemplate(xDoc.DocumentElement ?? throw new Exception("No root element in document " + path));
     }
 }
 
 public class PNodePathsLoader {
     [JsonPropertyName("templates")]
-    public List<string> TemplatePaths { get; set; }
+    public List<string> TemplatePaths { get; set; } = new();
     [JsonPropertyName("root")]
-    public string RootPath { get; set; }
+    public string RootPath { get; set; } = "";
 
     public static PNodePathsLoader FromJson(string text) {
         return JsonSerializer.Deserialize<PNodePathsLoader>(text) ?? throw new Exception("Failed to deserialize json to PNodePathsLoader: " + text);

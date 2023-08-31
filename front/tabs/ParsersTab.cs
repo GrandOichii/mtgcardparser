@@ -58,22 +58,30 @@ public partial class ParsersTab : TabBar
 		
 		var pNodeW = ParsersListNode.GetItemMetadata(index).As<Wrapper<PNode>>();
 		var pNode = pNodeW.Value;
+		GraphEditNode.ClearConnections();
 		
 		foreach (var child in GraphEditNode.GetChildren())
 			child.QueueFree();
 
-		AddPNodeBase(pNodeW);
+		AddPNodeBase(pNodeW, true);
+		GraphEditNode.ArrangeNodes();
 	}
 	
-	private void AddPNodeBase(Wrapper<PNode> pNodeW) {
+	private PNodeBase AddPNodeBase(Wrapper<PNode> pNodeW, bool ignoreTemplate=false) {
 		var node = PNodeBasePS.Instantiate() as PNodeBase;
 		
 		GraphEditNode.AddChild(node);
-		node.Load(pNodeW);
+		node.Load(pNodeW, ignoreTemplate);
 		
+		if (pNodeW.Value.IsTemplate && !ignoreTemplate) return node;
 		// iterate over the children
-		foreach (var child in pNodeW.Value.Children)
-			AddPNodeBase(new Wrapper<PNode>(child));
+		var childI = 0;
+		foreach (var child in pNodeW.Value.Children) {
+			var cNode = AddPNodeBase(new Wrapper<PNode>(child));
+			GraphEditNode.ConnectNode(node.Name, childI, cNode.Name, 0);
+			++childI;
+		}
+		return node;
 	}
 	
 	[Signal]
@@ -82,6 +90,8 @@ public partial class ParsersTab : TabBar
 	private void OnMainProjectLoaded(Wrapper<Project> projectW)
 	{
 		var parsers = projectW.Value.Parsers;
+		foreach (var p in parsers)
+			GD.Print(p.IsTemplate);
 		foreach (var parser in parsers)
 			EmitSignal(SignalName.ParserAdded, new Wrapper<PNode>(parser));
 	}
