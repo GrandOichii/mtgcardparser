@@ -189,6 +189,3 @@ public partial class TTEditor : Window
 	#endregion
 }
 
-
-
-

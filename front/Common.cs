@@ -33,3 +33,5 @@ public partial class SourceCard : Node
 	
 	public Card ToCard() => new Card(CName, Text);
 }
+
+//public partial class 

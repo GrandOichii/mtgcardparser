@@ -252,7 +252,3 @@ public partial class Main : CanvasLayer
 	// 	}
 	// }
 }
-
-
-
-
