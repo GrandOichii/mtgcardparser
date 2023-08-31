@@ -34,4 +34,14 @@ public partial class SourceCard : Node
 	public Card ToCard() => new Card(CName, Text);
 }
 
-//public partial class 
+public partial class PNodeWrapper : Wrapper<PNode> {
+	public PNodeWrapper(PNode v) : base(v) {}
+
+	public int GetChildIndex(PNode child) {
+		for (int i = 0; i < Value.Children.Count; i++) {
+			if (Value.Children[i] == child)
+				return i;
+		}
+		return -1;
+	}
+}

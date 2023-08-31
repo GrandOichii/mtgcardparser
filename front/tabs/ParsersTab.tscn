@@ -41,6 +41,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 right_disconnects = true
+minimap_enabled = false
 
 [connection signal="ParserAdded" from="." to="." method="OnParserAdded"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]
