@@ -120,7 +120,7 @@ public partial class TTTemplateEditor : Window
 			// TODO notify that can't save without script
 			return;
 		}
-		// TODO check that the script has a function Transform(text, card, args)
+
 		var created = new LuaTextTransformerTemplate();
 		created.Name = name;
 		created.LState = new();

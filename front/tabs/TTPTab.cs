@@ -4,19 +4,6 @@ using System.Collections.Generic;
 
 using MtgCardParser;
 
-// TODO? add scrolls to lists
-
-
-//public partial class Wrapper<LuaTextTransformerTemplate> : Node {
-//	public LuaTextTransformerTemplate Value { get; }
-//	public TTTemplateWrapper(LuaTextTransformerTemplate v) { Value = v; }
-//}
-//
-//public partial class TTWrapper : Node {
-//
-//}
-
-
 public partial class TTPTab : TabBar
 {
 	#region Nodes
@@ -117,7 +104,6 @@ public partial class TTPTab : TabBar
 	
 	private void OnAddButtonPressed()
 	{
-		// TODO ugly, think of smt other
 		switch(TTTabContainerNode.CurrentTab) {
 		case 0:
 			// text transformers
@@ -139,7 +125,6 @@ public partial class TTPTab : TabBar
 	
 	private void OnEditButtonPressed()
 	{
-		// TODO ugly, think of smt other
 		switch(TTTabContainerNode.CurrentTab) {
 		case 0:
 			// text transformers

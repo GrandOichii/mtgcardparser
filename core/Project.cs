@@ -45,7 +45,7 @@ public class Project {
         // add manifest file
         var pLoader = new ProjectLoader();
         pLoader.TTPDir = TPP_DIR;
-        // TODO other
+        // TODO parsers
 
         // save manifest file
         var pLoaderJ = JsonSerializer.Serialize(pLoader);

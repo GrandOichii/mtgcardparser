@@ -15,7 +15,7 @@ public abstract class PNode {
 
 public class PNodeLoader {
     static readonly string MANIFEST_FILE = "manifest.json";
-    // TODO after loading all templates, iterate over all of the pnodes and replace them if they are marked as IsTemplate nad have the same name as a template in the collection
+
     private static readonly Dictionary<string, Func<PNodeLoader, XmlElement, PNode>> NODE_XML_PARSING_MAP = new() {
         { "matcher", Matcher.FromXml },
         { "selector", Selector.FromXml },

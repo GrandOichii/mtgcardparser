@@ -113,6 +113,7 @@ public partial class Main : CanvasLayer
 		
 		// var project = BakedProject;
 		// project.SaveTo(ProjectPath);
+		// GD.Print("Saved!");
 	}
 	
 	#endregion

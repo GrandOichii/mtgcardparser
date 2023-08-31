@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://nrxra0vj74f3"]
+[gd_scene load_steps=2 format=3 uid="uid://nrxra0vj74f3"]
 
 [ext_resource type="Script" path="res://tabs/ParsersTab.cs" id="1_d5dnc"]
-[ext_resource type="PackedScene" uid="uid://cajtv5fuxcuk6" path="res://pnodes/PNodeBase.tscn" id="2_miq07"]
 
 [node name="ParsersTab" type="TabBar"]
 anchors_preset = 15
@@ -23,17 +22,14 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TemplatesList" type="ItemList" parent="HBoxContainer/VBoxContainer"]
+[node name="ParsersList" type="ItemList" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="AddButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Add"
-
-[node name="EditButton" type="Button" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Edit"
 
 [node name="RemoveButton" type="Button" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -44,35 +40,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
+right_disconnects = true
 
-[node name="PNodeBase" parent="HBoxContainer/GraphEdit" instance=ExtResource("2_miq07")]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 143.0
-offset_bottom = 223.0
-mouse_filter = 1
-position_offset = Vector2(52, 143)
-
-[node name="PNodeBase2" parent="HBoxContainer/GraphEdit" instance=ExtResource("2_miq07")]
-layout_mode = 0
-offset_left = 281.0
-offset_top = 155.0
-offset_right = 408.0
-offset_bottom = 231.0
-mouse_filter = 1
-position_offset = Vector2(281, 155)
-
-[node name="PNodeBase3" parent="HBoxContainer/GraphEdit" instance=ExtResource("2_miq07")]
-layout_mode = 0
-offset_left = 297.0
-offset_top = 267.0
-offset_right = 424.0
-offset_bottom = 343.0
-mouse_filter = 1
-position_offset = Vector2(297, 267)
-
-[connection signal="item_activated" from="HBoxContainer/VBoxContainer/TemplatesList" to="." method="OnTemplatesListItemActivated"]
+[connection signal="ParserAdded" from="." to="." method="OnParserAdded"]
+[connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/EditButton" to="." method="OnEditButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]
 [connection signal="connection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditConnectionRequest"]
+[connection signal="disconnection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditDisconnectionRequest"]

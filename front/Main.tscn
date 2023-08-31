@@ -138,6 +138,7 @@ layout_mode = 2
 [connection signal="ClearSampled" from="." to="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="ClearCards"]
 [connection signal="ProjectLoaded" from="." to="MainControl/TabContainer/TTP" method="OnProjectLoaded"]
 [connection signal="ProjectLoaded" from="." to="MainControl/TabContainer/TTP/TTEditor" method="OnMainProjectLoaded"]
+[connection signal="ProjectLoaded" from="." to="MainControl/TabContainer/Parsers" method="OnMainProjectLoaded"]
 [connection signal="close_requested" from="CardViewWindow" to="." method="OnCardViewWindowCloseRequested"]
 [connection signal="CardClicked" from="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampleRandom" to="." method="OnSampleRandomPressed"]
