@@ -39,12 +39,35 @@ public partial class ParsersTab : TabBar
 		var toNode = GetPNode(to_node);
 		var fromPNode = fromNode.Data.Value;
 		var toPNode = toNode.Data.Value;
-		toPNode.Children[from_port] = fromPNode;
+		fromPNode.Children[from_port] = fromPNode;
 		// TODO not tested - don't know how safe it is to manually remove the last connection
 		
+		var removeQueue = new List<Godot.Collections.Dictionary>();
 		// TODO remove previous connections
-		foreach (var con in GraphEditNode.GetConnectionList())
-			GD.Print(con["from"]); // TODO continue work here
+		foreach (var con in GraphEditNode.GetConnectionList()) {
+			var fN = con["from"].As<string>();
+			var fP = con["from_port"].As<int>();
+			var tN = con["to"].As<string>();
+			var tP = con["to_port"].As<int>();
+			
+			// check that the target port is not already taken
+			if (tN == toNode.Name && tP == to_port) return;
+			
+			// check other connections from port
+			if (fN == fromNode.Name && from_port == fP) {
+				removeQueue.Add(con);
+			}
+			
+		}
+		foreach (var rD in removeQueue) {
+			var fN = rD["from"].As<string>();
+			var fP = rD["from_port"].As<int>();
+			var tN = rD["to"].As<string>();
+			var tP = rD["to_port"].As<int>();
+			GraphEditNode.DisconnectNode(fN, fP, tN, tP);
+			
+		}
+
 		GraphEditNode.ConnectNode(from_node, from_port, to_node, to_port);
 	}
 	
