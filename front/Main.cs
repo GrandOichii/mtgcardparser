@@ -275,13 +275,13 @@ public partial class Main : CanvasLayer
 		}
 		
 		foreach (var pair in unparcedTextIndex) {
-			GD.Print(pair.Key.Name);
-			foreach (var t in pair.Value)
-				GD.Print("\t" + t);
+			GD.Print(pair.Key.Name + " " + pair.Value.Count);
+			// foreach (var t in pair.Value)
+			// 	GD.Print("\t" + t);
 			
 		}
 		
-//		ParsersNode.UnparcedTextIndex = unparcedTextIndex;
+		ParsersNode.UnparcedTextIndex = unparcedTextIndex;
 	}
 	
 	private bool TraceMatches(ParseTrace trase) {

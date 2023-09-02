@@ -19,6 +19,36 @@ public partial class ParsersTab : TabBar
 	public ItemList ParsersListNode { get; private set; }
 	
 	#endregion
+
+	private Dictionary<PNode, List<string>> _unparcedTextIndex = new();
+	public Dictionary<PNode, List<string>> UnparcedTextIndex { 
+		get => _unparcedTextIndex;
+		set {
+			_unparcedTextIndex = value;
+			
+			// update existing graph nodes
+			foreach (var child in GraphEditNode.GetChildren()) {
+				var pNodeN = child as PNodeBase;
+				var pNodeW = pNodeN.Data;
+				
+				if (!UnparcedTextIndex.ContainsKey(pNodeW.Value)) {
+					continue;
+				}
+				
+				var list = UnparcedTextIndex[pNodeW.Value];
+				var children = pNodeN.GetChildren();
+				var last = children[children.Count-1];
+				UnprocessedTextList listNode;
+				if (last is UnprocessedTextList) {
+					listNode = last as UnprocessedTextList;
+				} else {
+					listNode = UnprocessedTextListPS.Instantiate() as UnprocessedTextList;
+					pNodeN.AddChild(listNode);
+				}
+				listNode.Load(list);
+			}
+		}
+	}
 	
 	public override void _Ready()
 	{
@@ -113,6 +143,8 @@ public partial class ParsersTab : TabBar
 		AddPNodeBase(pNodeW, true);
 		GraphEditNode.ArrangeNodes();
 	}
+
+	static readonly PackedScene UnprocessedTextListPS = ResourceLoader.Load("res://UnprocessedTextList.tscn") as PackedScene;
 	
 	private PNodeBase AddPNodeBase(PNodeWrapper pNodeW, bool ignoreTemplate=false) {
 		var node = PNodeBasePS.Instantiate() as PNodeBase;
@@ -120,7 +152,16 @@ public partial class ParsersTab : TabBar
 		GraphEditNode.AddChild(node);
 		node.Load(pNodeW, ignoreTemplate);
 		
+		// fill the unprocessed text
+		if (UnparcedTextIndex.ContainsKey(pNodeW.Value)) {
+			var list = UnparcedTextIndex[pNodeW.Value];
+			var child = UnprocessedTextListPS.Instantiate() as UnprocessedTextList;
+			node.AddChild(child);
+			child.Load(list);
+		}
+		
 		if (pNodeW.Value.IsTemplate && !ignoreTemplate) return node;
+		
 		// iterate over the children
 		var childI = 0;
 		foreach (var child in pNodeW.Value.Children) {
@@ -162,7 +203,3 @@ public partial class ParsersTab : TabBar
 		}
 	}
 }
-
-
-
-

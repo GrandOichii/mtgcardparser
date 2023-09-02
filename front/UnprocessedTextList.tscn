@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4qkejkiqhus"]
+
+[ext_resource type="Script" path="res://UnprocessedTextList.cs" id="1_qpwfp"]
+
+[node name="UnprocessedTextList" type="ScrollContainer"]
+custom_minimum_size = Vector2(300, 300)
+script = ExtResource("1_qpwfp")
+
+[node name="List" type="ItemList" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+auto_height = true
