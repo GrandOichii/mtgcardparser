@@ -6,15 +6,38 @@ using System.Text.Json.Serialization;
 
 
 public abstract class PNode {
+    virtual public string NodeName => "no-node-name";
     public string Name { get; set; } = "";
     public bool IsTemplate { get; set; } = false;
     public List<PNode> Children { get; } = new();
     abstract public bool Do(string text);
+    public void SaveTo(string path) {
+        var doc = new XmlDocument();
+
+        doc.AppendChild(ToXml(doc, true));
+
+        doc.Save(path);
+    }
+
+    public virtual XmlElement ToXml(XmlDocument doc, bool ignoreTemplate=false) {
+        var result = doc.CreateElement(NodeName);
+        
+        if (!ignoreTemplate && IsTemplate) {
+            result.SetAttribute("template", Name);
+            return result;
+        }
+        result.SetAttribute("name", Name);
+
+        foreach (var child in Children)
+            result.AppendChild(child.ToXml(doc));
+        return result;
+    }
 }
 
 
 public class PNodeLoader {
     static readonly string MANIFEST_FILE = "manifest.json";
+    static readonly string PARSER_SAVE_EXTENSION = ".xml";
 
     private static readonly Dictionary<string, Func<PNodeLoader, XmlElement, PNode>> NODE_XML_PARSING_MAP = new() {
         { "matcher", Matcher.FromXml },
@@ -64,7 +87,7 @@ public class PNodeLoader {
         return result;
     }
 
-    private void ReplaceTemplates(Dictionary<string, PNode> tIndex, PNode node) {
+    static private void ReplaceTemplates(Dictionary<string, PNode> tIndex, PNode node) {
         for (int i = 0; i < node.Children.Count; i++) {
             var child = node.Children[i];
             if (!child.IsTemplate) continue;
@@ -80,7 +103,30 @@ public class PNodeLoader {
 
         return LoadTemplate(xDoc.DocumentElement ?? throw new Exception("No root element in document " + path));
     }
+
+    static public void SaveParsers(List<PNode> parsers, string dir) {
+        // create manifest file
+        var loader = new PNodePathsLoader();
+
+        foreach (var parser in parsers) {
+            // save parser
+            var fName = parser.Name + PARSER_SAVE_EXTENSION;
+            var file = Path.Combine(dir, fName);
+            parser.SaveTo(file);
+
+            if (parser.Name == "root") {
+                loader.RootPath = fName;
+                continue;
+            }
+            loader.TemplatePaths.Add(fName);
+        }
+
+        // save the manifest file
+        var loaderJ = JsonSerializer.Serialize(loader);
+        File.WriteAllText(Path.Combine(dir, MANIFEST_FILE), loaderJ);
+    }
 }
+
 
 public class PNodePathsLoader {
     [JsonPropertyName("templates")]

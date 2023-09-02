@@ -1,0 +1,1 @@
+{"name":"venture-dungeon","template":"tt-simple-replacer","args":{"Pattern":"\\bventure into the dungeon\\b","Replacement":"[dungeonventure]"}}

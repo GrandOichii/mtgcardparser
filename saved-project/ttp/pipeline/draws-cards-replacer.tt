@@ -1,0 +1,1 @@
+{"name":"draws-cards-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bdraws\\b","Replacement":"draw"}}

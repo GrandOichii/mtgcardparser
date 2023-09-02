@@ -4,6 +4,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 
 public class Matcher : PNode {
+    public override string NodeName => "matcher";
     private string _patternString;
     public string PatternString { 
         get => _patternString;
@@ -74,5 +75,14 @@ public class Matcher : PNode {
         // }
         System.Console.WriteLine(Name);
         return true;
+    }
+
+    public override XmlElement ToXml(XmlDocument doc, bool ignoreTemplate = false)
+    {
+        var result = base.ToXml(doc, ignoreTemplate);
+        if (!ignoreTemplate && IsTemplate) return result;
+        
+        result.SetAttribute("pattern", PatternString);
+        return result;
     }
 }

@@ -1,0 +1,1 @@
+{"name":"the-remover","template":"tt-simple-replacer","args":{"Pattern":"\\bthe\\b","Replacement":""}}

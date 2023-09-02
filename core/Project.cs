@@ -33,6 +33,7 @@ public class Project {
     }
 
     private static readonly string TPP_DIR = "ttp";
+    private static readonly string PARSERS_DIR = "parsers";
     public void SaveTo(string dir) {
         // delete directory if already exists
         if (Directory.Exists(dir)) {
@@ -43,20 +44,27 @@ public class Project {
         Directory.CreateDirectory(dir);
 
         // add manifest file
-        var pLoader = new ProjectLoader();
-        pLoader.TTPDir = TPP_DIR;
-        // TODO parsers
+        var pLoader = new ProjectLoader
+        {
+            TTPDir = TPP_DIR,
+            ParsersDir = PARSERS_DIR
+        };
 
         // save manifest file
         var pLoaderJ = JsonSerializer.Serialize(pLoader);
         File.WriteAllText(Path.Combine(dir, MANIFEST_FILE), pLoaderJ);
 
-        var ttpDir = Path.Combine(dir, TPP_DIR);
+        var ttpDir = Path.Combine(dir, pLoader.TTPDir);
+        var parsersDir = Path.Combine(dir, pLoader.ParsersDir);
 
         // create ttp directory
         Directory.CreateDirectory(ttpDir);
 
+        // create parsers directory
+        Directory.CreateDirectory(parsersDir);
+
         TTPipeline.SaveTo(ttpDir);
+        PNodeLoader.SaveParsers(Parsers, parsersDir);
     }
 
     public PNode Root {

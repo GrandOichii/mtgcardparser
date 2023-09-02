@@ -6,15 +6,17 @@ class Program {
         var testPath = "../test-project";
         var project = Project.Load(testPath);
 
-        var ttp = project.TTPipeline;
-        var card = new Card("Where Ancients Tread", "{T}: Deal 1 damage to any target.");
-        var result = ttp.Do(
-            card
-        );
-        System.Console.WriteLine(result);
-        var root = project.Root;
-        var parsed = root.Do(result);
-        System.Console.WriteLine("Parsed: " + parsed);
+        // var ttp = project.TTPipeline;
+        // var card = new Card("Where Ancients Tread", "{T}: Deal 1 damage to any target.");
+        // var result = ttp.Do(
+        //     card
+        // );
+        // System.Console.WriteLine(result);
+        // var root = project.Root;
+        // var parsed = root.Do(result);
+        // System.Console.WriteLine("Parsed: " + parsed);
+
+        project.SaveTo("../saved-project");
     }
 }
 

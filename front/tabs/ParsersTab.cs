@@ -152,11 +152,10 @@ public partial class ParsersTab : TabBar
 		get {
 			var result = new List<PNode>();
 			
-			// TODO
-//			for (int i = 0; i < ParsersList.ItemCount; i++) {
-//				var pNodeW = ParsersList.GetItemMetadata(i);
-////				var pNode = 
-//			}
+			for (int i = 0; i < ParsersList.ItemCount; i++) {
+				var pNodeW = ParsersList.GetItemMetadata(i);
+				var pNode = pNodeW.Value;
+			}
 			
 			return result;
 		}

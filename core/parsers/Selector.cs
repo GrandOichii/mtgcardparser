@@ -2,7 +2,7 @@ namespace MtgCardParser;
 using System.Xml;
 
 public class Selector : PNode {
-
+    public override string NodeName => "selector";
     public static Selector FromXml(PNodeLoader loader, XmlElement el) {
         var result = new Selector();
 

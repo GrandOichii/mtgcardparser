@@ -36,6 +36,7 @@ public partial class Main : CanvasLayer
 	public CardViewWindow CardViewWindowNode { get; private set; }
 	public SpinBox SampleSizeNode { get; private set; }
 	public TTPTab TTPNode { get; private set; }
+	public ParsersTab ParsersNode { get; private set; }
 	
 	#endregion
 	
@@ -56,6 +57,7 @@ public partial class Main : CanvasLayer
 		CardsDownloadRequestNode = GetNode<HttpRequest>("%CardsDownloadRequest");
 		SampleSizeNode = GetNode<SpinBox>("%SampleSize");
 		TTPNode = GetNode<TTPTab>("%TTP");
+		ParsersNode = GetNode<ParsersTab>("%Parsers");
 		
 		_cardSrc = CardsDownloadRequestNode.DownloadFile;
 		#endregion
@@ -244,12 +246,12 @@ public partial class Main : CanvasLayer
 	
 	#endregion
 	
-	// public Project BakedProject {
-	// 	get {
-	// 		var ttp = TTPNode.BakedPipeline;
-	// 		var result = new Project(ttp, new());
-	// 		// TODO
-	// 		return result;
-	// 	}
-	// }
+	public Project BakedProject {
+		get {
+			var ttp = TTPNode.BakedPipeline;
+			var parsers = ParsersNode.BakedParsers;
+			var result = new Project(ttp, new());
+			return result;
+		}
+	}
 }

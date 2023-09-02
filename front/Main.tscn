@@ -122,6 +122,7 @@ visible = false
 layout_mode = 2
 
 [node name="Parsers" parent="MainControl/TabContainer" instance=ExtResource("5_yksel")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
