@@ -55,26 +55,22 @@ public class Matcher : PNode {
         return result + "\n]";
     }
 
-    public override bool Do(string text) {
+    public override ParseTrace? Do(string text) {
         CheckGroupCount();
 
         var match = Pattern.Match(text);
-        if (!match.Success) return false;
-        
+        if (!match.Success) return null;
+        var result = new ParseTrace(this, text);
+        result.Parsed = true;
         for (int i = 1; i < match.Groups.Count; i++) {
             var child = Children[i-1];
             var group = match.Groups[i];
-            var success = child.Do(group.ToString());
-            if (!success) return false;
+            var trace = child.Do(group.ToString());
+            result.ChildrenTraces.Add(trace);
+            if (trace is null || !trace.Parsed) result.Parsed = false;
         }
 
-        // Match m = matches[i];
-        // for (int i = 0; i < matches.Count; i++) {
-        //     Match match = matches[i];
-        //     System.Console.WriteLine("\t" + i + " " + match);
-        // }
-        System.Console.WriteLine(Name);
-        return true;
+        return result;
     }
 
     public override XmlElement ToXml(XmlDocument doc, bool ignoreTemplate = false)

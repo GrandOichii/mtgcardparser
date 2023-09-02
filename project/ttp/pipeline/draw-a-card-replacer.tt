@@ -1,1 +1,0 @@
-{"name":"draw-a-card-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bdraw a card\\b","Replacement":"draw 1 card"}}

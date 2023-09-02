@@ -77,7 +77,7 @@ public partial class Main : CanvasLayer
 		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 2;
 		SampleSizeNode.Value = 100;
 		OnSampleRandomPressed();
-		Load("../test-project");
+		Load("../saved-project");
 	}
 	
 	public override void _Process(double delta) {
@@ -99,7 +99,7 @@ public partial class Main : CanvasLayer
 	#region Font size
 	
 	private void ModFont(int v) {
-		// TODO i don't think this should be done this way
+		// TODO don't think this should be done this way
 		MainControlNode.Theme.DefaultFontSize += v;
 	}
 	
@@ -108,14 +108,15 @@ public partial class Main : CanvasLayer
 	#region Actions
 	
 	private void SaveAction() {
+		// GD.Print(ProjectPath.Length + "---");
 		if (ProjectPath.Length == 0) {
 			// TODO
 			return;
 		}
 		
-		// var project = BakedProject;
-		// project.SaveTo(ProjectPath);
-		// GD.Print("Saved!");
+		var project = BakedProject;
+		project.SaveTo(ProjectPath);
+		GD.Print("Saved!");
 	}
 	
 	#endregion
@@ -225,7 +226,8 @@ public partial class Main : CanvasLayer
 	private void OnSampleRandomPressed()
 	{
 		EmitSignal(SignalName.ClearSampled);
-		SampledCards = Cards.OrderBy(x => Rnd.Next()).Take((int)SampleSizeNode.Value).ToList();
+		// SampledCards = Cards.OrderBy(x => Rnd.Next()).Take((int)SampleSizeNode.Value).ToList();
+		SampledCards = Cards;
 		foreach (var card in SampledCards)
 			EmitSignal(SignalName.AddSampleCard, card);
 	}
@@ -250,7 +252,18 @@ public partial class Main : CanvasLayer
 		get {
 			var ttp = TTPNode.BakedPipeline;
 			var parsers = ParsersNode.BakedParsers;
-			var result = new Project(ttp, new());
+			var result = new Project(ttp, parsers);
+
+			GD.Print(SampledCards[0].Text);
+			var pResL = result.Do(SampledCards[0].ToCard());
+			foreach (var pRes in pResL) {
+				if (pRes is null) {
+					GD.Print("Failed to parse!");
+				} else {
+					GD.Print(pRes);
+				}
+				GD.Print("---");
+			}
 			return result;
 		}
 	}

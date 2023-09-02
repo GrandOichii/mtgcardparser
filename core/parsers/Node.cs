@@ -10,7 +10,7 @@ public abstract class PNode {
     public string Name { get; set; } = "";
     public bool IsTemplate { get; set; } = false;
     public List<PNode> Children { get; } = new();
-    abstract public bool Do(string text);
+    abstract public ParseTrace? Do(string text);
     public void SaveTo(string path) {
         var doc = new XmlDocument();
 

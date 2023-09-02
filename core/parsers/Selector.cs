@@ -29,19 +29,27 @@ public class Selector : PNode {
         return result + "\n]";
     }
 
-    public override bool Do(string text) {
-        if (Children.Count == 0) {
-            System.Console.WriteLine(Name);
-            return true;
-        }
-
+    public override ParseTrace? Do(string text) {
+        var result = new ParseTrace(this, text);
+        bool allNull = true;
+        bool restIsNull = false;
         foreach (var child in Children) {
-            var success = child.Do(text);
-            if (success) {
-                System.Console.WriteLine(Name);
-                return true;
-            } 
+            // if (restIsNull) {
+            //     result.ChildrenTraces.Add(null);
+            //     continue;
+            // }
+            var cTrace = child.Do(text);
+            result.ChildrenTraces.Add(cTrace);
+            if (cTrace is null) continue;
+
+            // restIsNull = true;
+            allNull = false;
+            if (cTrace.Parsed) {
+                result.Parsed = true;
+            }
         }
-        return false;
+        // if (allNull) return null;
+
+        return result;
     }
 }

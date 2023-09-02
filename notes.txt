@@ -34,3 +34,35 @@ Parser:
             Template: Selector?
             Name: string
             Children: List<Matcher>
+
+== HOW TO FIND RELEVANT UNPARSED TEXT ==
+(root: whenever event, effect.)
+Parsed: False
+    null
+    (trigger: whenever event, effect.)
+    Parsed: False
+        (true: event)
+        Parsed: True
+        null
+    null
+    null
+
+OR
+
+(root: whenever event, effect.)
+Parsed: False
+    null
+    (trigger: whenever event, effect.)
+    Parsed: False
+        (true: event)
+        Parsed: True
+        (effect: effect)
+        Parsed: False
+            null
+            null
+    (effect: whenever event, effect.)
+    Parsed: False
+        null
+        null
+    (static-effect: whenever event, effect.)
+    Parsed: False

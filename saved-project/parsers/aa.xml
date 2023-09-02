@@ -1,4 +1,4 @@
 <matcher name="aa" pattern="(.+): (.+)">
-  <selector template="empty-selector" />
+  <matcher template="true" />
   <selector template="effect" />
 </matcher>

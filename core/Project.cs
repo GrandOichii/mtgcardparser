@@ -3,6 +3,15 @@ using System.Text.Json.Serialization;
 
 namespace MtgCardParser;
 
+public class ParseTrace {
+    public PNode Parent { get; }
+    public string Text { get; }
+    public bool Parsed { get; set; } = false;
+    public List<ParseTrace?> ChildrenTraces { get; } = new();
+    public ParseTrace(PNode parent, String text) { Parent = parent; Text = text; }
+}
+
+
 public class Project {
     private static readonly string MANIFEST_FILE = "manifest.json";
 
@@ -74,6 +83,17 @@ public class Project {
                     return node;
             throw new Exception("No root parser present");
         }
+    }
+
+    public List<ParseTrace?> Do(Card card) {
+        var result = new List<ParseTrace?>();
+        var text = TTPipeline.Do(card);
+        var lines = text.Split(Environment.NewLine);
+        foreach (var line in lines) {
+            result.Add(Root.Do(line));
+        }
+
+        return result;
     }
 }
 
