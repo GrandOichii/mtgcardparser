@@ -30,12 +30,27 @@ class Program {
         System.Console.WriteLine();
         System.Console.WriteLine();
 
+        var unproccessedIndex = new Dictionary<PNode, List<string>>();
+
         foreach (var trace in result) {
             var relevant = new Dictionary<string, ParseTrace>();
             CheckForRelevantTraces("", trace, relevant);
             foreach (var pair in relevant) {
                 System.Console.WriteLine(pair.Key + ": " + pair.Value.Text);
+                var pNode = pair.Value.Parent;
+                if (!unproccessedIndex.ContainsKey(pNode)) unproccessedIndex.Add(pNode, new());
+                unproccessedIndex[pNode].Add(pair.Value.Text);
             }
+        }
+
+        System.Console.WriteLine();
+        System.Console.WriteLine();
+        System.Console.WriteLine();
+
+        foreach (var pair in unproccessedIndex) {
+            System.Console.WriteLine(pair.Key.Name);
+            foreach (var t in pair.Value)
+                System.Console.WriteLine("\t" + t);
         }
         
     }

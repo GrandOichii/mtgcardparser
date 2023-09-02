@@ -254,17 +254,49 @@ public partial class Main : CanvasLayer
 			var parsers = ParsersNode.BakedParsers;
 			var result = new Project(ttp, parsers);
 
-			GD.Print(SampledCards[0].Text);
-			var pResL = result.Do(SampledCards[0].ToCard());
-			foreach (var pRes in pResL) {
-				if (pRes is null) {
-					GD.Print("Failed to parse!");
-				} else {
-					GD.Print(pRes);
-				}
-				GD.Print("---");
-			}
+			
 			return result;
 		}
 	}
+	
+	private void OnBakeButtonPressed()
+	{
+		var project = BakedProject;
+		var unparcedTextIndex = new Dictionary<PNode, List<string>>();
+		
+		foreach (var card in SampledCards) {
+			var traces = project.Do(card.ToCard());
+			foreach (var trace in traces) {
+				if (trace.Parsed) continue;
+				
+				FillUnparcedTextIndex(trace, unparcedTextIndex);
+			}
+			
+		}
+		
+		foreach (var pair in unparcedTextIndex) {
+			GD.Print(pair.Key.Name);
+			foreach (var t in pair.Value)
+				GD.Print("\t" + t);
+			
+		}
+		
+//		ParsersNode.UnparcedTextIndex = unparcedTextIndex;
+	}
+	
+	private bool TraceMatches(ParseTrace trase) {
+		return !trase.Parsed;
+	}
+	
+	private void FillUnparcedTextIndex(ParseTrace? trace, Dictionary<PNode, List<string>> index) {
+		if (trace is null) return;
+		if (TraceMatches(trace)){
+			if (!index.ContainsKey(trace.Parent)) index.Add(trace.Parent, new());
+			index[trace.Parent].Add(trace.Text);
+		}
+		foreach (var child in trace.ChildrenTraces)
+			FillUnparcedTextIndex(child, index);
+	}
 }
+
+
