@@ -202,4 +202,18 @@ public partial class ParsersTab : TabBar
 			return result;
 		}
 	}
+	
+	private void AddNode() {
+		GD.Print("Amogus");
+	}
+
+	private void OnGraphEditGuiInput(InputEvent e)
+	{
+		if (e.IsActionPressed("add-node")) {
+			AddNode();
+		}
+	}
 }
+
+
+

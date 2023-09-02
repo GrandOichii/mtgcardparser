@@ -43,9 +43,20 @@ size_flags_stretch_ratio = 4.0
 right_disconnects = true
 minimap_enabled = false
 
+[node name="AddNodeContextMenu" type="PopupMenu" parent="."]
+title = "Add node"
+size = Vector2i(133, 100)
+visible = true
+item_count = 2
+item_0/text = "New matcher"
+item_0/id = 0
+item_1/text = "New selector"
+item_1/id = 1
+
 [connection signal="ParserAdded" from="." to="." method="OnParserAdded"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]
 [connection signal="connection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditConnectionRequest"]
 [connection signal="disconnection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditDisconnectionRequest"]
+[connection signal="gui_input" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditGuiInput"]
