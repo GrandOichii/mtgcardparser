@@ -168,6 +168,7 @@ public partial class ParsersTab : TabBar
 		// iterate over the children
 		var childI = 0;
 		foreach (var child in pNodeW.Value.Children) {
+			if (child is null) continue;
 			var cNode = AddPNodeBase(new(child));
 			GraphEditNode.ConnectNode(node.Name, childI, cNode.Name, 0);
 			++childI;
