@@ -46,13 +46,12 @@ minimap_enabled = false
 [node name="AddNodePopupMenu" type="PopupMenu" parent="."]
 unique_name_in_owner = true
 size = Vector2i(167, 100)
-item_count = 3
-item_0/text = "New pNode"
+item_count = 2
+item_0/text = "New parser node"
 item_0/id = 0
-item_1/text = "Matcher template"
+item_1/text = ""
 item_1/id = 1
-item_2/text = "Selector template"
-item_2/id = 2
+item_1/separator = true
 
 [connection signal="ParserAdded" from="." to="." method="OnParserAdded"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]

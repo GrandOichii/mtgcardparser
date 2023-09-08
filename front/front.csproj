@@ -4,7 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="..\core\bin\Debug\net6.0\core.dll" />
+    <ProjectReference Include="..\core\core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NLua" Version="1.6.0" />

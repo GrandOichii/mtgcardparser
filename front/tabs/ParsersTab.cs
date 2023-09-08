@@ -71,11 +71,10 @@ public partial class ParsersTab : TabBar
 		var toNode = GetPNode(to_node);
 		var fromPNode = fromNode.Data.Value;
 		var toPNode = toNode.Data.Value;
-		fromPNode.Children[from_port] = toPNode;
 		// TODO not tested - don't know how safe it is to manually remove the last connection
 		
 		var removeQueue = new List<Godot.Collections.Dictionary>();
-		// TODO remove previous connections
+
 		foreach (var con in GraphEditNode.GetConnectionList()) {
 			var fN = con["from"].As<string>();
 			var fP = con["from_port"].As<int>();
@@ -100,6 +99,7 @@ public partial class ParsersTab : TabBar
 			
 		}
 
+		fromPNode.Children[from_port] = toPNode;
 		GraphEditNode.ConnectNode(from_node, from_port, to_node, to_port);
 	}
 	
@@ -110,8 +110,7 @@ public partial class ParsersTab : TabBar
 		var fromPNode = fromNode.Data.Value;
 		var toPNode = toNode.Data.Value;
 		
-		var i = fromNode.Data.GetChildIndex(toPNode);
-		fromPNode.Children[i] = null;
+		fromPNode.Children[from_port] = null;
 		// TODO not tested - don't know how safe it is, especially for saving
 		
 		GraphEditNode.DisconnectNode(from_node, from_port, to_node, to_port);
@@ -186,9 +185,14 @@ public partial class ParsersTab : TabBar
 	
 	private void OnParserAdded(PNodeWrapper pNodeW)
 	{
+		// add parser to parser list
 		var pnode = pNodeW.Value;
 		var i = ParsersListNode.AddItem(pnode.Name);
 		ParsersListNode.SetItemMetadata(i, pNodeW);
+
+		// add parser to context menu
+		AddNodePopupMenuNode.AddItem(pnode.Name + " (" + pnode.NodeName + ")");
+		AddNodePopupMenuNode.SetItemMetadata(AddNodePopupMenuNode.ItemCount - 1, pNodeW);
 	}
 	
 	public List<PNode> BakedParsers {
@@ -205,9 +209,11 @@ public partial class ParsersTab : TabBar
 		}
 	}
 	
+	public Vector2 LastMouseLocalPos { get; private set; }
 	private void AddNode(Vector2 pos) {
 		var mousePos = GetGlobalMousePosition();
 		AddNodePopupMenuNode.PopupOnParent(new Rect2I((int)mousePos.X, (int)mousePos.Y, -1, -1));
+		LastMouseLocalPos = GraphEditNode.GetLocalMousePosition();
 	}
 
 	private void OnGraphEditGuiInput(InputEvent e)
@@ -219,8 +225,16 @@ public partial class ParsersTab : TabBar
 	
 	private void OnAddNodePopupMenuIdPressed(int id)
 	{
-		GD.Print(id);
-		// Replace with function body.
+		if (id < 2) {
+			// TODO player pressed "new parser node"
+			return;
+		}
+		
+		var pNodeW = AddNodePopupMenuNode.GetItemMetadata(id).As<PNodeWrapper>();
+		var child = AddPNodeBase(pNodeW);
+//		child.Position = GraphEditNode.GetLocalMousePosition();
+		child.PositionOffset = LastMouseLocalPos;
+//		GD.Print(child.Position);
 	}
 }
 
