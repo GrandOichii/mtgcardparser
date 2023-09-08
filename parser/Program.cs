@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 class Program {
     public static void Main(String[] args) {
         var testPath = "../saved-project";
+        testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
         var project = Project.Load(testPath);
 
         // var ttp = project.TTPipeline;
