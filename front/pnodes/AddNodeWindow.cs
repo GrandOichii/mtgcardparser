@@ -89,10 +89,10 @@ public partial class AddNodeWindow : Window
 		}
 		
 		// check name
-		if (_parserNames.Contains(result.Name)) {
-			// TODO tell user that name is already taken
-			return;
-		}
+		// if (_parserNames.Contains(result.Name)) {
+		// 	// TODO tell user that name is already taken
+		// 	return;
+		// }
 
 		EmitSignal(SignalName.PNodeCreated, new PNodeWrapper(result));
 		Visible = false;

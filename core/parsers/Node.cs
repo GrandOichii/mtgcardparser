@@ -90,7 +90,10 @@ public class PNodeLoader {
     static private void ReplaceTemplates(Dictionary<string, PNode> tIndex, PNode node) {
         for (int i = 0; i < node.Children.Count; i++) {
             var child = node.Children[i];
-            if (!child.IsTemplate) continue;
+            if (!child.IsTemplate) {
+                ReplaceTemplates(tIndex, child);
+                continue;
+            }
 
             node.Children[i] = tIndex[child.Name];
         }

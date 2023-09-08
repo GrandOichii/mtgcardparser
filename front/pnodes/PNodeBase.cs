@@ -76,4 +76,10 @@ public partial class PNodeBase : GraphNode
 			child.QueueFree();
 	}
 
+	private void OnResizeRequest(Vector2 new_minsize)
+	{
+		Size = new_minsize;
+	}
 }
+
+

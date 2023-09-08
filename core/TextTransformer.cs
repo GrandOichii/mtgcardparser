@@ -260,11 +260,11 @@ public class FileSourceSurrounderTextTransformerTemplate : RegexSurrounderTransf
 
     public override StringBuilder Do(StringBuilder text, Card card, Dictionary<string, string> args)
     {
-        var words = File.ReadAllLines(args[FILE_PATH_NAME]);
-        foreach (var word in words) {
-            var pattern = string.Format(PATTERN_FORMAT, word);
-            text = RegexDo(text, card, pattern, args[SURROUND_ARG_NAME]);
-        }
+        //var words = File.ReadAllLines(args[FILE_PATH_NAME]);
+        //foreach (var word in words) {
+        //    var pattern = string.Format(PATTERN_FORMAT, word);
+        //    text = RegexDo(text, card, pattern, args[SURROUND_ARG_NAME]);
+        //}
         return text;
     }
 }

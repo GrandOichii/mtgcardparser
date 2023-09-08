@@ -1,0 +1,4 @@
+<selector name="effect">
+  <matcher template="life-gain" />
+  <matcher template="life-loss" />
+</selector>

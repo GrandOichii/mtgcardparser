@@ -6,4 +6,7 @@
 offset_right = 192.0
 offset_bottom = 87.0
 title = "PNode name here"
+resizable = true
 script = ExtResource("1_iqyni")
+
+[connection signal="resize_request" from="." to="." method="OnResizeRequest"]

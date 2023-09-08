@@ -1,0 +1,4 @@
+<matcher name="aa" pattern="(.+): (.+)">
+  <matcher template="true" />
+  <selector template="effect" />
+</matcher>

@@ -88,7 +88,7 @@ public class Project {
     public List<ParseTrace?> Do(Card card) {
         var result = new List<ParseTrace?>();
         var text = TTPipeline.Do(card);
-        var lines = text.Split(Environment.NewLine);
+        var lines = text.Split("\n");
         foreach (var line in lines) {
             result.Add(Root.Do(line));
         }

@@ -20,6 +20,7 @@ public partial class UnprocessedTextList : ScrollContainer
 	}
 
 	public void Load(List<string> list) {
+		// TODO doenst seem to be working on loading multiple times
 		ListNode.Clear();
 		foreach (var line in list)
 			ListNode.AddItem(line);

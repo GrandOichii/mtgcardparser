@@ -1,0 +1,3 @@
+<matcher name="life-gain" pattern="gain (.+) life">
+  <matcher template="true" />
+</matcher>
