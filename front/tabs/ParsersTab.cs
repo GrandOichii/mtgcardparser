@@ -17,6 +17,7 @@ public partial class ParsersTab : TabBar
 	
 	public GraphEdit GraphEditNode { get; private set; }
 	public ItemList ParsersListNode { get; private set; }
+	public PopupMenu AddNodePopupMenuNode { get; private set; }
 	
 	#endregion
 
@@ -56,6 +57,7 @@ public partial class ParsersTab : TabBar
 		
 		GraphEditNode = GetNode<GraphEdit>("%GraphEdit");
 		ParsersListNode = GetNode<ItemList>("%ParsersList");
+		AddNodePopupMenuNode = GetNode<PopupMenu>("%AddNodePopupMenu");
 		
 		#endregion
 		
@@ -203,17 +205,26 @@ public partial class ParsersTab : TabBar
 		}
 	}
 	
-	private void AddNode() {
-		GD.Print("Amogus");
+	private void AddNode(Vector2 pos) {
+		var mousePos = GetGlobalMousePosition();
+		AddNodePopupMenuNode.PopupOnParent(new Rect2I((int)mousePos.X, (int)mousePos.Y, -1, -1));
 	}
 
 	private void OnGraphEditGuiInput(InputEvent e)
 	{
 		if (e.IsActionPressed("add-node")) {
-			AddNode();
+			AddNode((e as InputEventMouseButton).Position);
 		}
 	}
+	
+	private void OnAddNodePopupMenuIdPressed(int id)
+	{
+		GD.Print(id);
+		// Replace with function body.
+	}
 }
+
+
 
 
 

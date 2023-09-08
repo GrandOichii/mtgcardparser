@@ -43,7 +43,8 @@ size_flags_stretch_ratio = 4.0
 right_disconnects = true
 minimap_enabled = false
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="AddNodePopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
 size = Vector2i(167, 100)
 item_count = 3
 item_0/text = "New pNode"
@@ -60,3 +61,4 @@ item_2/id = 2
 [connection signal="connection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditConnectionRequest"]
 [connection signal="disconnection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditDisconnectionRequest"]
 [connection signal="gui_input" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditGuiInput"]
+[connection signal="id_pressed" from="AddNodePopupMenu" to="." method="OnAddNodePopupMenuIdPressed"]

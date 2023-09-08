@@ -46,7 +46,7 @@ public partial class PNodeWrapper : Wrapper<PNode> {
 	}
 }
 
-public abstract partial class PNodeEditor : Control {
+public partial class PNodeEditor : Control {
 	public virtual void ClearValues() {}
-	public abstract PNode GetBakedPNode();
+	public virtual PNode GetBakedPNode() => null;
 }
