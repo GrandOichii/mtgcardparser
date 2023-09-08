@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://cdfjt8sna3tjv"]
+[gd_scene load_steps=2 format=3 uid="uid://cdfjt8sna3tjv"]
+
+[ext_resource type="Script" path="res://pnodes/matcher/MatcherEditor.cs" id="1_qjt56"]
 
 [node name="MatcherEditor" type="VBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_qjt56")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -11,7 +14,8 @@ layout_mode = 2
 layout_mode = 2
 text = "Name: "
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+[node name="NameEdit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -22,6 +26,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Pattern: "
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer2"]
+[node name="PatternEdit" type="LineEdit" parent="HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

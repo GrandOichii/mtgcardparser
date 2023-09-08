@@ -1,7 +1,15 @@
-[gd_scene format=3 uid="uid://bcycvauqxlvse"]
+[gd_scene load_steps=4 format=3 uid="uid://bcycvauqxlvse"]
 
-[node name="Window" type="Window"]
-size = Vector2i(500, 500)
+[ext_resource type="Script" path="res://pnodes/AddNodeWindow.cs" id="1_5td2c"]
+[ext_resource type="PackedScene" uid="uid://cdfjt8sna3tjv" path="res://pnodes/matcher/MatcherEditor.tscn" id="1_ifbi2"]
+[ext_resource type="PackedScene" uid="uid://djyi2bisos14d" path="res://pnodes/selector/SelectorEditor.tscn" id="2_3jf7e"]
+
+[node name="AddNodeWindow" type="Window"]
+initial_position = 2
+size = Vector2i(250, 150)
+transient = true
+exclusive = true
+script = ExtResource("1_5td2c")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -20,10 +28,39 @@ alignment = 1
 layout_mode = 2
 text = "Type: "
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+[node name="TypeOption" type="OptionButton" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 item_count = 2
+selected = 0
 popup/item_0/text = "matcher"
 popup/item_0/id = 0
 popup/item_1/text = "selector"
 popup/item_1/id = 1
+
+[node name="MatcherEditor" parent="CanvasLayer/VBoxContainer" instance=ExtResource("1_ifbi2")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SelectorEditor" parent="CanvasLayer/VBoxContainer" instance=ExtResource("2_3jf7e")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="CancelButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[connection signal="close_requested" from="." to="." method="OnCloseRequested"]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/HBoxContainer/TypeOption" to="." method="OnTypeOptionItemSelected"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/AddButton" to="." method="OnAddButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/CancelButton" to="." method="OnCancelButtonPressed"]

@@ -45,3 +45,8 @@ public partial class PNodeWrapper : Wrapper<PNode> {
 		return -1;
 	}
 }
+
+public abstract partial class PNodeEditor : Control {
+	public virtual void ClearValues() {}
+	public abstract PNode GetBakedPNode();
+}

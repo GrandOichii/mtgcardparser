@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://djyi2bisos14d"]
+[gd_scene load_steps=2 format=3 uid="uid://djyi2bisos14d"]
+
+[ext_resource type="Script" path="res://pnodes/selector/SelectorEditor.cs" id="1_ggc5w"]
 
 [node name="SelectorEditor" type="VBoxContainer"]
 anchors_preset = 15
@@ -6,6 +8,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ggc5w")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -14,7 +17,8 @@ layout_mode = 2
 layout_mode = 2
 text = "Name: "
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+[node name="NameEdit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -25,6 +29,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Children: "
 
-[node name="SpinBox" type="SpinBox" parent="HBoxContainer2"]
+[node name="ChildSpinBox" type="SpinBox" parent="HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

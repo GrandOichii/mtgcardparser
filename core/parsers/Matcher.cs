@@ -45,15 +45,15 @@ public class Matcher : PNode {
         }
     }
 
-    public override string ToString() {
-        var result = "";
+    // public override string ToString() {
+    //     var result = "";
 
-        result += Name + " " + Pattern + "[";
-        foreach (var child in Children)
-            result += "\n" + child.ToString();
+    //     result += Name + " " + Pattern + "[";
+    //     foreach (var child in Children)
+    //         result += "\n" + child.ToString();
 
-        return result + "\n]";
-    }
+    //     return result + "\n]";
+    // }
 
     public override ParseTrace? Do(string text) {
         CheckGroupCount();

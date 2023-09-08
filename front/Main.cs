@@ -108,12 +108,21 @@ public partial class Main : CanvasLayer
 	#region Actions
 	
 	private void SaveAction() {
-		// GD.Print(ProjectPath.Length + "---");
 		if (ProjectPath.Length == 0) {
 			// TODO
 			return;
 		}
-		
+
+		try {
+			foreach (var parser in ParsersNode.BakedParsers)
+				CheckForNullChildren(parser);
+		}
+		catch (Exception ex) {
+			// TODO show user
+			GD.Print(ex);
+			return;
+		}
+
 		var project = BakedProject;
 		project.SaveTo(ProjectPath);
 		GD.Print("Saved!");
@@ -121,7 +130,21 @@ public partial class Main : CanvasLayer
 	
 	#endregion
 	
+	#region Save utility
+
+	public void CheckForNullChildren(PNode node) {
+		for (int i = 0; i < node.Children.Count; i++) {
+			var child = node.Children[i];
+			if (child is null) throw new Exception("Connection " + i + " of node " + node.Name + " is empty.");
+			if (child.IsTemplate) continue;
+			CheckForNullChildren(child);
+		}
+	}
+
+	#endregion
+
 	#region Cards downloading
+	
 	private bool _downloading = false;
 	public bool Downloading {
 		get => _downloading;

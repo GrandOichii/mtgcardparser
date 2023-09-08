@@ -22,12 +22,12 @@ public class Selector : PNode {
         return result;
     }
 
-    public override string ToString() {
-        var result = Name + " [";
-        foreach (var child in Children)
-            result += "\n" + child.ToString();
-        return result + "\n]";
-    }
+    // public override string ToString() {
+    //     var result = Name + " [";
+    //     foreach (var child in Children)
+    //         result += "\n" + child.ToString();
+    //     return result + "\n]";
+    // }
 
     public override ParseTrace? Do(string text) {
         var result = new ParseTrace(this, text);

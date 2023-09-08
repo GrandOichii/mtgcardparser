@@ -9,7 +9,7 @@ public abstract class PNode {
     virtual public string NodeName => "no-node-name";
     public string Name { get; set; } = "";
     public bool IsTemplate { get; set; } = false;
-    public List<PNode> Children { get; } = new();
+    public List<PNode> Children { get; set; } = new();
     abstract public ParseTrace? Do(string text);
     public void SaveTo(string path) {
         var doc = new XmlDocument();
