@@ -1,12 +1,15 @@
 using Godot;
 using System;
-
 using System.Collections.Generic;
+
+using MtgCardParser;
 
 public partial class AddNodeWindow : Window
 {
 	[Signal]
 	public delegate void PNodeCreatedEventHandler(PNodeWrapper pNodeW);
+
+	private List<string> _parserNames;
 	
 	#region Nodes
 	
@@ -15,9 +18,7 @@ public partial class AddNodeWindow : Window
 	public OptionButton TypeOptionNode { get; private set; }
 	
 	#endregion
-	
-	public bool Saved { get; private set; } = false;
-	
+		
 	public Dictionary<string, PNodeEditor> PNodeEditorMap { get; private set; }
 	
 	public override void _Ready()
@@ -34,6 +35,15 @@ public partial class AddNodeWindow : Window
 			{ "matcher", MatcherEditorNode },
 			{ "selector", SelectorEditorNode }
 		};
+	}
+
+	private PNodeEditor CurrentEditor {
+		get {
+			foreach (var editor in PNodeEditorMap.Values)
+				if (editor.Visible)
+					return editor;
+			throw new Exception("No editor visible in AddNodeWindow");
+		}
 	}
 	
 	private void OnTypeOptionItemSelected(int index)
@@ -52,13 +62,12 @@ public partial class AddNodeWindow : Window
 	
 	private void OnCloseRequested()
 	{
-		Saved = false;
 		Visible = false;
 	}
 	
-	public void Do() {
-		Saved = true;
+	public void Do(List<string> parserNames) {
 		Visible = true;
+		_parserNames = parserNames;
 	}
 	
 	private void OnCancelButtonPressed()
@@ -69,11 +78,24 @@ public partial class AddNodeWindow : Window
 	private void OnAddButtonPressed()
 	{
 		var sType = TypeOptionNode.GetItemText(TypeOptionNode.GetSelectedId()); 
-		// check name
 		// check pattern
+		PNode result;
+		try {
+			result = CurrentEditor.GetBakedPNode();
+		} catch (Exception ex) {
+			// TODO show user
+			GD.Print(ex);
+			return;
+		}
 		
-		GD.Print(sType);
-		// Replace with function body.
+		// check name
+		if (_parserNames.Contains(result.Name)) {
+			// TODO tell user that name is already taken
+			return;
+		}
+
+		EmitSignal(SignalName.PNodeCreated, new PNodeWrapper(result));
+		Visible = false;
 	}
 
 }

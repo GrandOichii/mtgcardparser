@@ -18,6 +18,7 @@ public partial class ParsersTab : TabBar
 	public GraphEdit GraphEditNode { get; private set; }
 	public ItemList ParsersListNode { get; private set; }
 	public PopupMenu AddNodePopupMenuNode { get; private set; }
+	public AddNodeWindow AddNodeWindowNode { get; private set; }
 	
 	#endregion
 
@@ -58,6 +59,7 @@ public partial class ParsersTab : TabBar
 		GraphEditNode = GetNode<GraphEdit>("%GraphEdit");
 		ParsersListNode = GetNode<ItemList>("%ParsersList");
 		AddNodePopupMenuNode = GetNode<PopupMenu>("%AddNodePopupMenu");
+		AddNodeWindowNode = GetNode<AddNodeWindow>("%AddNodeWindow");
 		
 		#endregion
 		
@@ -209,6 +211,15 @@ public partial class ParsersTab : TabBar
 		}
 	}
 	
+	public List<string> BakedParserNames {
+		get {
+			var result = new List<string>();
+			foreach (var parser in BakedParsers)
+				result.Add(parser.Name);
+			return result;
+		}
+	}
+	
 	public Vector2 LastMouseLocalPos { get; private set; }
 	private void AddNode(Vector2 pos) {
 		var mousePos = GetGlobalMousePosition();
@@ -227,18 +238,18 @@ public partial class ParsersTab : TabBar
 	{
 		if (id < 2) {
 			// TODO player pressed "new parser node"
+			AddNodeWindowNode.Do(BakedParserNames);
 			return;
 		}
 		
 		var pNodeW = AddNodePopupMenuNode.GetItemMetadata(id).As<PNodeWrapper>();
 		var child = AddPNodeBase(pNodeW);
-//		child.Position = GraphEditNode.GetLocalMousePosition();
 		child.PositionOffset = LastMouseLocalPos;
-//		GD.Print(child.Position);
+	}
+	
+	private void OnAddNodeWindowPNodeCreated(PNodeWrapper pNodeW)
+	{
+		var child = AddPNodeBase(pNodeW);
+		child.PositionOffset = LastMouseLocalPos;
 	}
 }
-
-
-
-
-

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://nrxra0vj74f3"]
+[gd_scene load_steps=3 format=3 uid="uid://nrxra0vj74f3"]
 
 [ext_resource type="Script" path="res://tabs/ParsersTab.cs" id="1_d5dnc"]
+[ext_resource type="PackedScene" uid="uid://bcycvauqxlvse" path="res://pnodes/AddNodeWindow.tscn" id="2_oeh1s"]
 
 [node name="ParsersTab" type="TabBar"]
 anchors_preset = 15
@@ -53,6 +54,10 @@ item_1/text = ""
 item_1/id = 1
 item_1/separator = true
 
+[node name="AddNodeWindow" parent="." instance=ExtResource("2_oeh1s")]
+unique_name_in_owner = true
+visible = false
+
 [connection signal="ParserAdded" from="." to="." method="OnParserAdded"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
@@ -61,3 +66,4 @@ item_1/separator = true
 [connection signal="disconnection_request" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditDisconnectionRequest"]
 [connection signal="gui_input" from="HBoxContainer/GraphEdit" to="." method="OnGraphEditGuiInput"]
 [connection signal="id_pressed" from="AddNodePopupMenu" to="." method="OnAddNodePopupMenuIdPressed"]
+[connection signal="PNodeCreated" from="AddNodeWindow" to="." method="OnAddNodeWindowPNodeCreated"]
