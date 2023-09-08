@@ -297,12 +297,12 @@ public partial class Main : CanvasLayer
 			
 		}
 		
-		foreach (var pair in unparcedTextIndex) {
-			GD.Print(pair.Key.Name + " " + pair.Value.Count);
-			// foreach (var t in pair.Value)
-			// 	GD.Print("\t" + t);
+		// foreach (var pair in unparcedTextIndex) {
+		// 	GD.Print(pair.Key.Name + " " + pair.Value.Count);
+		// 	// foreach (var t in pair.Value)
+		// 	// 	GD.Print("\t" + t);
 			
-		}
+		// }
 		
 		ParsersNode.UnparcedTextIndex = unparcedTextIndex;
 	}

@@ -69,7 +69,7 @@ public partial class ParsersTab : TabBar
 		var toNode = GetPNode(to_node);
 		var fromPNode = fromNode.Data.Value;
 		var toPNode = toNode.Data.Value;
-		fromPNode.Children[from_port] = fromPNode;
+		fromPNode.Children[from_port] = toPNode;
 		// TODO not tested - don't know how safe it is to manually remove the last connection
 		
 		var removeQueue = new List<Godot.Collections.Dictionary>();
