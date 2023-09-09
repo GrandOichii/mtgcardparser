@@ -64,8 +64,11 @@ public partial class AddNodeWindow : Window
 	{
 		Visible = false;
 	}
+
+	private bool _isTemplate;
 	
-	public void Do(List<string> parserNames) {
+	public void Do(List<string> parserNames, bool isTemplate=false) {
+		_isTemplate = isTemplate;
 		Visible = true;
 		_parserNames = parserNames;
 	}
@@ -89,10 +92,14 @@ public partial class AddNodeWindow : Window
 		}
 		
 		// check name
-		// if (_parserNames.Contains(result.Name)) {
-		// 	// TODO tell user that name is already taken
-		// 	return;
-		// }
+		 if (_isTemplate) {
+			result.IsTemplate = _isTemplate;
+			
+			if (_parserNames.Contains(result.Name)) {
+				// TODO tell user that name is already taken
+				return;
+			}
+		 }
 
 		EmitSignal(SignalName.PNodeCreated, new PNodeWrapper(result));
 		Visible = false;

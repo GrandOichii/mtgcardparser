@@ -122,7 +122,7 @@ public partial class ParsersTab : TabBar
 	
 	private void OnAddButtonPressed()
 	{
-		// TODO
+		AddNodeWindowNode.Do(BakedParserNames, true);
 	}
 
 	private void OnRemoveButtonPressed()
@@ -145,6 +145,27 @@ public partial class ParsersTab : TabBar
 
 		AddPNodeBase(pNodeW, true);
 		GraphEditNode.ArrangeNodes();
+
+		// center camera on the whole graph
+		bool fuse = true;
+		int minTop = 0;
+		int minLeft = 0;
+		int maxRight = 0;
+		int maxBottom = 0;
+		foreach (PNodeBase node in GraphEditNode.GetChildren()) {
+			var pos = node.PositionOffset;
+			
+			if (fuze) {
+				minTop = pos.Y;
+				maxBottom = pos.Y;
+				minLeft = pos.X;
+				maxRight = pos.X;
+				fuze = false;
+				continue;
+			}
+
+			
+		}
 	}
 
 	static readonly PackedScene UnprocessedTextListPS = ResourceLoader.Load("res://UnprocessedTextList.tscn") as PackedScene;
@@ -250,6 +271,16 @@ public partial class ParsersTab : TabBar
 	
 	private void OnAddNodeWindowPNodeCreated(PNodeWrapper pNodeW)
 	{
+		if (pNodeW.Value.IsTemplate) {
+
+			EmitSignal(SignalName.ParserAdded, pNodeW);
+			var i = ParsersListNode.ItemCount - 1;
+			ParsersListNode.Select(i);
+			OnTemplatesListItemActivated(i);
+			return;
+		}
+
+		// is adding node to current graph edit
 		var child = AddPNodeBase(pNodeW);
 		child.PositionOffset = LastMouseLocalPos;
 	}
