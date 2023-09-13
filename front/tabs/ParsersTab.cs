@@ -141,31 +141,59 @@ public partial class ParsersTab : TabBar
 		GraphEditNode.ClearConnections();
 		
 		foreach (var child in GraphEditNode.GetChildren())
-			child.QueueFree();
+			child.Free();
 
 		AddPNodeBase(pNodeW, true);
 		GraphEditNode.ArrangeNodes();
 
 		// center camera on the whole graph
 		bool fuse = true;
-		int minTop = 0;
-		int minLeft = 0;
-		int maxRight = 0;
-		int maxBottom = 0;
+		float minTop = 0;
+		float minLeft = 0;
+		float maxRight = 0;
+		float maxBottom = 0;
 		foreach (PNodeBase node in GraphEditNode.GetChildren()) {
 			var pos = node.PositionOffset;
-			
-			if (fuze) {
-				minTop = pos.Y;
-				maxBottom = pos.Y;
-				minLeft = pos.X;
-				maxRight = pos.X;
-				fuze = false;
+			var x = pos.X;
+			var y = pos.Y;
+			var mX = x + node.Size.X;
+			var mY = y + node.Size.Y;
+
+			if (fuse) {
+				minTop = y;
+				maxBottom = mY;
+				minLeft = x;
+				maxRight = mX;
+				fuse = false;
 				continue;
 			}
 
+			if (y < minTop) minTop = y;
+			if (mY > maxBottom) maxBottom = mY;
+			if (x < minLeft) minLeft = x;
+			if (mX > maxRight) maxRight = mX;
+		}
+		var rectX = maxRight - minLeft;
+		var rectY = maxBottom - minTop;
+		var ratioX = rectX / GraphEditNode.Size.X;
+		var ratioY = rectY / GraphEditNode.Size.Y;
+		GD.Print(ratioX + " " + ratioY);
+		var ratioMax = Math.Max(ratioX, ratioY);
+		var ratioMin = Math.Min(ratioX, ratioY);
+		var evaluator = ratioMax;
+		GraphEditNode.Zoom = 1f;
+		if (evaluator > 1) {
+			GraphEditNode.Zoom = 1f / evaluator;
 			
 		}
+		
+		GraphEditNode.ScrollOffset = new(0, 0);
+		GraphEditNode.GrabFocus();
+	}
+	
+	public override void _Process(double delta) {
+		// GD.Print(GraphEditNode.ScrollOffset);
+		// GraphEditNode.ScrollOffset = new(GraphEditNode.ScrollOffset.X, GraphEditNode.ScrollOffset.Y + 1);
 	}
 
 	static readonly PackedScene UnprocessedTextListPS = ResourceLoader.Load("res://UnprocessedTextList.tscn") as PackedScene;
@@ -174,6 +202,7 @@ public partial class ParsersTab : TabBar
 		var node = PNodeBasePS.Instantiate() as PNodeBase;
 		
 		GraphEditNode.AddChild(node);
+		node.PositionOffset = new(0, 0);
 		node.Load(pNodeW, ignoreTemplate);
 		
 		// fill the unprocessed text

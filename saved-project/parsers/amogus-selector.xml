@@ -1,0 +1,6 @@
+<selector name="amogus-selector">
+  <matcher template="aa" />
+  <selector template="effect" />
+  <selector template="effect" />
+  <selector template="effect" />
+</selector>
