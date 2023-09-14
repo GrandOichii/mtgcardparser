@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 using MtgCardParser;
 
@@ -22,7 +23,9 @@ public partial class EditSelectorWindow : Window
 		#endregion
 	}
 	
-	public void Load(Selector selector) {
+	private List<string> _takenNames;
+	public void Load(Selector selector, List<string> takenNames) {
+		_takenNames = takenNames;
 		_operated = selector;
 		
 		Title = selector.Name + " selector editor";
@@ -36,9 +39,13 @@ public partial class EditSelectorWindow : Window
 
 	private void OnSaveButtonPressed()
 	{
-		// TODO check that name is not taken
 		var baked = EditorNode.GetBakedPNode() as Selector;
-		
+		var flag = GUtil.CheckNameTaken(baked.Name, _operated.Name, _takenNames);
+		if (!flag) {
+			GUtil.Alert(this, "Parser name " + baked.Name + " is already taken");
+			return;
+		}
+
 		// check that can save
 		var oldName = _operated.Name;
 		

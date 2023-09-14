@@ -65,4 +65,14 @@ public static class GUtil
 		// TODO use own dialog box
 		OS.Alert(message, "MTG Card Parser");
 	}
+
+	public static bool CheckNameTaken(string newName, string oldName, List<string> names) {
+		if (newName == oldName) return true;
+		foreach (var name in names) {
+			if (name != newName) continue;
+
+			return false;
+		}
+		return true;
+	}
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 using MtgCardParser;
 
@@ -21,7 +22,9 @@ public partial class EditMatcherWindow : Window
 		#endregion
 	}
 	
-	public void Load(Matcher matcher) {
+	private List<string> _takenNames;
+	public void Load(Matcher matcher, List<string> takenNames) {
+		_takenNames = takenNames;
 		_operated = matcher;
 		
 		Title = matcher.Name + " matcher editor";
@@ -34,8 +37,12 @@ public partial class EditMatcherWindow : Window
 	public delegate void MatcherUpdatedEventHandler(PNodeWrapper pNodeW, string oldName);
 	private void OnSaveButtonPressed()
 	{
-		// TODO check that name is not taken
 		var baked = EditorNode.GetBakedPNode() as Matcher;
+		var flag = GUtil.CheckNameTaken(baked.Name, _operated.Name, _takenNames);
+		if (!flag) {
+			GUtil.Alert(this, "Parser name " + baked.Name + " is already taken");
+			return;
+		}
 		
 		// check that can save
 		var oldName = _operated.Name;

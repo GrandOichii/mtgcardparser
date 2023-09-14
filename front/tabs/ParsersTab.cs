@@ -333,11 +333,11 @@ public partial class ParsersTab : TabBar
 		
 		switch (pNode) {
 		case Matcher matcher:
-			EditMatcherWindowNode.Load(matcher);
+			EditMatcherWindowNode.Load(matcher, BakedParserNames);
 			EditMatcherWindowNode.Show();
 			break;
 		case Selector selector:
-			EditSelectorWindowNode.Load(selector);
+			EditSelectorWindowNode.Load(selector, BakedParserNames);
 			EditSelectorWindowNode.Show();
 			break;
 		}
