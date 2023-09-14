@@ -1,1 +1,1 @@
-{"templates":["aa.xml","trigger.xml","effect.xml","empty-selector.xml","static-effect.xml","true.xml","life-gain.xml","life-loss.xml","amogus-matcher.xml","amogus-selector.xml"],"root":"root.xml"}
+{"templates":["aa.xml","trigger.xml","effect.xml","empty-selector.xml","static-effect.xml","true.xml","life-gain.xml","life-loss.xml","amogus-matcher.xml","amogus-selector.xml","cost.xml","trigger-event.xml","life-gain-event.xml","block-event.xml","attacks-trigger.xml","add-mana-effect.xml","draw-effect.xml","scry-effect.xml"],"root":"root.xml"}

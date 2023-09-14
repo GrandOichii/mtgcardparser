@@ -1,0 +1,5 @@
+<selector name="trigger-event">
+  <matcher template="life-gain-event" />
+  <matcher template="block-event" />
+  <matcher template="attacks-trigger" />
+</selector>

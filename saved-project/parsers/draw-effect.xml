@@ -1,0 +1,3 @@
+<matcher name="draw-effect" pattern="draw (.+) card">
+  <matcher template="true" />
+</matcher>

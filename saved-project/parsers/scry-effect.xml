@@ -1,0 +1,3 @@
+<matcher name="scry-effect" pattern="scry (.+)">
+  <matcher template="true" />
+</matcher>

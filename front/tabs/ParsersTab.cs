@@ -343,7 +343,7 @@ public partial class ParsersTab : TabBar
 		}
 	}
 	
-	private void PNodeUpdated(PNodeWrapper pNodeW, string oldName) {
+	private void PNodeUpdated(PNodeWrapper pNodeW, string oldName, bool expandChildrenIfGreater) {
 		
 		// replace all present nodes
 		foreach (var child in GraphEditNode.GetChildren()) {
@@ -362,6 +362,8 @@ public partial class ParsersTab : TabBar
 		
 		foreach (var child in pNodeW.Value.Children)
 			if (child is not null) return;
+		
+		if (expandChildrenIfGreater) return;
 		
 		var removeQueue = new List<Godot.Collections.Dictionary>();
 		
@@ -390,7 +392,7 @@ public partial class ParsersTab : TabBar
 
 	private void OnEditMatcherWindowMatcherUpdated(PNodeWrapper pNodeW, string oldName)
 	{
-		PNodeUpdated(pNodeW, oldName);
+		PNodeUpdated(pNodeW, oldName, false);
 	}
 	
 	private void ReplaceParsersListParserName(string oldName, string newName) {
@@ -406,6 +408,6 @@ public partial class ParsersTab : TabBar
 	
 	private void OnEditSelectorWindowSelectorUpdated(PNodeWrapper pNodeW, string oldName)
 	{
-		PNodeUpdated(pNodeW, oldName);
+		PNodeUpdated(pNodeW, oldName, true);
 	}
 }

@@ -75,7 +75,7 @@ public partial class Main : CanvasLayer
 		
 		// TODO remove
 		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 2;
-		SampleSizeNode.Value = 100;
+		SampleSizeNode.Value = CardsListNode.ItemCount;
 		OnSampleRandomPressed();
 		Load("../saved-project");
 	}

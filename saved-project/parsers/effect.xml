@@ -1,4 +1,7 @@
 <selector name="effect">
+  <matcher template="draw-effect" />
+  <matcher template="add-mana-effect" />
   <matcher template="life-gain" />
   <matcher template="life-loss" />
+  <matcher template="scry-effect" />
 </selector>
