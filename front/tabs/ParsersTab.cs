@@ -5,10 +5,6 @@ using System.Collections.Generic;
 using MtgCardParser;
 
 
-// TODO
-// reselecting another parser keeps moving the whole tree SE for some reason
-
-
 public partial class ParsersTab : TabBar
 {
 	static readonly PackedScene PNodeBasePS = ResourceLoader.Load("res://pnodes/PNodeBase.tscn") as PackedScene;
@@ -73,7 +69,6 @@ public partial class ParsersTab : TabBar
 		var toNode = GetPNode(to_node);
 		var fromPNode = fromNode.Data.Value;
 		var toPNode = toNode.Data.Value;
-		// TODO not tested - don't know how safe it is to manually remove the last connection
 		
 		var removeQueue = new List<Godot.Collections.Dictionary>();
 
@@ -113,7 +108,6 @@ public partial class ParsersTab : TabBar
 		var toPNode = toNode.Data.Value;
 		
 		fromPNode.Children[from_port] = null;
-		// TODO not tested - don't know how safe it is, especially for saving
 		
 		GraphEditNode.DisconnectNode(from_node, from_port, to_node, to_port);
 	}
@@ -173,21 +167,23 @@ public partial class ParsersTab : TabBar
 			if (x < minLeft) minLeft = x;
 			if (mX > maxRight) maxRight = mX;
 		}
+		
+		var vX = GraphEditNode.Size.X;
+		var vY = GraphEditNode.Size.Y;
 		var rectX = maxRight - minLeft;
 		var rectY = maxBottom - minTop;
-		var ratioX = rectX / GraphEditNode.Size.X;
-		var ratioY = rectY / GraphEditNode.Size.Y;
-		GD.Print(ratioX + " " + ratioY);
+		var ratioX = rectX / vX;
+		var ratioY = rectY / vY;
+
 		var ratioMax = Math.Max(ratioX, ratioY);
 		var ratioMin = Math.Min(ratioX, ratioY);
 		var evaluator = ratioMax;
 		GraphEditNode.Zoom = 1f;
 		if (evaluator > 1) {
 			GraphEditNode.Zoom = 1f / evaluator;
-			
 		}
 		
-		GraphEditNode.ScrollOffset = new(0, 0);
+		GraphEditNode.ScrollOffset = new((vX - rectX) / 2, (vY - rectY) / 2);
 		GraphEditNode.GrabFocus();
 	}
 	
@@ -272,6 +268,7 @@ public partial class ParsersTab : TabBar
 	}
 	
 	public Vector2 LastMouseLocalPos { get; private set; }
+	
 	private void AddNode(Vector2 pos) {
 		var mousePos = GetGlobalMousePosition();
 		AddNodePopupMenuNode.PopupOnParent(new Rect2I((int)mousePos.X, (int)mousePos.Y, -1, -1));

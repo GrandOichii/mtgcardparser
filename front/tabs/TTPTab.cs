@@ -130,7 +130,8 @@ public partial class TTPTab : TabBar
 			// text transformers
 			var ttItems = TextTransformerListNode.GetSelectedItems();
 			if (ttItems.Length == 0) {
-				// TODO notify the user to select a template first
+				GUtil.Alert(this, "Select text transformer");
+
 				return;
 			}
 			var ttData = TextTransformerListNode.GetItemMetadata(ttItems[0]).As<Wrapper<TextTransformer>>();
@@ -143,7 +144,8 @@ public partial class TTPTab : TabBar
 			
 			var tttItems = TextTransformerTemplateListNode.GetSelectedItems();
 			if (tttItems.Length == 0) {
-				// TODO notify the user to select a template first
+				GUtil.Alert(this, "Select text transformer template");
+
 				return;
 			}
 			var tttData = TextTransformerTemplateListNode.GetItemMetadata(tttItems[0]).As<Wrapper<LuaTextTransformerTemplate>>();
@@ -161,7 +163,8 @@ public partial class TTPTab : TabBar
 			// text transformers
 			var ttItems = TextTransformerListNode.GetSelectedItems();
 			if (ttItems.Length == 0) {
-				// TODO notify the user to select a tt first
+				GUtil.Alert(this, "Select text transformer");
+
 				return;
 			}
 			// TODO ask the user to confirm deleting the tt
@@ -174,7 +177,8 @@ public partial class TTPTab : TabBar
 			
 			var tttItems = TextTransformerTemplateListNode.GetSelectedItems();
 			if (tttItems.Length == 0) {
-				// TODO notify the user to select a template first
+				GUtil.Alert(this, "Select text transformer template");
+
 				return;
 			}
 			// TODO ask the user to confirm deleting the templates
@@ -251,7 +255,8 @@ public partial class TTPTab : TabBar
 	private void MoveSelectedTTLI(int amount) {
 		var items = TextTransformerListNode.GetSelectedItems();
 		if (items.Length == 0) {
-			// TODO notify the user to select a template first
+			GUtil.Alert(this, "Select a text transformer to move");
+
 			return;
 		}
 		

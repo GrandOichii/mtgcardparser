@@ -118,14 +118,16 @@ public partial class Main : CanvasLayer
 				CheckForNullChildren(parser);
 		}
 		catch (Exception ex) {
-			// TODO show user
+			GUtil.Alert(this, "Failed to save!");
+
 			GD.Print(ex);
 			return;
 		}
 
 		var project = BakedProject;
 		project.SaveTo(ProjectPath);
-		GD.Print("Saved!");
+		GUtil.Alert(this, "Saved");
+
 	}
 	
 	#endregion

@@ -74,7 +74,8 @@ public partial class TTTemplateEditor : Window
 		for (int i = 0; i < ArgumentListNode.ItemCount; i++) {
 			var itemText = ArgumentListNode.GetItemText(i);
 			if (itemText == argName) {
-				// TODO notify the user that can't add the argument
+				GUtil.Alert(this, "Argument with name " + argName + " already present");
+
 				return;
 			}
 		}
@@ -97,7 +98,8 @@ public partial class TTTemplateEditor : Window
 	{
 		var name = NameEditNode.Text;
 		if (name.Length == 0) {
-			// TODO notify that can't save without name
+			GUtil.Alert(this, "Enter text transformer template name");
+
 			return;
 		}
 		
@@ -110,14 +112,16 @@ public partial class TTTemplateEditor : Window
 			
 			++current;
 			if (current > allowed) {
-				// TODO notify the user that can't add
+				GUtil.Alert(this, "Transformer template with name " + name + " already exists");
+
 				return;
 			}
 		}
 		
 		var script = ScriptEditNode.Text;
 		if (script.Length == 0) {
-			// TODO notify that can't save without script
+			GUtil.Alert(this, "Can't save text transformer template without script");
+
 			return;
 		}
 

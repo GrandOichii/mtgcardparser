@@ -50,3 +50,10 @@ public partial class PNodeEditor : Control {
 	public virtual void ClearValues() {}
 	public virtual PNode GetBakedPNode() => null;
 }
+
+public static class GUtil {
+	public static void Alert(Node parent, string message) {
+		// TODO use own dialog box
+		OS.Alert(message, "MTG Card Parser");
+	}
+}

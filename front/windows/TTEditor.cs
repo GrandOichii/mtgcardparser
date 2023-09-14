@@ -127,7 +127,8 @@ public partial class TTEditor : Window
 		var name = NameEditNode.Text;
 		
 		if (name.Length == 0) {
-			// TODO notify that can't save without name
+			GUtil.Alert(this,"Enter text transformer name" );
+
 			return;
 		}
 		
@@ -140,14 +141,16 @@ public partial class TTEditor : Window
 
 			++current;
 			if (current > allowed) {
-				// TODO notify the user that can't add
+				GUtil.Alert(this, "Text transformer with name " + name + " already exists");
+
 				return;
 			}
 		}
 		
 		var templateI = TemplateOptionNode.Selected;
 		if (templateI == -1) {
-			// TODO notify user to pick template first
+			GUtil.Alert(this, "Pick text transformer template");
+
 			return;
 		}
 		

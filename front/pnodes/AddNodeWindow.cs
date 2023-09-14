@@ -96,7 +96,8 @@ public partial class AddNodeWindow : Window
 			result.IsTemplate = _isTemplate;
 			
 			if (_parserNames.Contains(result.Name)) {
-				// TODO tell user that name is already taken
+				GUtil.Alert(this, "Parser with name " + result.Name + " already exists");
+
 				return;
 			}
 		 }
