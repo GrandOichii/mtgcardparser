@@ -16,6 +16,7 @@ public partial class ParsersTab : TabBar
 	public PopupMenu AddNodePopupMenuNode { get; private set; }
 	public AddNodeWindow AddNodeWindowNode { get; private set; }
 	public EditMatcherWindow EditMatcherWindowNode { get; private set; }
+	public EditSelectorWindow EditSelectorWindowNode { get; private set; }	
 	
 	#endregion
 
@@ -58,6 +59,7 @@ public partial class ParsersTab : TabBar
 		AddNodePopupMenuNode = GetNode<PopupMenu>("%AddNodePopupMenu");
 		AddNodeWindowNode = GetNode<AddNodeWindow>("%AddNodeWindow");
 		EditMatcherWindowNode = GetNode<EditMatcherWindow>("%EditMatcherWindow"); 
+		EditSelectorWindowNode = GetNode<EditSelectorWindow>("%EditSelectorWindow");
 		
 		#endregion
 		
@@ -130,8 +132,6 @@ public partial class ParsersTab : TabBar
 	
 	private void OnTemplatesListItemActivated(int index)
 	{
-		// TODO? don't know if this is the correct way, seems kinda slow
-		
 		var pNodeW = ParsersListNode.GetItemMetadata(index).As<PNodeWrapper>();
 		var pNode = pNodeW.Value;
 		GraphEditNode.ClearConnections();
@@ -293,7 +293,6 @@ public partial class ParsersTab : TabBar
 	private void OnAddNodePopupMenuIdPressed(int id)
 	{
 		if (id < 2) {
-			// TODO player pressed "new parser node"
 			AddNodeWindowNode.Do(BakedParserNames);
 			return;
 		}
@@ -338,14 +337,14 @@ public partial class ParsersTab : TabBar
 			EditMatcherWindowNode.Show();
 			break;
 		case Selector selector:
-			// TODO
-			GD.Print("selector");
+			EditSelectorWindowNode.Load(selector);
+			EditSelectorWindowNode.Show();
 			break;
 		}
 	}
-
-	private void OnEditMatcherWindowMatcherUpdated(PNodeWrapper pNodeW, string oldName)
-	{
+	
+	private void PNodeUpdated(PNodeWrapper pNodeW, string oldName) {
+		
 		// replace all present nodes
 		foreach (var child in GraphEditNode.GetChildren()) {
 			var pNodeB = child as PNodeBase;
@@ -388,6 +387,11 @@ public partial class ParsersTab : TabBar
 			GraphEditNode.DisconnectNode(fN, fP, tN, tP);
 		}
 	}
+
+	private void OnEditMatcherWindowMatcherUpdated(PNodeWrapper pNodeW, string oldName)
+	{
+		PNodeUpdated(pNodeW, oldName);
+	}
 	
 	private void ReplaceParsersListParserName(string oldName, string newName) {
 		for (int i = 0; i < ParsersListNode.ItemCount; i++) {
@@ -400,7 +404,8 @@ public partial class ParsersTab : TabBar
 		throw new Exception("Failed to replace parser name in list: " + oldName + " -> " + newName);
 	}
 	
+	private void OnEditSelectorWindowSelectorUpdated(PNodeWrapper pNodeW, string oldName)
+	{
+		PNodeUpdated(pNodeW, oldName);
+	}
 }
-
-
-

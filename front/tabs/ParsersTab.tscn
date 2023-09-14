@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://nrxra0vj74f3"]
+[gd_scene load_steps=5 format=3 uid="uid://nrxra0vj74f3"]
 
 [ext_resource type="Script" path="res://tabs/ParsersTab.cs" id="1_d5dnc"]
 [ext_resource type="PackedScene" uid="uid://cgdqwxh06tf7k" path="res://pnodes/EditMatcherWindow.tscn" id="2_abfla"]
 [ext_resource type="PackedScene" uid="uid://bcycvauqxlvse" path="res://pnodes/AddNodeWindow.tscn" id="2_oeh1s"]
+[ext_resource type="PackedScene" uid="uid://pm16bsqdbtw1" path="res://pnodes/EditSelectorWindow.tscn" id="3_utbxv"]
 
 [node name="ParsersTab" type="TabBar"]
 anchors_preset = 15
@@ -13,6 +14,10 @@ grow_vertical = 2
 script = ExtResource("1_d5dnc")
 
 [node name="EditMatcherWindow" parent="." instance=ExtResource("2_abfla")]
+unique_name_in_owner = true
+visible = false
+
+[node name="EditSelectorWindow" parent="." instance=ExtResource("3_utbxv")]
 unique_name_in_owner = true
 visible = false
 
@@ -65,6 +70,7 @@ visible = false
 
 [connection signal="ParserAdded" from="." to="." method="OnParserAdded"]
 [connection signal="MatcherUpdated" from="EditMatcherWindow" to="." method="OnEditMatcherWindowMatcherUpdated"]
+[connection signal="SelectorUpdated" from="EditSelectorWindow" to="." method="OnEditSelectorWindowSelectorUpdated"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]

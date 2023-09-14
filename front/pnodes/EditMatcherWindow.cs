@@ -34,6 +34,7 @@ public partial class EditMatcherWindow : Window
 	public delegate void MatcherUpdatedEventHandler(PNodeWrapper pNodeW, string oldName);
 	private void OnSaveButtonPressed()
 	{
+		// TODO check that name is not taken
 		var baked = EditorNode.GetBakedPNode() as Matcher;
 		
 		// check that can save
