@@ -1,14 +1,6 @@
 <selector name="root">
   <matcher template="aa" />
   <matcher template="trigger" />
-  <selector name="effect-funny1">
-    <matcher name="token-creation" pattern="create (.+)">
-      <matcher template="true" />
-    </matcher>
-    <matcher template="life-gain" />
-    <matcher template="life-gain" />
-    <matcher template="life-gain" />
-    <matcher template="life-gain" />
-  </selector>
+  <selector template="effect" />
   <selector template="static-effect" />
 </selector>

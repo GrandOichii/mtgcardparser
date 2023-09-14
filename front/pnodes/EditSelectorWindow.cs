@@ -50,8 +50,9 @@ public partial class EditSelectorWindow : Window
 		var oldName = _operated.Name;
 		
 		_operated.Name = baked.Name;
-		if (_operated.Children.Count != baked.Children.Count) {
-			_operated.Children = baked.Children;
+		if (_operated.Children.Count < baked.Children.Count) {
+			for (int i = 0; i < baked.Children.Count - _operated.Children.Count; i++)
+				_operated.Children.Add(null);
 		}
 		
 		EmitSignal(SignalName.SelectorUpdated, new PNodeWrapper(_operated), oldName);

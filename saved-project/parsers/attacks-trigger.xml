@@ -1,3 +1,3 @@
 <matcher name="attacks-trigger" pattern="(.+) attacks">
-  <matcher template="true" />
+  <matcher template="TODO" />
 </matcher>

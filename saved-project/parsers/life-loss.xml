@@ -1,3 +1,3 @@
 <matcher name="life-loss" pattern="lose (.+) life">
-  <matcher template="true" />
+  <matcher template="TODO" />
 </matcher>

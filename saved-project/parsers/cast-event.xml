@@ -1,0 +1,4 @@
+<matcher name="cast-event" pattern="(.+) cast (.+)">
+  <matcher template="TODO" />
+  <matcher template="TODO" />
+</matcher>

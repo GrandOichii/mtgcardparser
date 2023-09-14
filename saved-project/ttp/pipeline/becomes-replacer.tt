@@ -1,0 +1,1 @@
+{"name":"becomes-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bbecomes\\b","Replacement":"become"}}
