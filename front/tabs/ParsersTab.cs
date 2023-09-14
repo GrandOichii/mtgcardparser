@@ -15,6 +15,7 @@ public partial class ParsersTab : TabBar
 	public ItemList ParsersListNode { get; private set; }
 	public PopupMenu AddNodePopupMenuNode { get; private set; }
 	public AddNodeWindow AddNodeWindowNode { get; private set; }
+	public EditMatcherWindow EditMatcherWindowNode { get; private set; }
 	
 	#endregion
 
@@ -56,6 +57,7 @@ public partial class ParsersTab : TabBar
 		ParsersListNode = GetNode<ItemList>("%ParsersList");
 		AddNodePopupMenuNode = GetNode<PopupMenu>("%AddNodePopupMenu");
 		AddNodeWindowNode = GetNode<AddNodeWindow>("%AddNodeWindow");
+		EditMatcherWindowNode = GetNode<EditMatcherWindow>("%EditMatcherWindow"); 
 		
 		#endregion
 		
@@ -183,13 +185,16 @@ public partial class ParsersTab : TabBar
 			GraphEditNode.Zoom = 1f / evaluator;
 		}
 		
-		GraphEditNode.ScrollOffset = new((vX - rectX) / 2, (vY - rectY) / 2);
+//		GraphEditNode.ScrollOffset = new((vX - rectX) / 2, (vY - rectY) / 2);
+		GraphEditNode.ScrollOffset = new(0, 0);
 		GraphEditNode.GrabFocus();
+		
+		// reset selected node
+		_selectedPNodeBase = null;
 	}
 	
 	public override void _Process(double delta) {
-		// GD.Print(GraphEditNode.ScrollOffset);
-		// GraphEditNode.ScrollOffset = new(GraphEditNode.ScrollOffset.X, GraphEditNode.ScrollOffset.Y + 1);
+		
 	}
 
 	static readonly PackedScene UnprocessedTextListPS = ResourceLoader.Load("res://UnprocessedTextList.tscn") as PackedScene;
@@ -280,6 +285,9 @@ public partial class ParsersTab : TabBar
 		if (e.IsActionPressed("add-node")) {
 			AddNode((e as InputEventMouseButton).Position);
 		}
+		if (e.IsActionPressed("edit-local-node")) {
+			EditLocalNode();
+		}
 	}
 	
 	private void OnAddNodePopupMenuIdPressed(int id)
@@ -310,4 +318,89 @@ public partial class ParsersTab : TabBar
 		var child = AddPNodeBase(pNodeW);
 		child.PositionOffset = LastMouseLocalPos;
 	}
+	
+	private Node? _selectedPNodeBase = null;
+	private void OnGraphEditNodeSelected(Node node)
+	{
+		_selectedPNodeBase = node;
+	}
+	
+	private void EditLocalNode() {
+		if (_selectedPNodeBase is null) return;
+		
+		var pNodeN = _selectedPNodeBase as PNodeBase;
+		var pNode = pNodeN.Data.Value;
+		if (!pNodeN.IgnoreTemplate && pNode.IsTemplate) return;
+		
+		switch (pNode) {
+		case Matcher matcher:
+			EditMatcherWindowNode.Load(matcher);
+			EditMatcherWindowNode.Show();
+			break;
+		case Selector selector:
+			// TODO
+			GD.Print("selector");
+			break;
+		}
+	}
+
+	private void OnEditMatcherWindowMatcherUpdated(PNodeWrapper pNodeW, string oldName)
+	{
+		// replace all present nodes
+		foreach (var child in GraphEditNode.GetChildren()) {
+			var pNodeB = child as PNodeBase;
+			if (pNodeB.Data.Value.Name != pNodeW.Value.Name) continue;
+			
+//			pNodeB.Data.Value.Name = newName;
+			pNodeB.Load(pNodeW, pNodeB.IgnoreTemplate);
+		}
+		
+		var newName = pNodeW.Value.Name;
+		if (pNodeW.Value.IsTemplate) {
+			// replace the list name
+			ReplaceParsersListParserName(oldName, newName);
+		}
+		
+		foreach (var child in pNodeW.Value.Children)
+			if (child is not null) return;
+		
+		var removeQueue = new List<Godot.Collections.Dictionary>();
+		
+		// disconnect all connections
+		foreach (var con in GraphEditNode.GetConnectionList()) {
+			var fN = con["from"].As<string>();
+			var fP = con["from_port"].As<int>();
+			var tN = con["to"].As<string>();
+			var tP = con["to_port"].As<int>();
+			
+			// check other connections from port
+			var fromNode = GraphEditNode.GetNode(fN) as PNodeBase;
+			if (fromNode.Data.Value.Name == newName) {
+				removeQueue.Add(con);
+			}
+			
+		}
+		foreach (var rD in removeQueue) {
+			var fN = rD["from"].As<string>();
+			var fP = rD["from_port"].As<int>();
+			var tN = rD["to"].As<string>();
+			var tP = rD["to_port"].As<int>();
+			GraphEditNode.DisconnectNode(fN, fP, tN, tP);
+		}
+	}
+	
+	private void ReplaceParsersListParserName(string oldName, string newName) {
+		for (int i = 0; i < ParsersListNode.ItemCount; i++) {
+			if (ParsersListNode.GetItemText(i) != oldName) continue;
+			
+			ParsersListNode.SetItemText(i, newName);
+			ParsersListNode.GetItemMetadata(i).As<PNodeWrapper>().Value.Name = newName;
+			return;
+		}
+		throw new Exception("Failed to replace parser name in list: " + oldName + " -> " + newName);
+	}
+	
 }
+
+
+

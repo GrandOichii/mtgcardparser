@@ -3,7 +3,7 @@ using System;
 
 using MtgCardParser;
 
-public partial class SelectorEditor : PNodeEditor
+public partial class SelectorEditor : Control, PNodeEditor
 {
 	#region Nodes
 	
@@ -33,12 +33,12 @@ public partial class SelectorEditor : PNodeEditor
 		set => ChildSpinBoxNode.Value = value;
 	}
 	
-	public override void ClearValues() {
+	public void ClearValues() {
 		SName = "";
 		SChildCount = 0;
 	}
 	
-	public override PNode GetBakedPNode() {
+	public PNode GetBakedPNode() {
 		var result = new Selector();
 
 		result.Name = SName;
@@ -46,4 +46,8 @@ public partial class SelectorEditor : PNodeEditor
 
 		return result;
 	}
+
+	public void SetVisible(bool v) { Visible = v; }
+	public bool IsVisible() => Visible;
+
 }

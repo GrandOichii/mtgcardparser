@@ -114,9 +114,7 @@ public partial class TTPTab : TabBar
 		case 1:
 			// text transformer templates
 			TTTemplateEditorNode.TemplateNames = TemplateNames;
-			foreach (var name in TemplateNames)
-				GD.Print(name);
-			GD.Print("=============");	
+
 			TTTemplateEditorNode.Load(null);
 			TTTemplateEditorNode.Show();
 			return;

@@ -10,6 +10,7 @@ public partial class PNodeBase : GraphNode
 	static readonly Color RIGHT_COLOR = new Color(1, 1, 0, 1);
 	
 	public PNodeWrapper Data { get; set; }
+	public bool IgnoreTemplate { get; private set; }
 	
 	#region Nodes
 
@@ -28,6 +29,7 @@ public partial class PNodeBase : GraphNode
 	
 	public void Load(PNodeWrapper pNodeW, bool ignoreTemplate) {
 		Data = pNodeW;
+		IgnoreTemplate = ignoreTemplate;
 		
 		var pNode = pNodeW.Value;
 		Clear();
@@ -75,7 +77,7 @@ public partial class PNodeBase : GraphNode
 		foreach (var child in GetChildren())
 			child.QueueFree();
 	}
-
+ 
 	private void OnResizeRequest(Vector2 new_minsize)
 	{
 		Size = new_minsize;

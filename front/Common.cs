@@ -7,7 +7,8 @@ using System.Text.Json.Serialization;
 using MtgCardParser;
 
 
-public partial class Wrapper<T> : Node {
+public partial class Wrapper<T> : Node
+{
 	public T Value { get; }
 	public Wrapper(T v) { Value = v; }
 }
@@ -30,15 +31,18 @@ public partial class SourceCard : Node
 	public string Power { get; set; }
 	[JsonPropertyName("toughness")]
 	public string Toughness { get; set; }
-	
+
 	public Card ToCard() => new Card(CName, Text);
 }
 
-public partial class PNodeWrapper : Wrapper<PNode> {
-	public PNodeWrapper(PNode v) : base(v) {}
+public partial class PNodeWrapper : Wrapper<PNode>
+{
+	public PNodeWrapper(PNode v) : base(v) { }
 
-	public int GetChildIndex(PNode child) {
-		for (int i = 0; i < Value.Children.Count; i++) {
+	public int GetChildIndex(PNode child)
+	{
+		for (int i = 0; i < Value.Children.Count; i++)
+		{
 			if (Value.Children[i] == child)
 				return i;
 		}
@@ -46,13 +50,18 @@ public partial class PNodeWrapper : Wrapper<PNode> {
 	}
 }
 
-public partial class PNodeEditor : Control {
-	public virtual void ClearValues() {}
-	public virtual PNode GetBakedPNode() => null;
+public interface PNodeEditor
+{
+	public bool IsVisible();
+	public void SetVisible(bool v);
+	public void ClearValues() { }
+	public PNode GetBakedPNode() => null;
 }
 
-public static class GUtil {
-	public static void Alert(Node parent, string message) {
+public static class GUtil
+{
+	public static void Alert(Node parent, string message)
+	{
 		// TODO use own dialog box
 		OS.Alert(message, "MTG Card Parser");
 	}

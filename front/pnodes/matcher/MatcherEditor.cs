@@ -3,7 +3,7 @@ using System;
 
 using MtgCardParser;
 
-public partial class MatcherEditor : PNodeEditor
+public partial class MatcherEditor : Control, PNodeEditor
 {
 	#region Nodes
 	
@@ -32,19 +32,24 @@ public partial class MatcherEditor : PNodeEditor
 		set => PatternEditNode.Text = value;
 	}
 	
-	public override void ClearValues() {
+	public void ClearValues() {
 		MName = "";
 		MPattern = "";
 	}
 
-	public override PNode GetBakedPNode() {
+	public PNode GetBakedPNode() {
 		var result = new Matcher();
 
 		result.Name = MName;
 		result.PatternString = MPattern;
 		result.Children = new(new PNode[result.GroupCount]);
+		for (int i = 0; i < result.GroupCount; i++)
+			result.Children[i] = null;
 
 		return result;
 	}
+
+	public void SetVisible(bool v) { Visible = v; }
+	public bool IsVisible() => Visible;
 
 }

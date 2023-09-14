@@ -40,7 +40,7 @@ public partial class AddNodeWindow : Window
 	private PNodeEditor CurrentEditor {
 		get {
 			foreach (var editor in PNodeEditorMap.Values)
-				if (editor.Visible)
+				if (editor.IsVisible())
 					return editor;
 			throw new Exception("No editor visible in AddNodeWindow");
 		}
@@ -52,10 +52,10 @@ public partial class AddNodeWindow : Window
 
 		foreach (var pair in PNodeEditorMap) {
 			var editor = pair.Value;
-			editor.Visible = false;
+			editor.SetVisible(false);
 			
 			if (pair.Key != option) continue;
-			editor.Visible = true;
+			editor.SetVisible(true);
 			editor.ClearValues();
 		}
 	}
@@ -71,6 +71,10 @@ public partial class AddNodeWindow : Window
 		_isTemplate = isTemplate;
 		Visible = true;
 		_parserNames = parserNames;
+		
+		foreach (var editor in PNodeEditorMap.Values)
+			editor.ClearValues();
+		
 	}
 	
 	private void OnCancelButtonPressed()
