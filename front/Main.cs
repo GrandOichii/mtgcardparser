@@ -310,7 +310,11 @@ public partial class Main : CanvasLayer
 	}
 	
 	private bool TraceMatches(ParseTrace trase) {
-		return !trase.Parsed;
+		// return !trase.Parsed;
+		foreach (var child in trase.ChildrenTraces)
+			if (child is not null)
+				return false;
+		return true;
 	}
 	
 	private void FillUnparcedTextIndex(ParseTrace? trace, Dictionary<PNode, List<string>> index) {
