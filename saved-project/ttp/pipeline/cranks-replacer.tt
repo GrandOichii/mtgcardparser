@@ -1,0 +1,1 @@
+{"name":"cranks-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bcranks\\b","Replacement":"crank"}}

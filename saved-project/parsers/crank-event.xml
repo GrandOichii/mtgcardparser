@@ -1,0 +1,4 @@
+<matcher name="crank-event" pattern="(.+) crank (.+)">
+  <selector template="who" />
+  <matcher template="TODO" />
+</matcher>

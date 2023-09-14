@@ -1,0 +1,4 @@
+<matcher name="exert-event" pattern="(.+) exert (.+)">
+  <selector template="who" />
+  <matcher template="TODO" />
+</matcher>
