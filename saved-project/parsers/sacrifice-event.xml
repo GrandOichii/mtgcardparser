@@ -1,0 +1,4 @@
+<matcher name="sacrifice-event" pattern="(.+) sacrifice (.+)">
+  <selector template="who" />
+  <matcher template="TODO" />
+</matcher>

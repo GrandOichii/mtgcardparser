@@ -42,6 +42,7 @@ public class PNodeLoader {
     private static readonly Dictionary<string, Func<PNodeLoader, XmlElement, PNode>> NODE_XML_PARSING_MAP = new() {
         { "matcher", Matcher.FromXml },
         { "selector", Selector.FromXml },
+        { "splitter", Splitter.FromXml },
     };
 
     public PNode Load(XmlElement el) {

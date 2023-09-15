@@ -1,0 +1,4 @@
+<matcher name="draw-event" pattern="(.+) draw (.+)">
+  <selector template="who" />
+  <matcher template="TODO" />
+</matcher>

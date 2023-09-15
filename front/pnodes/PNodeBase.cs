@@ -8,6 +8,7 @@ public partial class PNodeBase : GraphNode
 {
 	static readonly Color LEFT_COLOR = new Color(1, 1, 0, 1);
 	static readonly Color RIGHT_COLOR = new Color(1, 1, 0, 1);
+	static readonly Color MULTI_RIGHT_COLOR = new Color(1, 0, 0, 1);
 	
 	public PNodeWrapper Data { get; set; }
 	public bool IgnoreTemplate { get; private set; }
@@ -66,6 +67,15 @@ public partial class PNodeBase : GraphNode
 				AddChild(c);
 				SetSlot(i, i == 0, 0, LEFT_COLOR, true, 0, RIGHT_COLOR);
 			}
+			break;
+		case Splitter splitter:
+			Title += " (splitter)";
+			if (isTemplate) break;
+
+			var cSp = new Control();
+			cSp.CustomMinimumSize = new(0, 40);
+			AddChild(cSp);
+			SetSlot(0, true, 0, LEFT_COLOR, true, 0, MULTI_RIGHT_COLOR);
 			break;
 		}
 

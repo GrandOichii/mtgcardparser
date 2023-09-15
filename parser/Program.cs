@@ -1,10 +1,17 @@
 ﻿using MtgCardParser;
 using System.Xml;
+using System.Xml;
 
 using System.Text.RegularExpressions;
 
 class Program {
     public static void Main(String[] args) {
+        // var pattern = new Regex(",\\s");
+        // var split = pattern.Split("{x}, {t}");
+        // System.Console.WriteLine(split.Length);
+        // foreach(var s in split)
+        //     System.Console.WriteLine("\t" + s);
+        // return;
         var testPath = "../saved-project";
         // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
         var project = Project.Load(testPath);
@@ -20,7 +27,7 @@ class Program {
         // System.Console.WriteLine("Parsed: " + parsed);
 
         // project.SaveTo("../saved-project");
-        var text = "whenever amgus, gusgus.";
+        var text = "{x}, {t}: Amogus";
         var result = project.Do(new Card("Test1", text));
         foreach (var trace in result) {
             PrintTrace(trace);

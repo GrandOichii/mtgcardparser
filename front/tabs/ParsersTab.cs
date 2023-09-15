@@ -16,6 +16,7 @@ public partial class ParsersTab : TabBar
 	public PopupMenu AddNodePopupMenuNode { get; private set; }
 	public AddNodeWindow AddNodeWindowNode { get; private set; }
 	public EditMatcherWindow EditMatcherWindowNode { get; private set; }
+	public EditSplitterWindow EditSplitterWindowNode { get; private set; }
 	public EditSelectorWindow EditSelectorWindowNode { get; private set; }	
 	
 	#endregion
@@ -60,6 +61,7 @@ public partial class ParsersTab : TabBar
 		AddNodeWindowNode = GetNode<AddNodeWindow>("%AddNodeWindow");
 		EditMatcherWindowNode = GetNode<EditMatcherWindow>("%EditMatcherWindow"); 
 		EditSelectorWindowNode = GetNode<EditSelectorWindow>("%EditSelectorWindow");
+		EditSplitterWindowNode = GetNode<EditSplitterWindow>("%EditSplitterWindow");
 		
 		#endregion
 		
@@ -340,6 +342,10 @@ public partial class ParsersTab : TabBar
 			EditSelectorWindowNode.Load(selector, BakedParserNames);
 			EditSelectorWindowNode.Show();
 			break;
+		case Splitter splitter:
+			EditSplitterWindowNode.Load(splitter, BakedParserNames);
+			EditSplitterWindowNode.Show();
+			break;
 		}
 	}
 	
@@ -410,4 +416,10 @@ public partial class ParsersTab : TabBar
 	{
 		PNodeUpdated(pNodeW, oldName, true);
 	}
+
+	private void OnEditSplitterWindowSplitterUpdated(PNodeWrapper pNodeW, string oldName)
+	{
+		PNodeUpdated(pNodeW, oldName, true);
+	}
 }
+

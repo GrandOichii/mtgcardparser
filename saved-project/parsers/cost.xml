@@ -1,3 +1,7 @@
 <selector name="cost">
-  <matcher template="TODO" />
+  <splitter name="cost-split" pattern=",\s">
+    <matcher name="test1" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </splitter>
 </selector>

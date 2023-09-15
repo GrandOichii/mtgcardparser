@@ -15,6 +15,7 @@ public partial class AddNodeWindow : Window
 	
 	public MatcherEditor MatcherEditorNode { get; private set; }
 	public SelectorEditor SelectorEditorNode { get; private set; }
+	public SplitterEditor SplitterEditorNode { get; private set; }
 	public OptionButton TypeOptionNode { get; private set; }
 	
 	#endregion
@@ -26,6 +27,7 @@ public partial class AddNodeWindow : Window
 		#region Node fetching
 		
 		MatcherEditorNode = GetNode<MatcherEditor>("%MatcherEditor");
+		SplitterEditorNode = GetNode<SplitterEditor>("%SplitterEditor");
 		SelectorEditorNode = GetNode<SelectorEditor>("%SelectorEditor");
 		TypeOptionNode = GetNode<OptionButton>("%TypeOption");
 		
@@ -33,6 +35,7 @@ public partial class AddNodeWindow : Window
 		
 		PNodeEditorMap = new() {
 			{ "matcher", MatcherEditorNode },
+			{ "splitter", SplitterEditorNode },
 			{ "selector", SelectorEditorNode }
 		};
 	}

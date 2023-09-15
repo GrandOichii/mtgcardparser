@@ -1,0 +1,4 @@
+<matcher name="etb-event" pattern="(.+) etb (.+)">
+  <matcher template="TODO" />
+  <matcher template="TODO" />
+</matcher>

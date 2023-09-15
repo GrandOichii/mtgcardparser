@@ -1,0 +1,1 @@
+{"name":"sacrifices-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bsacrifices\\b","Replacement":"sacrifice"}}
