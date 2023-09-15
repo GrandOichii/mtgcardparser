@@ -1,7 +1,11 @@
-<selector name="effect">
-  <matcher template="draw-effect" />
-  <matcher template="add-mana-effect" />
-  <matcher template="life-gain" />
-  <matcher template="life-loss" />
-  <matcher template="scry-effect" />
-</selector>
+<matcher name="effect" pattern="(.+)">
+  <splitter name="effect-split" pattern="\.\s">
+    <selector name="effect-select">
+      <matcher template="draw-effect" />
+      <matcher template="add-mana-effect" />
+      <matcher template="life-gain" />
+      <matcher template="life-loss" />
+      <matcher template="scry-effect" />
+    </selector>
+  </splitter>
+</matcher>

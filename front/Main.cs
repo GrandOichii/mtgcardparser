@@ -37,6 +37,7 @@ public partial class Main : CanvasLayer
 	public SpinBox SampleSizeNode { get; private set; }
 	public TTPTab TTPNode { get; private set; }
 	public ParsersTab ParsersNode { get; private set; }
+	public Control SavedPopinNode { get; private set; }
 	
 	#endregion
 	
@@ -58,6 +59,8 @@ public partial class Main : CanvasLayer
 		SampleSizeNode = GetNode<SpinBox>("%SampleSize");
 		TTPNode = GetNode<TTPTab>("%TTP");
 		ParsersNode = GetNode<ParsersTab>("%Parsers");
+		SavedPopinNode = GetNode<Control>("%SavedPopin");
+		SavedPopinNode.Position = new(0, -SavedPopinNode.Size.Y);
 		
 		_cardSrc = CardsDownloadRequestNode.DownloadFile;
 		#endregion
@@ -126,7 +129,12 @@ public partial class Main : CanvasLayer
 
 		var project = BakedProject;
 		project.SaveTo(ProjectPath);
-		GUtil.Alert(this, "Saved");
+//		GUtil.Alert(this, "Saved");
+//		return;
+		var t = CreateTween();
+		t.TweenProperty(SavedPopinNode, "position", new Vector2(0, 0), .2f);
+		t.TweenInterval(.4f);
+		t.TweenProperty(SavedPopinNode, "position", new Vector2(0, -SavedPopinNode.Size.Y), .2f);
 
 	}
 	

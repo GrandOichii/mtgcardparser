@@ -1,3 +1,5 @@
-<matcher name="draw-effect" pattern="draw (.+) card">
-  <matcher template="TODO" />
+<matcher name="draw-effect" pattern="^draw (.+) card">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

@@ -1,4 +1,4 @@
 <matcher name="cycle-event" pattern="(.+) cycle (.+)">
-  <matcher template="TODO" />
+  <selector template="who" />
   <matcher template="TODO" />
 </matcher>

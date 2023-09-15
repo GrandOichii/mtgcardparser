@@ -1,6 +1,6 @@
 <selector name="root">
   <matcher template="aa" />
   <matcher template="trigger" />
-  <selector template="effect" />
+  <matcher template="effect" />
   <selector template="static-effect" />
 </selector>

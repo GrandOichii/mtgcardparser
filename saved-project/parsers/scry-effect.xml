@@ -1,3 +1,5 @@
-<matcher name="scry-effect" pattern="scry (.+)">
-  <matcher template="TODO" />
+<matcher name="scry-effect" pattern="^scry (.+)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

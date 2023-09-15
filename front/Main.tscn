@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://din77vaj1rxrr"]
+[gd_scene load_steps=8 format=3 uid="uid://din77vaj1rxrr"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_8c403"]
 [ext_resource type="PackedScene" uid="uid://dokm78qayo4n8" path="res://windows/CardViewWindow.tscn" id="2_u3tsi"]
@@ -6,11 +6,40 @@
 [ext_resource type="PackedScene" uid="uid://b36fxsgiudut2" path="res://tabs/TTPTab.tscn" id="4_o111x"]
 [ext_resource type="PackedScene" uid="uid://nrxra0vj74f3" path="res://tabs/ParsersTab.tscn" id="5_yksel"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6hho"]
+bg_color = Color(0.337255, 0.682353, 0.482353, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
 [sub_resource type="Theme" id="Theme_jl4x5"]
 default_font_size = 20
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_8c403")
+
+[node name="SavedPopin" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SavedPopin"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="SavedPopin/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6hho")
+
+[node name="Label" type="Label" parent="SavedPopin/MarginContainer/PanelContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Saved"
+horizontal_alignment = 1
 
 [node name="CardViewWindow" parent="." instance=ExtResource("2_u3tsi")]
 unique_name_in_owner = true

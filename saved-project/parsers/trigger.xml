@@ -1,4 +1,4 @@
 <matcher name="trigger" pattern="whenever (.+), (.+).">
   <selector template="trigger-event" />
-  <selector template="effect" />
+  <matcher template="effect" />
 </matcher>
