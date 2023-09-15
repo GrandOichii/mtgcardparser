@@ -1,4 +1,4 @@
-<matcher name="die-event" pattern="(.+) die">
+<matcher name="tap-you-control-cost" pattern="^tap (.+) you control$">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

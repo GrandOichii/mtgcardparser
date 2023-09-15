@@ -1,4 +1,7 @@
-<matcher name="exile-from-cost" pattern="^exile (.+) from (.+)">
+<matcher name="zone-change-event" pattern="(.+) is put into (.+) from (.+)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

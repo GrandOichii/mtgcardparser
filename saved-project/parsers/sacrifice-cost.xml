@@ -1,3 +1,5 @@
 <matcher name="sacrifice-cost" pattern="sacrifice (.+)">
-  <matcher template="TODO" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

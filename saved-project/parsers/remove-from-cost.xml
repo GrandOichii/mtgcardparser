@@ -1,4 +1,4 @@
-<matcher name="remove-from-cost" pattern="remove (.+) from (.+)">
+<matcher name="remove-from-cost" pattern="^remove (.+) from (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

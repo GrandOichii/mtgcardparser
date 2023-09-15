@@ -16,4 +16,6 @@
   <matcher template="die-event" />
   <matcher template="draw-event" />
   <matcher template="sacrifice-event" />
+  <matcher template="become-target-of-event" />
+  <matcher template="zone-change-event" />
 </selector>

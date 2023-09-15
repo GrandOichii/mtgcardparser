@@ -1,4 +1,4 @@
-<matcher name="die-event" pattern="(.+) die">
+<matcher name="return-to-owner-hand-cost" pattern="return (.+) to its owner's hand">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

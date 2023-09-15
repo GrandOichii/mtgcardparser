@@ -1,4 +1,4 @@
-<matcher name="exile-from-cost" pattern="^exile (.+) from (.+)">
+<matcher name="become-target-of-event" pattern="(.+) become target of (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

@@ -1,3 +1,5 @@
 <matcher name="pay-life-cost" pattern="pay (.+) life">
-  <matcher template="TODO" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

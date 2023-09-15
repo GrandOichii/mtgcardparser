@@ -1,4 +1,6 @@
 <matcher name="cast-event" pattern="(.+) cast (.+)">
   <selector template="who" />
-  <matcher template="TODO" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

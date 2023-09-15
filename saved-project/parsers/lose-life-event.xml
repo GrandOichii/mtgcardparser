@@ -1,4 +1,6 @@
-<matcher name="lose-life-event" pattern="(.+) lose (.+)">
-  <matcher template="TODO" />
-  <matcher template="TODO" />
+<matcher name="lose-life-event" pattern="(.+) lose (.+) life">
+  <selector template="who" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

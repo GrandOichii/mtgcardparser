@@ -8,6 +8,10 @@
       <matcher template="discard-cost" />
       <matcher template="remove-from-cost" />
       <matcher template="exile-from-cost" />
+      <matcher template="reveal-cost" />
+      <matcher template="tap-you-control-cost" />
+      <matcher template="return-to-owner-hand-cost" />
+      <matcher template="exile-cost" />
     </selector>
   </splitter>
 </selector>
