@@ -1,7 +1,13 @@
 <selector name="cost">
   <splitter name="cost-split" pattern=",\s">
-    <matcher name="test1" pattern="(.+)">
-      <matcher template="TODO" />
-    </matcher>
+    <selector name="cost-select">
+      <matcher template="curly-cost" />
+      <matcher template="sacrifice-cost" />
+      <matcher template="pay-life-cost" />
+      <matcher template="loyalty-cost" />
+      <matcher template="discard-cost" />
+      <matcher template="remove-from-cost" />
+      <matcher template="exile-from-cost" />
+    </selector>
   </splitter>
 </selector>

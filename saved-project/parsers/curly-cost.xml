@@ -1,0 +1,7 @@
+<matcher name="curly-cost" pattern="{([^}]+)}">
+  <splitter name="curly-splitter" pattern="}{">
+    <matcher name="test" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </splitter>
+</matcher>

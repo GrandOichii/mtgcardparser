@@ -1,0 +1,8 @@
+<matcher name="loyalty-cost" pattern="([\+\−])(\d+)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

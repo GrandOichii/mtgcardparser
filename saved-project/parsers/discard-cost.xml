@@ -1,0 +1,3 @@
+<matcher name="discard-cost" pattern="discard (.+)">
+  <matcher template="TODO" />
+</matcher>

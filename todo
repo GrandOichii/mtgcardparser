@@ -1,0 +1,6 @@
+- reducing the number of children in a selector doesn't do anything
+- add exporting a local node to a template
+- right clicking to add nodes doesn't add them to correct mouse position
+- add ability to analize similar unprocessed text to group together different parser nodes
+
+- implement node copying
