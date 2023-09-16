@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://nrxra0vj74f3"]
+[gd_scene load_steps=8 format=3 uid="uid://nrxra0vj74f3"]
 
 [ext_resource type="Script" path="res://tabs/ParsersTab.cs" id="1_d5dnc"]
 [ext_resource type="PackedScene" uid="uid://cgdqwxh06tf7k" path="res://pnodes/EditMatcherWindow.tscn" id="2_abfla"]
+[ext_resource type="Texture2D" uid="uid://beo7bxjm5pqwe" path="res://assets/check.png" id="2_kovfe"]
 [ext_resource type="PackedScene" uid="uid://bcycvauqxlvse" path="res://pnodes/AddNodeWindow.tscn" id="2_oeh1s"]
+[ext_resource type="Texture2D" uid="uid://b2dd4dyes84d5" path="res://assets/cross.png" id="3_h3wwt"]
 [ext_resource type="PackedScene" uid="uid://pm16bsqdbtw1" path="res://pnodes/EditSelectorWindow.tscn" id="3_utbxv"]
 [ext_resource type="PackedScene" uid="uid://djqbnb64f1vwe" path="res://pnodes/EditSplitterWindow.tscn" id="4_tmttd"]
 
@@ -13,6 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d5dnc")
+ParcedIcon = ExtResource("2_kovfe")
+UnparcedIcon = ExtResource("3_h3wwt")
 
 [node name="EditMatcherWindow" parent="." instance=ExtResource("2_abfla")]
 unique_name_in_owner = true

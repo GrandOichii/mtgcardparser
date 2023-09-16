@@ -1,4 +1,4 @@
-<matcher name="add-mana-effect" pattern="^add (.+)">
+<matcher name="token-creation" pattern="^create (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

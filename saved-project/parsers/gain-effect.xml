@@ -1,0 +1,8 @@
+<matcher name="gain-effect" pattern="(.+) gain (.+)">
+  <matcher name="who-gains" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="gains-what" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

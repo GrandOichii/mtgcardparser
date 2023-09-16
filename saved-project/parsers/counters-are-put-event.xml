@@ -1,0 +1,8 @@
+<matcher name="counters-are-put-event" pattern="(.+ counters) are put on (.+)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

@@ -1,0 +1,8 @@
+<matcher name="gets-effect" pattern="(.+) get (.+)">
+  <matcher name="get-target" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="get-what" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

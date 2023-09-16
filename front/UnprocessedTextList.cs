@@ -9,7 +9,6 @@ public partial class UnprocessedTextList : ScrollContainer
 	public ItemList ListNode { get; private set; }
 	
 	#endregion
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		#region Node fetching
@@ -19,10 +18,11 @@ public partial class UnprocessedTextList : ScrollContainer
 		#endregion
 	}
 
-	public void Load(List<string> list) {
-		// TODO doenst seem to be working on loading multiple times
+	public void Load(List<string> parcedList, List<string> unparcedList, Texture2D pTex, Texture2D uTex) {
 		ListNode.Clear();
-		foreach (var line in list)
-			ListNode.AddItem(line);
+		foreach (var line in unparcedList) 
+			ListNode.AddItem(line, uTex);
+		foreach (var line in parcedList) 
+			ListNode.AddItem(line, pTex);
 	}
 }

@@ -1,0 +1,6 @@
+<matcher name="put-counter-effect" pattern="^put (.+ counter) on (.+)">
+  <matcher template="counter-type" />
+  <matcher name="counter-target" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

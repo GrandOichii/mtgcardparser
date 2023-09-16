@@ -8,6 +8,15 @@ using MtgCardParser;
 public partial class ParsersTab : TabBar
 {
 	static readonly PackedScene PNodeBasePS = ResourceLoader.Load("res://pnodes/PNodeBase.tscn") as PackedScene;
+
+	#region Exports
+	
+	[Export]
+	public Texture2D ParcedIcon { get; set; }
+	[Export]
+	public Texture2D UnparcedIcon { get; set; }
+	
+	#endregion
 	
 	#region Nodes
 	
@@ -20,34 +29,50 @@ public partial class ParsersTab : TabBar
 	public EditSelectorWindow EditSelectorWindowNode { get; private set; }	
 	
 	#endregion
+	
+	private void UpdateParcedTextOnNodes() {
+		foreach (var child in GraphEditNode.GetChildren()) {
+			var pNodeN = child as PNodeBase;
+			var pNodeW = pNodeN.Data;
+			
+			var pList = new List<string>();
+			var uList = new List<string>();
+			
+			if (ParcedTextIndex.ContainsKey(pNodeW.Value)) {
+				pList = ParcedTextIndex[pNodeW.Value];
+			}
+			if (UnparcedTextIndex.ContainsKey(pNodeW.Value)) {
+				uList = UnparcedTextIndex[pNodeW.Value];
+			}
+			
+			var children = pNodeN.GetChildren();
+			var last = children[children.Count-1];
+			UnprocessedTextList listNode;
+			if (last is UnprocessedTextList) {
+				listNode = last as UnprocessedTextList;
+			} else {
+				listNode = UnprocessedTextListPS.Instantiate() as UnprocessedTextList;
+				pNodeN.AddChild(listNode);
+			}
+			listNode.Load(pList, uList, ParcedIcon, UnparcedIcon);
+		}
+	}
+	
 
 	private Dictionary<PNode, List<string>> _unparcedTextIndex = new();
 	public Dictionary<PNode, List<string>> UnparcedTextIndex { 
 		get => _unparcedTextIndex;
 		set {
 			_unparcedTextIndex = value;
-			
-			// update existing graph nodes
-			foreach (var child in GraphEditNode.GetChildren()) {
-				var pNodeN = child as PNodeBase;
-				var pNodeW = pNodeN.Data;
-				
-				if (!UnparcedTextIndex.ContainsKey(pNodeW.Value)) {
-					continue;
-				}
-				
-				var list = UnparcedTextIndex[pNodeW.Value];
-				var children = pNodeN.GetChildren();
-				var last = children[children.Count-1];
-				UnprocessedTextList listNode;
-				if (last is UnprocessedTextList) {
-					listNode = last as UnprocessedTextList;
-				} else {
-					listNode = UnprocessedTextListPS.Instantiate() as UnprocessedTextList;
-					pNodeN.AddChild(listNode);
-				}
-				listNode.Load(list);
-			}
+			UpdateParcedTextOnNodes();
+		}
+	}
+	private Dictionary<PNode, List<string>> _parcedTextIndex = new();
+	public Dictionary<PNode, List<string>> ParcedTextIndex { 
+		get => _parcedTextIndex;
+		set {
+			_parcedTextIndex = value;
+			UpdateParcedTextOnNodes();
 		}
 	}
 	
@@ -209,20 +234,25 @@ public partial class ParsersTab : TabBar
 		node.Load(pNodeW, ignoreTemplate);
 		
 		// fill the unprocessed text
-		if (UnparcedTextIndex.ContainsKey(pNodeW.Value)) {
-			var list = UnparcedTextIndex[pNodeW.Value];
-			var child = UnprocessedTextListPS.Instantiate() as UnprocessedTextList;
-			node.AddChild(child);
-			child.Load(list);
+		var pList = new List<string>();
+		var uList = new List<string>();
+		if (ParcedTextIndex.ContainsKey(pNodeW.Value)) {
+			pList = ParcedTextIndex[pNodeW.Value];
 		}
+		if (UnparcedTextIndex.ContainsKey(pNodeW.Value)) {
+			uList = UnparcedTextIndex[pNodeW.Value];
+		}
+		var child = UnprocessedTextListPS.Instantiate() as UnprocessedTextList;
+		node.AddChild(child);
+		child.Load(pList, uList, ParcedIcon, UnparcedIcon);
 		
 		if (pNodeW.Value.IsTemplate && !ignoreTemplate) return node;
 		
 		// iterate over the children
 		var childI = 0;
-		foreach (var child in pNodeW.Value.Children) {
-			if (child is null) continue;
-			var cNode = AddPNodeBase(new(child));
+		foreach (var nChild in pNodeW.Value.Children) {
+			if (nChild is null) continue;
+			var cNode = AddPNodeBase(new(nChild));
 			GraphEditNode.ConnectNode(node.Name, childI, cNode.Name, 0);
 			++childI;
 		}
@@ -417,7 +447,7 @@ public partial class ParsersTab : TabBar
 		PNodeUpdated(pNodeW, oldName, true);
 	}
 
-	private void OnEditSplitterWindowSplitterUpdated(PNodeWrapper pNodeW, string oldName)
+	private void OnEditSplitterWindowSplitterUpdated(PNodeWrapper  pNodeW, string oldName)
 	{
 		PNodeUpdated(pNodeW, oldName, true);
 	}

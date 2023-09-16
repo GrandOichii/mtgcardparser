@@ -3,5 +3,7 @@
 - right clicking to add nodes doesn't add them to correct mouse position
 - add ability to analize similar unprocessed text to group together different parser nodes
 - sampling cards doesn't work?
+- creating a local matcher with no capture groups doesn't have an input
+- change to display all parsed AND unparced texts
 
 - implement node copying

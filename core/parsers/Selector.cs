@@ -47,6 +47,7 @@ public class Selector : PNode {
             if (cTrace.Parsed) {
                 result.Parsed = true;
             }
+            break;
         }
         // if (allNull) return null;
 

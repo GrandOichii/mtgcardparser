@@ -29,4 +29,6 @@
   <matcher template="become-monstrous-event" />
   <matcher template="proliferate-event" />
   <matcher template="clash-event" />
+  <matcher template="become-untapped-event" />
+  <matcher template="counters-are-put-event" />
 </selector>

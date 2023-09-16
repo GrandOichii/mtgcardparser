@@ -295,25 +295,18 @@ public partial class Main : CanvasLayer
 	private void OnBakeButtonPressed()
 	{
 		var project = BakedProject;
+		var parcedTextIndex = new Dictionary<PNode, List<string>>();
 		var unparcedTextIndex = new Dictionary<PNode, List<string>>();
 		
 		foreach (var card in SampledCards) {
 			var traces = project.Do(card.ToCard());
-			foreach (var trace in traces) {
-				if (trace.Parsed) continue;
-				
-				FillUnparcedTextIndex(trace, unparcedTextIndex);
+			foreach (var trace in traces) {				
+				FillTextIndicies(trace, parcedTextIndex, unparcedTextIndex);
 			}
 			
 		}
 		
-		// foreach (var pair in unparcedTextIndex) {
-		// 	GD.Print(pair.Key.Name + " " + pair.Value.Count);
-		// 	// foreach (var t in pair.Value)
-		// 	// 	GD.Print("\t" + t);
-			
-		// }
-		
+		ParsersNode.ParcedTextIndex = parcedTextIndex;
 		ParsersNode.UnparcedTextIndex = unparcedTextIndex;
 	}
 	
@@ -325,14 +318,15 @@ public partial class Main : CanvasLayer
 		return true;
 	}
 	
-	private void FillUnparcedTextIndex(ParseTrace? trace, Dictionary<PNode, List<string>> index) {
+	private void FillTextIndicies(ParseTrace? trace, Dictionary<PNode, List<string>> pIndex, Dictionary<PNode, List<string>> uIndex) {
 		if (trace is null) return;
-		if (TraceMatches(trace)){
-			if (!index.ContainsKey(trace.Parent)) index.Add(trace.Parent, new());
-			index[trace.Parent].Add(trace.Text);
-		}
+		var index = pIndex;
+		if (!trace.Parsed)
+			index = uIndex;
+		if (!index.ContainsKey(trace.Parent)) index.Add(trace.Parent, new());
+		index[trace.Parent].Add(trace.Text);
 		foreach (var child in trace.ChildrenTraces)
-			FillUnparcedTextIndex(child, index);
+			FillTextIndicies(child, pIndex, uIndex);
 	}
 }
 
