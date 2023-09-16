@@ -1,0 +1,1 @@
+{"name":"is-dealt-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bis dealt\\b","Replacement":"isdealt"}}

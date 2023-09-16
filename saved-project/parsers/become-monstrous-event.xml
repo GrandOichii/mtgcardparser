@@ -1,0 +1,5 @@
+<matcher name="become-monstrous-event" pattern="(.+) become monstrous">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

@@ -1,0 +1,6 @@
+<matcher name="clash-event" pattern="(.+) clash ?(.*)">
+  <selector template="who" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

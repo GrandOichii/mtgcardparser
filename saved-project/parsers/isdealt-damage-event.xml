@@ -1,0 +1,11 @@
+<matcher name="isdealt-damage-event" pattern="(.+) isdealt ?(.*) damage ?(.*)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

@@ -1,0 +1,5 @@
+<matcher name="leave-battlefield-event" pattern="(.+) leave battlefield$">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

@@ -1,0 +1,6 @@
+<matcher name="surveil-event" pattern="(.+) surveil ?(.*)">
+  <selector template="who" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

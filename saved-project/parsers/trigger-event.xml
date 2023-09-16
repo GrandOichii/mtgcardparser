@@ -18,4 +18,15 @@
   <matcher template="sacrifice-event" />
   <matcher template="become-target-of-event" />
   <matcher template="zone-change-event" />
+  <matcher template="leave-battlefield-event" />
+  <matcher template="damage-deal-event" />
+  <matcher template="isdealt-damage-event" />
+  <matcher template="becomes-blocked-event" />
+  <matcher template="turned-face-up-event" />
+  <matcher template="become-tapped-event" />
+  <matcher template="surveil-event" />
+  <matcher template="attack-event" />
+  <matcher template="become-monstrous-event" />
+  <matcher template="proliferate-event" />
+  <matcher template="clash-event" />
 </selector>

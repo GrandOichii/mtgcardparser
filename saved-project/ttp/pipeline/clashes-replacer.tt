@@ -1,0 +1,1 @@
+{"name":"clashes-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bclashes\\b","Replacement":"clash"}}

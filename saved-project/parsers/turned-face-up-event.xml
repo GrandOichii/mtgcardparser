@@ -1,0 +1,5 @@
+<matcher name="turned-face-up-event" pattern="(.+) is turned face up">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

@@ -1,0 +1,8 @@
+<matcher name="becomes-blocked-event" pattern="(.+) become blocked ?(.*)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

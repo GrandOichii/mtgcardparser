@@ -1,0 +1,5 @@
+<matcher name="become-tapped-event" pattern="(.+) become tapped$">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>

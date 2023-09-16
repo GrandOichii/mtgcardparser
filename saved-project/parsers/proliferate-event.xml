@@ -1,0 +1,6 @@
+<matcher name="proliferate-event" pattern="(.+) proliferate ?(.*)">
+  <selector template="who" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>
