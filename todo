@@ -4,6 +4,7 @@
 - add ability to analize similar unprocessed text to group together different parser nodes
 - sampling cards doesn't work?
 - creating a local matcher with no capture groups doesn't have an input
-- change to display all parsed AND unparced texts
+- creashed several times when opening and directly opening the counter-type parser AND what-in-cost parser
+- changing the name of the parser doesn't update it in the context menu
 
 - implement node copying

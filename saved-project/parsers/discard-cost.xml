@@ -1,5 +1,12 @@
-<matcher name="discard-cost" pattern="^discard (.+)">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+<matcher name="discard-cost" pattern="^discard ?(\d*) (.+)">
+  <selector name="amount-select">
+    <matcher template="simple-numeric" />
+    <matcher template="empty" />
+  </selector>
+  <selector name="what">
+    <matcher name="any-card" pattern="^(card)$">
+      <matcher template="true" />
+    </matcher>
+    <selector template="what-in-cost" />
+  </selector>
 </matcher>

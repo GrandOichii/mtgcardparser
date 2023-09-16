@@ -167,6 +167,7 @@ public partial class ParsersTab : TabBar
 			child.Free();
 
 		AddPNodeBase(pNodeW, true);
+		// TODO crashes on some graphs
 		GraphEditNode.ArrangeNodes();
 
 		// center camera on the whole graph

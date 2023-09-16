@@ -1,5 +1,3 @@
 <matcher name="sacrifice-cost" pattern="sacrifice (.+)">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+  <selector template="what-in-cost" />
 </matcher>

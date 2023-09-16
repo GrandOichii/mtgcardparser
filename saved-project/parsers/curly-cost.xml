@@ -1,7 +1,31 @@
 <matcher name="curly-cost" pattern="{([^}]+)}">
   <splitter name="curly-splitter" pattern="}{">
-    <matcher name="test" pattern="(.+)">
-      <matcher template="TODO" />
-    </matcher>
+    <selector name="curly-cost-select">
+      <matcher name="tap" pattern="^(t)$">
+        <matcher template="true" />
+      </matcher>
+      <matcher name="generic" pattern="(\d+)">
+        <matcher template="true" />
+      </matcher>
+      <matcher name="colored-mana" pattern="\[mana:(.+)\]">
+        <selector name="colored-mana-select">
+          <matcher name="white" pattern="^(w)$">
+            <matcher template="true" />
+          </matcher>
+          <matcher name="blue" pattern="^(u)$">
+            <matcher template="true" />
+          </matcher>
+          <matcher name="black" pattern="^(b)$">
+            <matcher template="true" />
+          </matcher>
+          <matcher name="red" pattern="^(r)$">
+            <matcher template="true" />
+          </matcher>
+          <matcher name="green" pattern="^(g)$">
+            <matcher template="true" />
+          </matcher>
+        </selector>
+      </matcher>
+    </selector>
   </splitter>
 </matcher>
