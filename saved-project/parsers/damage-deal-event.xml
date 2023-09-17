@@ -2,10 +2,21 @@
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>
+  <selector name="combat-type">
+    <matcher name="combat" pattern="^(combat)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher name="noncombat" pattern="^(noncombat)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher template="empty" />
+  </selector>
   <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
+    <selector name="damage-receiver-select">
+      <matcher name="specific" pattern="^to (.+)">
+        <selector template="who" />
+      </matcher>
+      <matcher template="empty" />
+    </selector>
   </matcher>
 </matcher>

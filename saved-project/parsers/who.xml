@@ -1,3 +1,22 @@
 <selector name="who">
-  <matcher template="TODO" />
+  <selector name="player-select">
+    <matcher name="opponent" pattern="^(opponent)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher name="you" pattern="^(you)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher name="any" pattern="^(player)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher name="referenced-player" pattern="^(that player)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher name="all-players" pattern="^(each player)$">
+      <matcher template="true" />
+    </matcher>
+    <matcher name="each-opponent" pattern="^(each opponent)$">
+      <matcher template="true" />
+    </matcher>
+  </selector>
 </selector>

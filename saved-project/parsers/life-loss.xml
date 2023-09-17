@@ -1,4 +1,8 @@
-<matcher name="life-loss" pattern="lose (.+) life">
+<matcher name="life-loss" pattern="(.*) ?lose (.+) life ?(.*)">
+  <matcher name="whitespace-remover" pattern="(.+)\s$">
+    <selector template="who" />
+  </matcher>
+  <matcher template="simple-numeric" />
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>
