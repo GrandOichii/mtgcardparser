@@ -26,7 +26,8 @@ public partial class ParsersTab : TabBar
 	public AddNodeWindow AddNodeWindowNode { get; private set; }
 	public EditMatcherWindow EditMatcherWindowNode { get; private set; }
 	public EditSplitterWindow EditSplitterWindowNode { get; private set; }
-	public EditSelectorWindow EditSelectorWindowNode { get; private set; }	
+	public EditSelectorWindow EditSelectorWindowNode { get; private set; }
+	public CheckButton ParceTODOCheckNode { get; private set; }
 	
 	#endregion
 	
@@ -87,9 +88,11 @@ public partial class ParsersTab : TabBar
 		EditMatcherWindowNode = GetNode<EditMatcherWindow>("%EditMatcherWindow"); 
 		EditSelectorWindowNode = GetNode<EditSelectorWindow>("%EditSelectorWindow");
 		EditSplitterWindowNode = GetNode<EditSplitterWindow>("%EditSplitterWindow");
+		ParceTODOCheckNode = GetNode<CheckButton>("%ParceTODOCheck");
 		
 		#endregion
 		
+//		OnParceTODOCheckToggled((TODOPNodeW.Value as Matcher).PatternString == "nnn");
 	}
 	
 	private PNodeBase GetPNode(StringName name) => GraphEditNode.GetNode<PNodeBase>(name.ToString());
@@ -452,5 +455,22 @@ public partial class ParsersTab : TabBar
 	{
 		PNodeUpdated(pNodeW, oldName, true);
 	}
+	
+	private PNodeWrapper TODOPNodeW {
+		get {
+			for (int i = 0; i < ParsersListNode.ItemCount; i++) {
+				var pNodeW = ParsersListNode.GetItemMetadata(i).As<PNodeWrapper>();
+				if (pNodeW.Value.Name == "TODO") return pNodeW;
+			}
+			throw new Exception("TODO parcer not found");
+		}
+	}
+	
+	private void OnParceTODOCheckToggled(bool button_pressed)
+	{
+		(TODOPNodeW.Value as Matcher).PatternString = button_pressed ? "nnn" : ".*";
+		UpdateParcedTextOnNodes();
+	}
 }
+
 

@@ -12,6 +12,7 @@
       <matcher template="tap-you-control-cost" />
       <matcher template="return-to-owner-hand-cost" />
       <matcher template="exile-cost" />
+      <matcher template="put-counter-cost" />
     </selector>
   </splitter>
 </selector>

@@ -42,6 +42,12 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="ParceTODOCheck" type="CheckButton" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Mark TODO as unparced "
+
 [node name="ParsersList" type="ItemList" parent="HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -81,6 +87,7 @@ visible = false
 [connection signal="MatcherUpdated" from="EditMatcherWindow" to="." method="OnEditMatcherWindowMatcherUpdated"]
 [connection signal="SelectorUpdated" from="EditSelectorWindow" to="." method="OnEditSelectorWindowSelectorUpdated"]
 [connection signal="SplitterUpdated" from="EditSplitterWindow" to="." method="OnEditSplitterWindowSplitterUpdated"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ParceTODOCheck" to="." method="OnParceTODOCheckToggled"]
 [connection signal="item_activated" from="HBoxContainer/VBoxContainer/ParsersList" to="." method="OnTemplatesListItemActivated"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddButton" to="." method="OnAddButtonPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/RemoveButton" to="." method="OnRemoveButtonPressed"]

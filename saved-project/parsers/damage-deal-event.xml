@@ -4,10 +4,10 @@
   </matcher>
   <selector name="combat-type">
     <matcher name="combat" pattern="^(combat)$">
-      <matcher template="true" />
+      <matcher template="TODO" />
     </matcher>
     <matcher name="noncombat" pattern="^(noncombat)$">
-      <matcher template="true" />
+      <matcher template="TODO" />
     </matcher>
     <matcher template="empty" />
   </selector>

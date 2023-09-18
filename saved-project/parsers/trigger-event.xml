@@ -1,7 +1,6 @@
 <selector name="trigger-event">
   <matcher template="life-gain-event" />
   <matcher template="block-event" />
-  <matcher template="attacks-trigger" />
   <matcher template="cast-event" />
   <matcher template="cycle-event" />
   <matcher template="lose-life-event" />

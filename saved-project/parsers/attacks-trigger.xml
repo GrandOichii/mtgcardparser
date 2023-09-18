@@ -1,5 +1,0 @@
-<matcher name="attacks-trigger" pattern="(.+) attacks">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
-</matcher>

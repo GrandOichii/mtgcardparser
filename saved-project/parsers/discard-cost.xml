@@ -5,7 +5,7 @@
   </selector>
   <selector name="what">
     <matcher name="any-card" pattern="^(card)$">
-      <matcher template="true" />
+      <matcher template="TODO" />
     </matcher>
     <selector template="what-in-cost" />
   </selector>
