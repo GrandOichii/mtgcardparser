@@ -53,4 +53,10 @@ public class Selector : PNode {
 
         return result;
     }
+
+    // public override void GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+    //     // TODO
+
+    // }
+
 }

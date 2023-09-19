@@ -1,7 +1,5 @@
 <matcher name="remove-from-cost" pattern="^remove (.+) from (.+)">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+  <matcher template="counter-type" />
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

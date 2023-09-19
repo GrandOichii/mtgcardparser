@@ -1,3 +1,4 @@
+namespace MtgCardParser;
 using NLua;
 
 static class LuaUtility {
@@ -83,4 +84,49 @@ static class LuaUtility {
             result[pair.Key] = pair.Value;
         return result;
     }
+
+
+}
+
+public static class Utility {
+
+    // static public List<string> Combinations(List<List<string>> collections) {
+    //     var result = new List<string>();
+    //     BuildPossibleCombination(collections, 0, result);
+    //     return result;
+    // }
+
+    // private static void BuildPossibleCombination(List<List<string>> collections, int level, List < string > output) {
+    //     if (level < collections.Count) {
+    //         foreach(string value in collections[level]) {
+    //             List < string > resultList = new List < string > ();
+    //             resultList.AddRange(output);
+    //             resultList.Add(value);
+    //             BuildPossibleCombination(collections, level + 1, resultList);
+    //         }
+    //     }
+    // }
+    public static IEnumerable<TSource> Append<TSource>(
+        this IEnumerable<TSource> source, TSource item)
+    {
+        foreach (TSource element in source)
+            yield return element;
+
+        yield return item;
+    }
+
+    public static IEnumerable<IEnumerable<string>> GetAllPossibleCombos(
+        IEnumerable<IEnumerable<string>> strings)
+    {
+        IEnumerable<IEnumerable<string>> combos = new string[][] { new string[0] };
+
+        foreach (var inner in strings)
+            combos = from c in combos
+                    from i in inner
+                    select c.Append(i);
+
+        return combos;
+    }
+
+
 }

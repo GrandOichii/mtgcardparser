@@ -3,12 +3,8 @@
     <matcher template="TODO" />
   </matcher>
   <selector name="combat-type">
-    <matcher name="combat" pattern="^(combat)$">
-      <matcher template="TODO" />
-    </matcher>
-    <matcher name="noncombat" pattern="^(noncombat)$">
-      <matcher template="TODO" />
-    </matcher>
+    <matcher name="combat" pattern="^combat$" />
+    <matcher name="noncombat" pattern="^noncombat$" />
     <matcher template="empty" />
   </selector>
   <matcher name="test" pattern="(.+)">

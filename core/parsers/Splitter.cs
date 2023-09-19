@@ -62,4 +62,10 @@ public class Splitter : PNode {
         result.SetAttribute("pattern", PatternString);
         return result;
     }
+
+    // public override void GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+    //     // TODO
+
+    // }
+
 }

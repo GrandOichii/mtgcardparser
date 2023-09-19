@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 
 class Program {
     public static void Main(String[] args) {
+        GenerateRandomCards();
+        return;
         // var pattern = new Regex(",\\s");
         // var split = pattern.Split("{x}, {t}");
         // System.Console.WriteLine(split.Length);
@@ -120,12 +122,35 @@ class Program {
         return true;
     }
 
+    private static void GenerateRandomCards() {
+        var testPath = "../saved-project";
+        // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
+        var project = Project.Load(testPath);
+        var text = "{T}: Draw 1 card.\n{1}{B}: You gain 5 life.";
+        var result = project.Do(new Card("Test1", text));
+        // System.Console.WriteLine(result);
+        var parcedMap = new Dictionary<PNode, List<ParseTrace>>();
+        foreach (var pr in result)
+            FillParcedTexts(pr, parcedMap);
 
+        project.GenerateAllPossibleTexts(parcedMap);
+    }
+
+    private static void FillParcedTexts(ParseTrace? trace, Dictionary<PNode, List<ParseTrace>> index) {
+        if (trace is null) return;
+        if (!trace.Parsed) return;
+        var parent = trace.Parent;
+        if (!index.ContainsKey(parent)) index.Add(parent, new());
+        var list = index[parent];
+        
+        // make all traces unique
+        foreach (var t in list)
+            if (t.Text == trace.Text)
+                return;
+        
+        index[parent].Add(trace);
+
+        foreach (var child in trace.ChildrenTraces)
+            FillParcedTexts(child, index);
+    }
 }
-
-/*
-Enters with an indestructable counter if you are flying with a +1/+1 counter.
-
-[\+|\-]\d\/[\+|\-]\d counter - +x/+x counters
-\b\w+\b counter - keyword counters
-*/

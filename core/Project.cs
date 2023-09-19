@@ -95,6 +95,10 @@ public class Project {
 
         return result;
     }
+
+    public void GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        Root.GenerateAllPossibleTexts(index);
+    }
 }
 
 class ProjectLoader {

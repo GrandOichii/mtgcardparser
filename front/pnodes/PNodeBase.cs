@@ -48,13 +48,15 @@ public partial class PNodeBase : GraphNode
 			Title += " (matcher)";
 			if (isTemplate) break;
 
-			var count = matcher.GroupCount;
+			var gc = matcher.GroupCount;
+			var count = gc;
+			if (count == 0) count = 1;	
 			for (int i = 0; i < count; i++) {
 				var c = new Control();
 				c.CustomMinimumSize = new(0, 40);
 				AddChild(c);
 
-				SetSlot(i, i == 0, 0, LEFT_COLOR, true, 0, RIGHT_COLOR);
+				SetSlot(i, i == 0, 0, LEFT_COLOR, gc > 0, 0, RIGHT_COLOR);
 			}
 			break;
 		case Selector selector:

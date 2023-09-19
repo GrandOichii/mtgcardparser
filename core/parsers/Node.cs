@@ -32,6 +32,13 @@ public abstract class PNode {
             result.AppendChild(child.ToXml(doc));
         return result;
     }
+
+    public virtual List<string> GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        foreach (var child in Children) {
+            child.GenerateAllPossibleTexts(index);
+        }
+        return new();
+    }
 }
 
 

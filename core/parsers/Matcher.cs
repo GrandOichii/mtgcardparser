@@ -81,4 +81,22 @@ public class Matcher : PNode {
         result.SetAttribute("pattern", PatternString);
         return result;
     }
+
+    public override List<string> GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        var result = new List<string>();
+        if (Children.Count == 0) {
+            if (!index.ContainsKey(this)) return new();
+            foreach (var s in index[this])
+                result.Add(s.Text);
+            return result;
+        }
+
+        foreach (var child in Children) {
+            var sub = child.GenerateAllPossibleTexts(index);
+            // TODO
+            // result.AddRange(sub);
+        }
+        return result;
+    }
+
 }
