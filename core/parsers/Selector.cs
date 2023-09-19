@@ -54,9 +54,15 @@ public class Selector : PNode {
         return result;
     }
 
-    // public override void GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
-    //     // TODO
-
-    // }
+    public override List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        var result = new List<string>();
+        foreach (var child in Children) {
+            var sub = child.GenerateAllPossibleTexts(index);
+            if (sub is null) continue;
+            result.AddRange(sub);
+        }
+        if (result.Count == 0) return null;
+        return result;
+    }
 
 }

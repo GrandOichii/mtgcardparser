@@ -33,11 +33,8 @@ public abstract class PNode {
         return result;
     }
 
-    public virtual List<string> GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
-        foreach (var child in Children) {
-            child.GenerateAllPossibleTexts(index);
-        }
-        return new();
+    public virtual List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        return null;
     }
 }
 

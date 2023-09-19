@@ -82,7 +82,8 @@ public class Matcher : PNode {
         return result;
     }
 
-    public override List<string> GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+    public override List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        if (Name == "TODO") return null;
         var result = new List<string>();
         if (Children.Count == 0) {
             if (!index.ContainsKey(this)) return new();
@@ -91,11 +92,22 @@ public class Matcher : PNode {
             return result;
         }
 
+        var collections = new List<List<string>>();
         foreach (var child in Children) {
             var sub = child.GenerateAllPossibleTexts(index);
-            // TODO
-            // result.AddRange(sub);
+            if (sub is null) return null;
+            collections.Add(sub);
         }
+        var combinations = Utility.GetAllPossibleCombos(collections);
+        var p = new Regex("\\(.+?\\)");
+        foreach (var arr in combinations) {
+            var text = PatternString;
+            foreach (var s in arr) {
+                text = p.Replace(text, s, 1);
+            }
+            result.Add(text);
+        }
+        if (GroupCount == 0) result.Add(PatternString);
         return result;
     }
 

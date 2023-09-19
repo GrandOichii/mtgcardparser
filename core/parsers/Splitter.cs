@@ -63,9 +63,9 @@ public class Splitter : PNode {
         return result;
     }
 
-    // public override void GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
-    //     // TODO
-
-    // }
+    public override List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        // TODO
+        return Children[0].GenerateAllPossibleTexts(index);
+    }
 
 }

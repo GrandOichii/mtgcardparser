@@ -96,8 +96,8 @@ public class Project {
         return result;
     }
 
-    public void GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
-        Root.GenerateAllPossibleTexts(index);
+    public List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        return Root.GenerateAllPossibleTexts(index);
     }
 }
 

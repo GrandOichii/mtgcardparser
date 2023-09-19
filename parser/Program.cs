@@ -133,7 +133,9 @@ class Program {
         foreach (var pr in result)
             FillParcedTexts(pr, parcedMap);
 
-        project.GenerateAllPossibleTexts(parcedMap);
+        var possibleTexts = project.GenerateAllPossibleTexts(parcedMap);
+        foreach (var t in possibleTexts)
+            System.Console.WriteLine(t);
     }
 
     private static void FillParcedTexts(ParseTrace? trace, Dictionary<PNode, List<ParseTrace>> index) {
