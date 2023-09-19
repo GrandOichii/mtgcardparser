@@ -58,7 +58,9 @@ public class Selector : PNode {
         var result = new List<string>();
         foreach (var child in Children) {
             var sub = child.GenerateAllPossibleTexts(index);
-            if (sub is null) continue;
+            if (sub is null) {
+                continue;
+            }
             result.AddRange(sub);
         }
         if (result.Count == 0) return null;

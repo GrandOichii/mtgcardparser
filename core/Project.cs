@@ -96,8 +96,22 @@ public class Project {
         return result;
     }
 
-    public List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
-        return Root.GenerateAllPossibleTexts(index);
+    public List<string> GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
+        var generated =  Root.GenerateAllPossibleTexts(index);
+        var result = new List<string>();
+        if (generated is null) return result;
+        foreach (var g in generated) {
+            var t = g
+                    .Replace("^", "")
+                    .Replace("$", "")
+                    .Replace("?", "")
+                    .Replace(" ,", ",")
+                    .Replace(" .", ".")
+                    .Replace("\\s", "")
+                    ;
+            result.Add(t);
+        }
+        return result;
     }
 }
 
