@@ -1,4 +1,4 @@
-<matcher name="aa" pattern="(.+): (.+).">
+<matcher name="aa" pattern="(.+): (.+)">
   <selector template="cost" />
   <matcher template="effect" />
 </matcher>

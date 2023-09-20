@@ -1,0 +1,1 @@
+{"name":"flavor-words-remover","template":"tt-simple-replacer","args":{"Pattern":"^(.\u002B) \u2014 ","Replacement":""}}

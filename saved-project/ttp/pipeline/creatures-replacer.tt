@@ -1,0 +1,1 @@
+{"name":"creatures-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bcreatures\\b","Replacement":"creature"}}

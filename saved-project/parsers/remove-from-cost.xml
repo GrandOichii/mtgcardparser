@@ -1,4 +1,4 @@
 <matcher name="remove-from-cost" pattern="remove (.+) from (.+)">
   <matcher template="counter-type" />
-  <selector template="permanent" />
+  <selector template="permanent-in-cost" />
 </matcher>

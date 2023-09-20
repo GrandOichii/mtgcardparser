@@ -194,7 +194,7 @@ public class SimpleReplacerTextTransformerTemplate : TextTransformerTemplate {
     {
         var pattern = string.Format(REGEX_PATTERN_FORMAT, args[REPLACED_PHRASE_ARG_NAME]);
         var replacement = args[REPLACEMENT_PHRASE_ARG_NAME];
-        var m = Regex.Matches(text.ToString(), pattern);
+        var m = Regex.Matches(text.ToString(), pattern, RegexOptions.Multiline);
         for (int i = m.Count - 1; i >= 0; i--) {
             Match match = m[i];
             text = text.Replace(

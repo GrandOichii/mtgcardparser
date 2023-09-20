@@ -1,4 +1,0 @@
-<selector name="effect-who">
-  <matcher name="you" pattern="you" />
-  <selector template="2+-players" />
-</selector>

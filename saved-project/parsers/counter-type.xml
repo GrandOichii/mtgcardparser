@@ -1,4 +1,4 @@
-<matcher name="counter-type" pattern="(.+) counter$">
+<matcher name="counter-type" pattern="(.+) counter">
   <selector name="counter-type-split">
     <matcher name="stat-modifier-counter" pattern="(.\d+)\/(.\d+)">
       <matcher template="power-toughness-modifier" />

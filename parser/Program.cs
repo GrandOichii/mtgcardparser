@@ -60,27 +60,6 @@ class Program {
             if (!trace.Parsed)
                 System.Console.WriteLine(trace.Parent.Name + " " + trace.Text);
         }
-
-        // foreach (var trace in result) {
-        //     var relevant = new Dictionary<string, ParseTrace>();
-        //     CheckForRelevantTraces("", trace, relevant);
-        //     foreach (var pair in relevant) {
-        //         System.Console.WriteLine(pair.Key + ": " + pair.Value.Text);
-        //         var pNode = pair.Value.Parent;
-        //         if (!unproccessedIndex.ContainsKey(pNode)) unproccessedIndex.Add(pNode, new());
-        //         unproccessedIndex[pNode].Add(pair.Value.Text);
-        //     }
-        // }
-
-        // System.Console.WriteLine();
-        // System.Console.WriteLine();
-        // System.Console.WriteLine();
-
-        // foreach (var pair in unproccessedIndex) {
-        //     System.Console.WriteLine(pair.Key.Name);
-        //     foreach (var t in pair.Value)
-        //         System.Console.WriteLine("\t" + t);
-        // }
         
     }
 
@@ -128,10 +107,14 @@ class Program {
         var project = Project.Load(testPath);
         var text = "{T}: Draw 1 card.\n{1}{B}: You gain 5 life.";
         var result = project.Do(new Card("Test1", text));
-        // System.Console.WriteLine(result);
         var parcedMap = new Dictionary<PNode, List<ParseTrace>>();
         foreach (var pr in result)
             FillParcedTexts(pr, parcedMap);
+        // foreach (var pair in parcedMap) {
+        //     System.Console.WriteLine(pair.Key.Name);
+        //     foreach (var s in pair.Value)
+        //         System.Console.WriteLine("\t" + s.Text);
+        // }
 
         var possibleTexts = project.GenerateAllPossibleTexts(parcedMap);
         foreach (var t in possibleTexts)

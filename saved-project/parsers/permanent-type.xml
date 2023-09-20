@@ -1,0 +1,8 @@
+<matcher name="permanent-type" pattern="\[type\:(.+)\]">
+  <selector name="type-select">
+    <matcher name="creature" pattern="creature" />
+    <matcher name="enchantment" pattern="enchantment" />
+    <matcher name="artifact" pattern="artifact" />
+    <matcher name="land" pattern="land" />
+  </selector>
+</matcher>

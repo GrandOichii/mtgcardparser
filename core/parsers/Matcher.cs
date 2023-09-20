@@ -10,7 +10,7 @@ public class Matcher : PNode {
         get => _patternString;
         set {
             _patternString = value;
-            Pattern = new Regex("^" + value + "$");
+            Pattern = new Regex("^" + value + "$", RegexOptions.Multiline);
         }
     }
     public Regex Pattern { get; private set; }
@@ -59,6 +59,9 @@ public class Matcher : PNode {
         CheckGroupCount();
 
         var match = Pattern.Match(text);
+        // if (Name == "simple-numeric") {
+        //     System.Console.WriteLine("AM");
+        // }
         if (!match.Success) return null;
         var result = new ParseTrace(this, text);
         result.Parsed = true;
@@ -85,13 +88,14 @@ public class Matcher : PNode {
     public override List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
         if (Name == "TODO") return null;
         var result = new List<string>();
-        if (GroupCount == 0) {
-            result.Add(PatternString);
-            // return result;
-        }
+        // if no children
+        // if 
 
         if (Children.Count == 0) {
-            if (!index.ContainsKey(this)) return result;
+            result.Add(PatternString);
+            if (!index.ContainsKey(this)) {
+                return result;
+            }
             result = new();
             foreach (var s in index[this])
                 result.Add(s.Text);
@@ -106,6 +110,7 @@ public class Matcher : PNode {
             collections.Add(sub);
         }
         var combinations = Utility.GetAllPossibleCombos(collections);
+        // TODO could be a problem with texts containing \\(\\)
         var p = new Regex("\\(.+?\\)");
         foreach (var arr in combinations) {
             var text = PatternString;

@@ -179,6 +179,7 @@ public partial class TTEditor : Window
 		
 	private void UpdateArgumentList() {
 		ClearArgumentList();
+		// TODO threw exception
 		var template = TemplateOptionNode.GetItemMetadata(TemplateOptionNode.Selected).As<Wrapper<TextTransformerTemplate>>().Value;
 		foreach (var arg in template.Args) {
 			AddTTArgLI(arg.Name, "");

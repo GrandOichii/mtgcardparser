@@ -6,6 +6,7 @@
 - creating a local matcher with no capture groups doesn't have an input
 - creashed several times when opening and directly opening the counter-type parser AND what-in-cost parser (fix: first open root, then bake, then open the needed parser)
 - changing the name of the parser doesn't update it in the context menu
+- text transformers don't seem to be updating after updating their scripts
 
 - implement node copying
 

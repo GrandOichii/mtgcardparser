@@ -1,0 +1,8 @@
+<selector name="who-effect">
+  <matcher name="you" pattern="you" />
+  <matcher name="referenced-controller" pattern="its controller" />
+  <matcher name="target" pattern="target (.+)">
+    <selector template="player-type" />
+  </matcher>
+  <selector template="2+-players" />
+</selector>

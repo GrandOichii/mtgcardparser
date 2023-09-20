@@ -1,4 +1,4 @@
-<matcher name="become-untapped-event" pattern="(.+) become untapped$">
+<matcher name="become-untapped-event" pattern="(.+) become untapped">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

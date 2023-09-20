@@ -1,5 +1,0 @@
-<selector name="permanent">
-  <matcher name="cardname" pattern="(\[cardname\])">
-    <matcher template="TODO" />
-  </matcher>
-</selector>
