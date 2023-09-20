@@ -1,3 +1,10 @@
 <selector name="permanent-in-cost">
-  <matcher template="permanent-type" />
+  <matcher name="cardname" pattern="\[cardname\]" />
+  <matcher name="not-cardname" pattern="(another)? ?(.+)">
+    <selector name="prefix-select">
+      <matcher name="another" pattern="another" />
+      <matcher template="empty" />
+    </selector>
+    <matcher template="permanent-type" />
+  </matcher>
 </selector>
