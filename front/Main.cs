@@ -38,6 +38,8 @@ public partial class Main : CanvasLayer
 	public TTPTab TTPNode { get; private set; }
 	public ParsersTab ParsersNode { get; private set; }
 	public Control SavedPopinNode { get; private set; }
+	public ProgressBar ParsedCardsNode { get; private set; }
+	public Label ParsedCardsLabelNode { get; private set; }
 	
 	#endregion
 	
@@ -60,8 +62,10 @@ public partial class Main : CanvasLayer
 		TTPNode = GetNode<TTPTab>("%TTP");
 		ParsersNode = GetNode<ParsersTab>("%Parsers");
 		SavedPopinNode = GetNode<Control>("%SavedPopin");
-		SavedPopinNode.Position = new(0, -SavedPopinNode.Size.Y);
+		ParsedCardsNode = GetNode<ProgressBar>("%ParsedCards");
+		ParsedCardsLabelNode = GetNode<Label>("%ParsedCardsLabel");
 		
+		SavedPopinNode.Position = new(0, -SavedPopinNode.Size.Y);
 		_cardSrc = CardsDownloadRequestNode.DownloadFile;
 		#endregion
 		
@@ -298,13 +302,25 @@ public partial class Main : CanvasLayer
 		var parcedTextIndex = new Dictionary<PNode, List<string>>();
 		var unparcedTextIndex = new Dictionary<PNode, List<string>>();
 		
+		var parcedC = 0;
 		foreach (var card in SampledCards) {
 			var traces = project.Do(card.ToCard());
-			foreach (var trace in traces) {				
+			var parced = false;
+			foreach (var trace in traces) {
+				if (trace.Parsed) {
+					parced = true;
+				}
 				FillTextIndicies(trace, parcedTextIndex, unparcedTextIndex);
 			}
+			if (!parced) continue;
+
+			++parcedC;
 			
 		}
+
+		ParsedCardsNode.MaxValue = SampledCards.Count;
+		ParsedCardsNode.Value = parcedC;
+		ParsedCardsLabelNode.Text = "" + parcedC + " / " + SampledCards.Count;
 		
 		ParsersNode.ParcedTextIndex = parcedTextIndex;
 		ParsersNode.UnparcedTextIndex = unparcedTextIndex;
