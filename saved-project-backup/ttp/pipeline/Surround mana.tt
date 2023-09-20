@@ -1,1 +1,0 @@
-{"name":"Surround mana","template":"tt-formatsurrounder","args":{"Pattern":"\\b[\\d]?[WUBRGC]\u002B\\b","Surround":"mana"}}

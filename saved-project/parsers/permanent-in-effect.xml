@@ -13,4 +13,5 @@
       <matcher template="empty" />
     </selector>
   </matcher>
+  <matcher name="self" pattern="\[cardname\]" />
 </selector>

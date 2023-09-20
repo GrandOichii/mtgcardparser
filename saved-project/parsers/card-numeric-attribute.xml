@@ -1,0 +1,5 @@
+<selector name="card-numeric-attribute">
+  <matcher name="power" pattern="power" />
+  <matcher name="toughness" pattern="toughness" />
+  <matcher name="mana value" pattern="mana value" />
+</selector>

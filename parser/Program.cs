@@ -106,8 +106,10 @@ class Program {
     private static void GenerateRandomCards() {
         var testPath = "../saved-project";
         // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
+        System.Console.WriteLine("Loading...");
         var project = Project.Load(testPath);
-        var text = "{T}: Draw 1 card.";
+        var text = "{1}: Put a charge counter on Test1.";
+        System.Console.WriteLine("Parcing...");
         var result = project.Do(new Card("Test1", text));
         var parcedMap = new Dictionary<PNode, List<ParseTrace>>();
         foreach (var pr in result)
@@ -118,11 +120,13 @@ class Program {
         //         System.Console.WriteLine("\t" + s.Text);
         // }
 
+        System.Console.WriteLine("Generating...");
         var possibleTexts = project.GenerateAllPossibleTexts(parcedMap);
         // System.Console.WriteLine(possibleTexts[Rnd.Next() % possibleTexts.Count]);
         // return;
-        foreach (var t in possibleTexts)
-            System.Console.WriteLine(t);
+        File.WriteAllLines("../possible-texts.txt", possibleTexts);
+        // foreach (var t in possibleTexts)
+        //     System.Console.WriteLine(t);
     }
 
     private static void FillParcedTexts(ParseTrace? trace, Dictionary<PNode, List<ParseTrace>> index) {

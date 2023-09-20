@@ -1,3 +1,12 @@
 <selector name="x-definer">
-  <matcher template="TODO" />
+  <matcher name="referenced-attribute" pattern="its (.+)">
+    <selector template="card-numeric-attribute" />
+  </matcher>
+  <matcher name="referenced-spell-attribute" pattern="(.+) of that spell">
+    <selector template="card-numeric-attribute" />
+  </matcher>
+  <matcher name="number-of-counters" pattern="number of (.+ counter)s on (.+)">
+    <matcher template="counter-type" />
+    <selector template="permanent-in-effect" />
+  </matcher>
 </selector>

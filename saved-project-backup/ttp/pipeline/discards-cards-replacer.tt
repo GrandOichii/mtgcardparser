@@ -1,1 +1,0 @@
-{"name":"discards-cards-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bdiscards\\b","Replacement":"discard"}}

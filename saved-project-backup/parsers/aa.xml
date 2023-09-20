@@ -1,4 +1,0 @@
-<matcher name="aa" pattern="(.+): (.+)">
-  <matcher template="TODO" />
-  <matcher template="effect" />
-</matcher>
