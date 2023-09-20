@@ -3,6 +3,7 @@
     <selector name="curly-cost-select">
       <matcher name="tap" pattern="t" />
       <matcher template="simple-numeric" />
+      <matcher template="colored-mana" />
       <matcher name="colored-mana" pattern="\[mana:(.+)\]">
         <selector name="colored-mana-select">
           <matcher name="white" pattern="w" />

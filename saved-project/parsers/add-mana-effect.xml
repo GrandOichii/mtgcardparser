@@ -1,5 +1,19 @@
 <matcher name="add-mana-effect" pattern="add (.+)">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+  <splitter name="or-split" pattern="\s,|\sor\s">
+    <selector name="mana-select">
+      <matcher name="mana-pips" pattern="\{(.+)\}">
+        <splitter name="mana-split" pattern="\}\{">
+          <matcher name="test" pattern="(.+)">
+            <matcher template="colored-mana" />
+          </matcher>
+        </splitter>
+      </matcher>
+      <matcher name="any-color-mana" pattern="(.+) mana of any color ?(.*)">
+        <selector template="numeric" />
+        <selector name="postfix">
+          <matcher template="empty" />
+        </selector>
+      </matcher>
+    </selector>
+  </splitter>
 </matcher>

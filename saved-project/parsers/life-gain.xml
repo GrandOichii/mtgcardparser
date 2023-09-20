@@ -2,7 +2,7 @@
   <matcher name="whitespace-remover" pattern="(.+)\s">
     <selector template="who-effect" />
   </matcher>
-  <matcher template="simple-numeric" />
+  <selector template="numeric" />
   <selector name="additional-info">
     <matcher template="empty" />
   </selector>

@@ -1,0 +1,4 @@
+<selector name="numeric">
+  <matcher template="simple-numeric" />
+  <matcher name="x" pattern="x" />
+</selector>

@@ -1,0 +1,10 @@
+<matcher name="colored-mana" pattern="\[mana:(.+)\]">
+  <selector name="colored-mana-select">
+    <matcher name="white" pattern="w" />
+    <matcher name="blue" pattern="u" />
+    <matcher name="black" pattern="b" />
+    <matcher name="red" pattern="r" />
+    <matcher name="green" pattern="g" />
+    <matcher name="colorless" pattern="c" />
+  </selector>
+</matcher>

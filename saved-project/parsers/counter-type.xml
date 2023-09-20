@@ -4,6 +4,6 @@
       <matcher template="power-toughness-modifier" />
       <matcher template="power-toughness-modifier" />
     </matcher>
-    <matcher name="single-word-counter" pattern="[^\s]+" />
+    <matcher name="single-word-counter" pattern="^[^\s]+$" />
   </selector>
 </matcher>

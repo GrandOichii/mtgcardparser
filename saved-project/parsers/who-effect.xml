@@ -4,5 +4,5 @@
   <matcher name="target" pattern="target (.+)">
     <selector template="player-type" />
   </matcher>
-  <selector template="2-or-more-players" />
+  <selector template="1-or-more-players" />
 </selector>

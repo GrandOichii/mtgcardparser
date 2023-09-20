@@ -1,3 +1,13 @@
-<matcher name="draw-effect" pattern="draw (.+) card">
+<matcher name="draw-effect" pattern="(.*? )?(may )?draw (.+) card">
+  <selector name="who-select">
+    <matcher template="empty" />
+    <matcher name="whitespace-remover" pattern="(.+)\s">
+      <selector template="who-effect" />
+    </matcher>
+  </selector>
+  <selector name="may-check">
+    <matcher template="empty" />
+    <matcher name="may" pattern="may " />
+  </selector>
   <matcher template="simple-numeric" />
 </matcher>
