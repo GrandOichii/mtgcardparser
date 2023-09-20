@@ -8,3 +8,7 @@
 - changing the name of the parser doesn't update it in the context menu
 
 - implement node copying
+
+Parsers:
+- split who into: single player, multiple players (problems when generating whenever each player attack ...)
+- gain life - replace who with something else

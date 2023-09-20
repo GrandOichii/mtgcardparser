@@ -1,6 +1,6 @@
 <matcher name="life-gain" pattern="(.*) ?gain (.+) life ?(.*)">
   <matcher name="whitespace-remover" pattern="^(.+)\s$">
-    <selector template="who" />
+    <selector template="effect-who" />
   </matcher>
   <matcher template="simple-numeric" />
   <selector name="additional-info">

@@ -1,5 +1,5 @@
 <matcher name="lose-life-event" pattern="(.+) lose (.+) life">
-  <selector template="who" />
+  <selector template="player-type" />
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

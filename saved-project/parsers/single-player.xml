@@ -1,0 +1,4 @@
+<selector name="single-player">
+  <matcher name="you" pattern="^you$" />
+  <selector template="player-type" />
+</selector>

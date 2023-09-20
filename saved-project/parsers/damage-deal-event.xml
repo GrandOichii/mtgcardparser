@@ -10,7 +10,7 @@
   <matcher name="test" pattern="(.+)">
     <selector name="damage-receiver-select">
       <matcher name="specific" pattern="^to (.+)">
-        <selector template="who" />
+        <selector template="player-type" />
       </matcher>
       <matcher template="empty" />
     </selector>

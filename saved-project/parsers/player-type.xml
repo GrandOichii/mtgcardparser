@@ -1,0 +1,4 @@
+<selector name="player-type">
+  <matcher name="opponent" pattern="^opponent$" />
+  <matcher name="any-player" pattern="^player$" />
+</selector>

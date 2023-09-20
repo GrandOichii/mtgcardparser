@@ -1,5 +1,5 @@
 <matcher name="destroy-effect" pattern="^destroy (.+)">
   <matcher name="destroy-what" pattern="(.+)">
-    <matcher template="TODO" />
+    <selector template="permanent" />
   </matcher>
 </matcher>

@@ -1,5 +1,5 @@
 <matcher name="tap-effect" pattern="^tap (.+)">
   <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
+    <selector template="permanent" />
   </matcher>
 </matcher>

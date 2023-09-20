@@ -108,6 +108,8 @@ public class Project {
                     .Replace(" ,", ",")
                     .Replace(" .", ".")
                     .Replace("\\s", "")
+                    .Replace("\\+", "+")
+                    .Replace("\\−", "−")
                     ;
             result.Add(t);
         }

@@ -1,3 +1,3 @@
 <matcher name="scry-event" pattern="(.+) scry">
-  <selector template="who" />
+  <selector template="player-type" />
 </matcher>

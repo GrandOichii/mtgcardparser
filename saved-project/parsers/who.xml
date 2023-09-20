@@ -1,10 +1,3 @@
 <selector name="who">
-  <selector name="player-select">
-    <matcher name="opponent" pattern="^opponent$" />
-    <matcher name="you" pattern="^you$" />
-    <matcher name="any" pattern="^player$" />
-    <matcher name="referenced-player" pattern="^that player$" />
-    <matcher name="all-players" pattern="^each player$" />
-    <matcher name="each-opponent" pattern="^each opponent$" />
-  </selector>
+  <selector template="1+-players" />
 </selector>

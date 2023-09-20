@@ -1,0 +1,4 @@
+<selector name="1+-players">
+  <selector template="2+-players" />
+  <selector template="single-player" />
+</selector>

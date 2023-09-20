@@ -1,6 +1,6 @@
 <matcher name="sacrifice-event" pattern="(.+) sacrifice (.+)">
-  <selector template="who" />
+  <selector template="player-type" />
   <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
+    <selector template="permanent" />
   </matcher>
 </matcher>

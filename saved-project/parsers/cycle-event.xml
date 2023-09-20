@@ -1,5 +1,5 @@
 <matcher name="cycle-event" pattern="(.+) cycle (.+)">
-  <selector template="who" />
+  <selector template="player-type" />
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

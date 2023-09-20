@@ -1,5 +1,5 @@
 <matcher name="proliferate-event" pattern="(.+) proliferate ?(.*)">
-  <selector template="who" />
+  <selector template="player-type" />
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

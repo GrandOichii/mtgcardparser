@@ -1,3 +1,3 @@
 <matcher name="simple-etb-event" pattern="(.+) etb">
-  <selector template="what-in-cost" />
+  <selector template="permanent" />
 </matcher>
