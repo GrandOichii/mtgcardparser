@@ -106,6 +106,7 @@ public class Project {
                     .Replace(" ,", ",")
                     .Replace(" .", ".")
                     .Replace("\\", "")
+                    .Replace("  ", " ")
                     ;
             result.Add(t);
         }

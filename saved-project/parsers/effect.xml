@@ -14,6 +14,7 @@
       <matcher template="gain-effect" />
       <matcher template="enchant-effect" />
       <matcher template="destroy-effect" />
+      <matcher template="deal-damage-effect" />
     </selector>
   </splitter>
 </matcher>

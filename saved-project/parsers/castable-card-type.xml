@@ -1,0 +1,8 @@
+<matcher name="castable-card-type" pattern="\[type\:(.+)\]">
+  <selector name="type-select">
+    <matcher name="creature" pattern="creature" />
+    <matcher name="instant" pattern="instant" />
+    <matcher name="sorcery" pattern="sorcery" />
+    <matcher name="enchantment" pattern="enchantment" />
+  </selector>
+</matcher>

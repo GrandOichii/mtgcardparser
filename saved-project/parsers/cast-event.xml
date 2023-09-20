@@ -1,6 +1,20 @@
 <matcher name="cast-event" pattern="(.+) cast (.+)">
-  <selector template="player-type" />
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
+  <selector name="who-casts">
+    <matcher name="you" pattern="you" />
+    <selector template="player-type" />
+  </selector>
+  <matcher name="test" pattern="(.*?) ?spell ?(.*)">
+    <selector name="prefix">
+      <splitter name="type-split" pattern=", | or ">
+        <matcher template="castable-card-type" />
+      </splitter>
+      <matcher template="empty" />
+    </selector>
+    <selector name="postfix">
+      <matcher name="test" pattern="(.+)">
+        <matcher template="TODO" />
+      </matcher>
+      <matcher template="empty" />
+    </selector>
   </matcher>
 </matcher>

@@ -1,0 +1,11 @@
+<matcher name="deal-damage-effect" pattern="(.+) deal (.+) damage to (.+)">
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+</matcher>
