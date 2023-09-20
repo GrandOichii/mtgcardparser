@@ -3,7 +3,7 @@
   <selector name="from-what-select">
     <matcher name="cardname" pattern="\[cardname\]" />
     <matcher name="controlled" pattern="(.+) you control">
-      <selector template="permanent-in-cost" />
+      <splitter template="permanent-in-cost" />
     </matcher>
   </selector>
 </matcher>

@@ -1,10 +1,15 @@
-<selector name="permanent-in-cost">
-  <matcher name="cardname" pattern="\[cardname\]" />
-  <matcher name="not-cardname" pattern="(another)? ?(.+)">
-    <selector name="prefix-select">
-      <matcher name="another" pattern="another" />
-      <matcher template="empty" />
-    </selector>
-    <matcher template="permanent-type" />
-  </matcher>
-</selector>
+<splitter name="permanent-in-cost" pattern=", | or ">
+  <selector name="split">
+    <matcher name="cardname" pattern="\[cardname\]" />
+    <matcher name="this-thing" pattern="this (.+)">
+      <matcher template="permanent-type" />
+    </matcher>
+    <matcher name="not-cardname" pattern="(another)? ?(.+)">
+      <selector name="prefix-select">
+        <matcher name="another" pattern="another" />
+        <matcher template="empty" />
+      </selector>
+      <matcher template="permanent-type" />
+    </matcher>
+  </selector>
+</splitter>
