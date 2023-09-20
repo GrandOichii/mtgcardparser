@@ -1,4 +1,4 @@
-<matcher name="add-mana-effect" pattern="^add (.+)">
+<matcher name="add-mana-effect" pattern="add (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

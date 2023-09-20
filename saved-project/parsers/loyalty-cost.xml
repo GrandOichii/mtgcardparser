@@ -1,7 +1,7 @@
 <matcher name="loyalty-cost" pattern="([\+\−])(\d+)">
   <selector name="modifier">
-    <matcher name="plus" pattern="^\+$" />
-    <matcher name="minus" pattern="^\−$" />
+    <matcher name="plus" pattern="\+" />
+    <matcher name="minus" pattern="\−" />
   </selector>
   <matcher template="simple-numeric" />
 </matcher>

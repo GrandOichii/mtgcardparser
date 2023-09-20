@@ -1,1 +1,1 @@
-<matcher name="ring-tempt-event" pattern="^ring tempts you$" />
+<matcher name="ring-tempt-event" pattern="ring tempts you" />

@@ -1,1 +1,1 @@
-<matcher name="simple-numeric" pattern="^\d+$" />
+<matcher name="simple-numeric" pattern="\d+" />

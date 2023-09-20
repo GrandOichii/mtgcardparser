@@ -102,8 +102,6 @@ public class Project {
         if (generated is null) return result;
         foreach (var g in generated) {
             var t = g
-                    .Replace("^", "")
-                    .Replace("$", "")
                     .Replace("?", "")
                     .Replace(" ,", ",")
                     .Replace(" .", ".")

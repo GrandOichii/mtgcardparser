@@ -1,19 +1,19 @@
 <selector name="what-in-cost">
-  <matcher name="self" pattern="^(\[cardname\])$">
+  <matcher name="self" pattern="(\[cardname\])">
     <matcher template="TODO" />
   </matcher>
   <matcher name="permanent" pattern="(another)? ?\[type\:(.+)\] ?(.*)">
     <selector name="prefix-select">
-      <matcher name="another" pattern="^(another)$">
+      <matcher name="another" pattern="(another)">
         <matcher template="TODO" />
       </matcher>
       <matcher template="empty" />
     </selector>
     <selector name="type-select">
-      <matcher name="creature" pattern="^creature$" />
+      <matcher name="creature" pattern="creature" />
     </selector>
     <selector name="postfix-select">
-      <matcher name="with-keyword" pattern="^with (.+)$">
+      <matcher name="with-keyword" pattern="with (.+)">
         <matcher template="TODO" />
       </matcher>
       <matcher template="empty" />

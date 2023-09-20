@@ -10,7 +10,7 @@ public class Matcher : PNode {
         get => _patternString;
         set {
             _patternString = value;
-            Pattern = new Regex(value);
+            Pattern = new Regex("^" + value + "$");
         }
     }
     public Regex Pattern { get; private set; }

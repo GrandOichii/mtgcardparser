@@ -1,4 +1,4 @@
-<matcher name="token-creation" pattern="^create (.+)">
+<matcher name="token-creation" pattern="create (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

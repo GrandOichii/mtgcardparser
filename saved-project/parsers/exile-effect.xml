@@ -1,4 +1,4 @@
-<matcher name="exile-effect" pattern="^exile (.+)">
+<matcher name="exile-effect" pattern="exile (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

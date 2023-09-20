@@ -1,15 +1,15 @@
 <matcher name="curly-cost" pattern="{([^}]+)}">
   <splitter name="curly-splitter" pattern="}{">
     <selector name="curly-cost-select">
-      <matcher name="tap" pattern="^t$" />
+      <matcher name="tap" pattern="t" />
       <matcher template="simple-numeric" />
       <matcher name="colored-mana" pattern="\[mana:(.+)\]">
         <selector name="colored-mana-select">
-          <matcher name="white" pattern="^w$" />
-          <matcher name="blue" pattern="^u$" />
-          <matcher name="black" pattern="^b$" />
-          <matcher name="red" pattern="^r$" />
-          <matcher name="green" pattern="^g$" />
+          <matcher name="white" pattern="w" />
+          <matcher name="blue" pattern="u" />
+          <matcher name="black" pattern="b" />
+          <matcher name="red" pattern="r" />
+          <matcher name="green" pattern="g" />
         </selector>
       </matcher>
     </selector>

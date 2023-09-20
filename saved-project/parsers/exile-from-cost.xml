@@ -1,4 +1,4 @@
-<matcher name="exile-from-cost" pattern="^exile (.+) from (.+)">
+<matcher name="exile-from-cost" pattern="exile (.+) from (.+)">
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

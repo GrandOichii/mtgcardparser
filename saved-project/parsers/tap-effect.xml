@@ -1,4 +1,4 @@
-<matcher name="tap-effect" pattern="^tap (.+)">
+<matcher name="tap-effect" pattern="tap (.+)">
   <matcher name="test" pattern="(.+)">
     <selector template="permanent" />
   </matcher>
