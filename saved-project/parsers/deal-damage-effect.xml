@@ -6,10 +6,9 @@
       <matcher template="permanent-type" />
     </matcher>
   </selector>
-  <selector name="amount-select">
-    <matcher template="simple-numeric" />
-  </selector>
+  <selector template="numeric" />
   <selector name="to-select">
+    <matcher name="any" pattern="any target" />
     <selector template="who-effect" />
   </selector>
 </matcher>

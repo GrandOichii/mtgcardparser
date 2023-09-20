@@ -124,6 +124,7 @@ class Program {
         var possibleTexts = project.GenerateAllPossibleTexts(parcedMap);
         // System.Console.WriteLine(possibleTexts[Rnd.Next() % possibleTexts.Count]);
         // return;
+        System.Console.WriteLine("Saving...");
         File.WriteAllLines("../possible-texts.txt", possibleTexts);
         // foreach (var t in possibleTexts)
         //     System.Console.WriteLine(t);

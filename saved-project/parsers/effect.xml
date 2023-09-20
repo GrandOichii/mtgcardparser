@@ -1,4 +1,4 @@
-<matcher name="effect" pattern="^(.+?)(, where x is .*)?$">
+<matcher name="effect" pattern="(.+?)(, where x is .*)?">
   <splitter name="effect-split" pattern="\.\s|\,\sthen\s">
     <selector name="effect-select">
       <matcher template="draw-effect" />

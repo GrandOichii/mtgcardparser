@@ -87,6 +87,8 @@ public class Matcher : PNode {
 
     public override List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
         if (Name == "TODO") return null;
+        if (Name == "aa") return null;
+        if (Name == "trigger") return null;
         var result = new List<string>();
         // if no children
         // if 
@@ -110,6 +112,7 @@ public class Matcher : PNode {
             collections.Add(sub);
         }
         var combinations = Utility.GetAllPossibleCombos(collections);
+        // var combinations = Utility.GetLightCombos(collections);
         // TODO could be a problem with texts containing \\(\\)
         var p = new Regex("\\(.+?\\)");
         foreach (var arr in combinations) {

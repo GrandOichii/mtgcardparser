@@ -128,5 +128,9 @@ public static class Utility {
         return combos;
     }
 
+    // public static IEnumerable<IEnumerable<string>> GetLightCombos(IEnumerable<IEnumerable<string>> strings) {
+
+    // }
+
 
 }
