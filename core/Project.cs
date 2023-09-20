@@ -105,6 +105,7 @@ public class Project {
                     .Replace("?", "")
                     .Replace(" ,", ",")
                     .Replace(" .", ".")
+                    .Replace("\\s", "")
                     .Replace("\\", "")
                     .Replace("  ", " ")
                     ;

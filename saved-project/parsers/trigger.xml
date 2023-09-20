@@ -1,4 +1,10 @@
-<matcher name="trigger" pattern="whenever ([^,]+), (.+)">
+<matcher name="trigger" pattern="whenever (.+?), ?(if .*,)? (.+)">
   <selector template="trigger-event" />
+  <selector name="if-select">
+    <matcher name="clause-extract" pattern="if (.+),">
+      <selector template="trigger-clause" />
+    </matcher>
+    <matcher template="empty" />
+  </selector>
   <matcher template="effect" />
 </matcher>

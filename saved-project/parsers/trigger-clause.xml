@@ -1,0 +1,17 @@
+<selector name="trigger-clause">
+  <matcher name="attacked-or-blocked-this-turn" pattern="(.+) attacked this turn">
+    <selector template="single-player" />
+  </matcher>
+  <matcher name="spell-was-kicked" pattern="it was kicked ?(.*)">
+    <selector name="kicked-postfix">
+      <matcher template="empty" />
+    </selector>
+  </matcher>
+  <matcher name="has-more-life" pattern="(.+) has more life than (.+)">
+    <selector template="single-player" />
+    <selector template="single-player" />
+  </matcher>
+  <matcher name="specific-cost-was-paid" pattern="its (.+) cost was paid">
+    <matcher template="TODO" />
+  </matcher>
+</selector>

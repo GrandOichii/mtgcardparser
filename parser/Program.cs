@@ -71,6 +71,7 @@ class Program {
     }
 
     private readonly static int INDENT_STEP = 4;
+
     private static void PrintTrace(ParseTrace? trace, int indent=0) {
         var indented = new String(' ', indent);
         if (trace is null) {
@@ -101,6 +102,7 @@ class Program {
         return true;
     }
 
+    private static Random Rnd = new();
     private static void GenerateRandomCards() {
         var testPath = "../saved-project";
         // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
@@ -117,6 +119,8 @@ class Program {
         // }
 
         var possibleTexts = project.GenerateAllPossibleTexts(parcedMap);
+        System.Console.WriteLine(possibleTexts[Rnd.Next() % possibleTexts.Count]);
+        return;
         foreach (var t in possibleTexts)
             System.Console.WriteLine(t);
     }
