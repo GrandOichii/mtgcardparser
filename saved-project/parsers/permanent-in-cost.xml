@@ -1,7 +1,3 @@
 <selector name="permanent-in-cost">
-  <matcher name="cardname" pattern="\[cardname\]" />
   <matcher template="permanent-type" />
-  <matcher name="all-of-type" pattern="all (.+)">
-    <matcher template="permanent-type" />
-  </matcher>
 </selector>

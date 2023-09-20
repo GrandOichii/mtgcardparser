@@ -1,4 +1,9 @@
 <matcher name="remove-from-cost" pattern="remove (.+) from (.+)">
   <matcher template="counter-type" />
-  <selector template="permanent-in-cost" />
+  <selector name="remove-from-what">
+    <matcher name="cardname" pattern="\[cardname\]" />
+    <matcher name="permanent" pattern="(.+) you control">
+      <selector template="permanent-in-cost" />
+    </matcher>
+  </selector>
 </matcher>

@@ -1,9 +1,8 @@
-- reducing the number of children in a selector doesn't do anything
+- reducing the number of children in a pnode doesn't do anything
 - add exporting a local node to a template
 - right clicking to add nodes doesn't add them to correct mouse position
 - add ability to analize similar unprocessed text to group together different parser nodes
 - sampling cards doesn't work?
-- creating a local matcher with no capture groups doesn't have an input
 - creashed several times when opening and directly opening the counter-type parser AND what-in-cost parser (fix: first open root, then bake, then open the needed parser)
 - changing the name of the parser doesn't update it in the context menu
 - text transformers don't seem to be updating after updating their scripts
@@ -11,5 +10,4 @@
 - implement node copying
 
 Parsers:
-- split who into: single player, multiple players (problems when generating whenever each player attack ...)
 - gain life - replace who with something else

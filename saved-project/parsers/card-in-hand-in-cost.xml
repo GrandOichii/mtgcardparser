@@ -1,4 +1,4 @@
-<selector name="what-in-cost">
+<selector name="card-in-hand-in-cost">
   <matcher name="self" pattern="(\[cardname\])">
     <matcher template="TODO" />
   </matcher>

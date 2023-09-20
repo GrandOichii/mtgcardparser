@@ -1,6 +1,4 @@
 <matcher name="put-counter-cost" pattern="put (.+ counter) on (.+)">
   <matcher template="counter-type" />
-  <matcher name="on-what" pattern="(.+)">
-    <selector template="permanent-in-cost" />
-  </matcher>
+  <matcher template="TODO" />
 </matcher>

@@ -5,6 +5,6 @@
   </selector>
   <selector name="what">
     <matcher name="any-card" pattern="card" />
-    <selector template="what-in-cost" />
+    <selector template="card-in-hand-in-cost" />
   </selector>
 </matcher>
