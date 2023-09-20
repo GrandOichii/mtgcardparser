@@ -5,6 +5,8 @@
 
 [node name="EditSplitterWindow" type="Window"]
 size = Vector2i(300, 150)
+transient = true
+exclusive = true
 script = ExtResource("1_605aa")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -38,3 +40,7 @@ text = "Save"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
+
+[connection signal="close_requested" from="." to="." method="OnCloseRequested"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="OnSaveButtonPressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="OnCancelButtonPressed"]

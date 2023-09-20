@@ -1,6 +1,7 @@
 <selector name="root">
   <matcher template="aa" />
   <matcher template="trigger" />
+  <matcher template="phase-trigger" />
   <matcher name="modal-option" pattern="* (.+)">
     <matcher template="effect" />
   </matcher>

@@ -63,4 +63,5 @@ public partial class EditSplitterWindow : Window
 	{
 		OnCancelButtonPressed();
 	}
+	
 }

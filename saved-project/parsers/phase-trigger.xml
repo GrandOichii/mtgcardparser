@@ -1,0 +1,9 @@
+<matcher name="phase-trigger" pattern="at (.+) of (.+), (.+)">
+  <selector name="phase-stage">
+    <matcher name="beginning" pattern="beginning" />
+  </selector>
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
+  <matcher template="effect" />
+</matcher>

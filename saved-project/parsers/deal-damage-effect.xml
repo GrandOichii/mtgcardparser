@@ -1,11 +1,15 @@
 <matcher name="deal-damage-effect" pattern="(.+) deal (.+) damage to (.+)">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+  <selector name="dealer">
+    <matcher name="cardname" pattern="\[cardname\]" />
+    <matcher name="referenced" pattern="it" />
+    <matcher name="this-thing" pattern="this (.+)">
+      <matcher template="permanent-type" />
+    </matcher>
+  </selector>
+  <selector name="amount-select">
+    <matcher template="simple-numeric" />
+  </selector>
+  <selector name="to-select">
+    <selector template="who-effect" />
+  </selector>
 </matcher>

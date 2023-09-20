@@ -28,6 +28,7 @@ visible = false
 
 [node name="EditSplitterWindow" parent="." instance=ExtResource("4_tmttd")]
 unique_name_in_owner = true
+initial_position = 2
 visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
