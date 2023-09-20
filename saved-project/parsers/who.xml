@@ -1,3 +1,3 @@
 <selector name="who">
-  <selector template="1+-players" />
+  <selector template="1-or-more-players" />
 </selector>

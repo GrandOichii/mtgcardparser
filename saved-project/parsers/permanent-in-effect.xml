@@ -1,0 +1,16 @@
+<selector name="permanent-in-effect">
+  <matcher name="all" pattern="all (.+)">
+    <matcher template="permanent-type" />
+  </matcher>
+  <matcher name="target" pattern="target (.+) ?(.*)">
+    <splitter name="type-split" pattern="\,\s|\sor\s">
+      <selector name="permanent">
+        <matcher name="any" pattern="permanent" />
+        <matcher template="permanent-type" />
+      </selector>
+    </splitter>
+    <selector name="postfix">
+      <matcher template="empty" />
+    </selector>
+  </matcher>
+</selector>

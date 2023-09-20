@@ -4,5 +4,6 @@
     <matcher name="enchantment" pattern="enchantment" />
     <matcher name="artifact" pattern="artifact" />
     <matcher name="land" pattern="land" />
+    <matcher name="planeswalker" pattern="planeswalker" />
   </selector>
 </matcher>

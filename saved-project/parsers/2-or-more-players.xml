@@ -1,4 +1,4 @@
-<selector name="2+-players">
+<selector name="2-or-more-players">
   <matcher name="each" pattern="each (.+)">
     <selector template="player-type" />
   </matcher>
