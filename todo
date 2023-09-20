@@ -10,6 +10,7 @@
 - implement node copying
 
 Parsers:
+- has more life is kinda wonky
 - gain life - replace who with something else
 - remove ... from this artifact you control, remove ... from [cardname] you control - kinda funny but still bad
 - remove -1/+1 counter from another [type:enchantment] you control: yous gain 1 life

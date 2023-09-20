@@ -107,7 +107,7 @@ class Program {
         var testPath = "../saved-project";
         // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
         var project = Project.Load(testPath);
-        var text = "{T}: Draw 1 card.\n{1}{B}: You gain 5 life.";
+        var text = "{T}: Draw 1 card.";
         var result = project.Do(new Card("Test1", text));
         var parcedMap = new Dictionary<PNode, List<ParseTrace>>();
         foreach (var pr in result)
@@ -119,8 +119,8 @@ class Program {
         // }
 
         var possibleTexts = project.GenerateAllPossibleTexts(parcedMap);
-        System.Console.WriteLine(possibleTexts[Rnd.Next() % possibleTexts.Count]);
-        return;
+        // System.Console.WriteLine(possibleTexts[Rnd.Next() % possibleTexts.Count]);
+        // return;
         foreach (var t in possibleTexts)
             System.Console.WriteLine(t);
     }

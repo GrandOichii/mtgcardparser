@@ -1,9 +1,13 @@
-<matcher name="phase-trigger" pattern="at (.+) of (.+), (.+)">
+<matcher name="phase-trigger" pattern="at (.+) of (.+?), ?(if .*,)? (.+)">
   <selector name="phase-stage">
     <matcher name="beginning" pattern="beginning" />
   </selector>
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>
+  <selector name="if-check">
+    <matcher template="empty" />
+    <selector template="trigger-clause" />
+  </selector>
   <matcher template="effect" />
 </matcher>
