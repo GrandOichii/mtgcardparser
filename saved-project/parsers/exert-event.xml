@@ -1,5 +1,5 @@
 <matcher name="exert-event" pattern="(.+) exert (.+)">
-  <selector template="player-type" />
+  <selector template="single-player" />
   <matcher name="test" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

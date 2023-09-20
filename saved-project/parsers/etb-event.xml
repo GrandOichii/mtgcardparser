@@ -1,8 +1,13 @@
-<matcher name="etb-event" pattern="(.+) etb (.+)">
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+<matcher name="etb-event" pattern="(.+) etb ?(.*)">
+  <splitter name="who-enters-split" pattern="\,\s|\sor\s">
+    <splitter template="permanent-in-cost" />
+  </splitter>
+  <selector name="postfix">
+    <matcher template="empty" />
+    <matcher name="under-control" pattern="under (.+) control">
+      <matcher name="test" pattern="(.+)">
+        <matcher template="TODO" />
+      </matcher>
+    </matcher>
+  </selector>
 </matcher>

@@ -10,7 +10,6 @@
   <matcher template="ring-tempt-event" />
   <matcher template="crank-event" />
   <matcher template="become-crewed-event" />
-  <matcher template="simple-etb-event" />
   <matcher template="etb-event" />
   <matcher template="die-event" />
   <matcher template="draw-event" />
