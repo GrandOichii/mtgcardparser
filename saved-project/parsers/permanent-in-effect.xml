@@ -1,6 +1,8 @@
 <selector name="permanent-in-effect">
   <matcher name="all" pattern="all (.+)">
-    <matcher template="permanent-type" />
+    <splitter name="what-split" pattern="\,\s|\sand\s">
+      <matcher template="permanent-type" />
+    </splitter>
   </matcher>
   <matcher name="target" pattern="target (.+) ?(.*)">
     <splitter name="type-split" pattern="\,\s|\sor\s">

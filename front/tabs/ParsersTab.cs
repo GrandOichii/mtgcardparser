@@ -171,7 +171,11 @@ public partial class ParsersTab : TabBar
 
 		AddPNodeBase(pNodeW, true);
 		// TODO crashes on some graphs
-		GraphEditNode.ArrangeNodes();
+		try {
+			GraphEditNode.ArrangeNodes();
+		} catch (Exception ex) {
+			GD.Print(ex);
+		}
 
 		// center camera on the whole graph
 		bool fuse = true;

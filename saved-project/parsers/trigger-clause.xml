@@ -11,6 +11,18 @@
     <selector template="single-player" />
     <selector template="single-player" />
   </matcher>
+  <matcher name="cost-was-paid-or-not" pattern="its (.+) cost was ?(not)? paid">
+    <selector name="cost-select">
+      <matcher name="additional" pattern="additional" />
+    </selector>
+    <selector name="not-select">
+      <matcher template="empty" />
+      <matcher name="not" pattern="not" />
+    </selector>
+  </matcher>
+  <matcher name="specific-turn-phase" pattern="it's (.+) turn">
+    <selector template="zone-owner" />
+  </matcher>
   <matcher name="specific-cost-was-paid" pattern="its (.+) cost was paid">
     <matcher template="TODO" />
   </matcher>

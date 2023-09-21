@@ -2,8 +2,13 @@
   <selector name="phase-stage">
     <matcher name="beginning" pattern="beginning" />
   </selector>
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
+  <matcher name="test" pattern="(.+) (\w+)">
+    <matcher name="test" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+    <matcher name="test" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
   </matcher>
   <selector name="if-check">
     <matcher template="empty" />

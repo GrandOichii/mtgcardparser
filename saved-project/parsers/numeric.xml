@@ -1,4 +1,6 @@
 <selector name="numeric">
   <matcher template="simple-numeric" />
   <matcher name="x" pattern="x" />
+  <matcher name="that much" pattern="that much" />
+  <matcher name="that many" pattern="that many" />
 </selector>

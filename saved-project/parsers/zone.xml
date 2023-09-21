@@ -1,0 +1,5 @@
+<selector name="zone">
+  <matcher name="graveyard" pattern="graveyard" />
+  <matcher name="exile" pattern="exile" />
+  <matcher name="hand" pattern="hand" />
+</selector>

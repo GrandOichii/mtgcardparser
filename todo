@@ -14,3 +14,5 @@ Parsers:
 - gain life - replace who with something else
 - remove ... from this artifact you control, remove ... from [cardname] you control - kinda funny but still bad
 - remove -1/+1 counter from another [type:enchantment] you control: yous gain 1 life
+- where x is ... target - don't know if legal by rules to reference a target in where clause
+- whenever you cast spell each turn - BAD

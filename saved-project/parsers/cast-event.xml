@@ -1,20 +1,43 @@
 <matcher name="cast-event" pattern="(.+) cast (.+)">
   <selector name="who-casts">
     <matcher name="you" pattern="you" />
+    <matcher name="enchanted-player" pattern="enchanted player" />
     <selector template="player-type" />
   </selector>
-  <matcher name="test" pattern="(.*?) ?spell ?(.*)">
+  <matcher name="what" pattern="(.*?) ?spell ?(.*)">
     <selector name="prefix">
+      <matcher template="empty" />
       <splitter name="type-split" pattern=", | or ">
         <matcher template="castable-card-type" />
       </splitter>
-      <matcher template="empty" />
     </selector>
     <selector name="postfix">
-      <matcher name="test" pattern="(.+)">
-        <matcher template="TODO" />
-      </matcher>
       <matcher template="empty" />
+      <matcher name="turn-specific" pattern="(.+) turn">
+        <selector name="type">
+          <matcher name="each" pattern="each" />
+          <matcher name="this" pattern="this" />
+        </selector>
+      </matcher>
+      <matcher name="from-zone" pattern="from ?(.*?) (\w+)">
+        <selector name="from-where-owner">
+          <matcher template="empty" />
+          <selector template="zone-owner" />
+        </selector>
+        <selector template="zone" />
+      </matcher>
+      <matcher name="from-anywhere-other-than" pattern="from anywhere other than ?(.*?) (\w+)">
+        <selector name="from-where-selector">
+          <matcher template="empty" />
+          <selector template="zone-owner" />
+        </selector>
+        <selector template="zone" />
+      </matcher>
+      <matcher name="with" pattern="with (.+)">
+        <selector name="with-what">
+          <matcher name="chosen-name" pattern="chosen name" />
+        </selector>
+      </matcher>
     </selector>
   </matcher>
 </matcher>
