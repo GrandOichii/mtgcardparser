@@ -5,8 +5,21 @@
   <matcher name="referenced-spell-attribute" pattern="(.+) of that spell">
     <selector template="card-numeric-attribute" />
   </matcher>
-  <matcher name="number-of-counters" pattern="number of (.+ counter)s on (.+)">
-    <matcher template="counter-type" />
-    <selector template="permanent-in-effect" />
+  <matcher name="number-of" pattern="(.*) ?number of (.+)">
+    <selector name="prefix">
+      <matcher template="empty" />
+      <matcher name="multiplication" pattern="(.+) times ">
+        <matcher template="simple-numeric" />
+      </matcher>
+      <matcher name="addition" pattern="(.+) plus ">
+        <matcher template="simple-numeric" />
+      </matcher>
+    </selector>
+    <selector name="of-what">
+      <matcher name="number-of-counters" pattern="(.+ counter)s on (.+)">
+        <matcher template="counter-type" />
+        <selector template="permanent-in-effect" />
+      </matcher>
+    </selector>
   </matcher>
 </selector>

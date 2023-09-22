@@ -1,26 +1,28 @@
-<matcher name="effect" pattern="(.+?)(, where x is .*)?">
+<matcher name="effect" pattern="(.+)">
   <splitter name="effect-split" pattern="\.\s|\,\sthen\s">
-    <selector name="effect-select">
-      <matcher template="draw-effect" />
-      <matcher template="add-mana-effect" />
-      <matcher template="life-gain" />
-      <matcher template="life-loss" />
-      <matcher template="scry-effect" />
-      <matcher template="tap-effect" />
-      <matcher template="token-creation" />
-      <matcher template="exile-effect" />
-      <matcher template="put-counter-effect" />
-      <matcher template="gets-effect" />
-      <matcher template="gain-effect" />
-      <matcher template="enchant-effect" />
-      <matcher template="destroy-effect" />
-      <matcher template="deal-damage-effect" />
-    </selector>
-  </splitter>
-  <selector name="x-checker">
-    <matcher template="empty" />
-    <matcher name="x-extractor" pattern=", where x is (.+)">
-      <selector template="x-definer" />
+    <matcher name="where-checker" pattern="(.+?)(, where x is .*)?">
+      <selector name="effect-select">
+        <matcher template="draw-effect" />
+        <matcher template="add-mana-effect" />
+        <matcher template="life-gain" />
+        <matcher template="life-loss" />
+        <matcher template="scry-effect" />
+        <matcher template="tap-effect" />
+        <matcher template="token-creation" />
+        <matcher template="exile-effect" />
+        <matcher template="put-counter-effect" />
+        <matcher template="gets-effect" />
+        <matcher template="gain-effect" />
+        <matcher template="enchant-effect" />
+        <matcher template="destroy-effect" />
+        <matcher template="deal-damage-effect" />
+      </selector>
+      <selector name="x-checker">
+        <matcher template="empty" />
+        <matcher name="x-extractor" pattern=", where x is (.+)">
+          <selector template="x-definer" />
+        </matcher>
+      </selector>
     </matcher>
-  </selector>
+  </splitter>
 </matcher>
