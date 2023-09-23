@@ -1,8 +1,6 @@
 <splitter name="creature-in-event" pattern="\,\s|\sor\s">
   <selector name="what">
     <matcher name="cardname" pattern="\[cardname\]" />
-    <matcher name="enchanted-creature" pattern="enchanted \[type\:creature\]" />
-    <matcher name="equipped-creature" pattern="equipped \[type\:creature\]" />
     <matcher name="general" pattern="(.*) ?(\[.+\]) ?(.*)">
       <selector name="prefix">
         <matcher template="empty" />
@@ -11,6 +9,8 @@
             <selector name="prefix-select">
               <matcher name="another" pattern="another" />
               <matcher name="nontoken" pattern="nontoken" />
+              <matcher name="enchanted" pattern="enchanted" />
+              <matcher name="equipped" pattern="equipped" />          
             </selector>
           </splitter>
         </matcher>
