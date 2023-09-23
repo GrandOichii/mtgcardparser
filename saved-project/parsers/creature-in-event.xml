@@ -1,3 +1,32 @@
-<selector name="creature-in-event">
-  <matcher name="cardname" pattern="\[cardname\]" />
-</selector>
+<splitter name="creature-in-event" pattern="\,\s|\sor\s">
+  <selector name="what">
+    <matcher name="cardname" pattern="\[cardname\]" />
+    <matcher name="enchanted-creature" pattern="enchanted \[type\:creature\]" />
+    <matcher name="equipped-creature" pattern="equipped \[type\:creature\]" />
+    <matcher name="general" pattern="(.*) ?(\[.+\]) ?(.*)">
+      <selector name="prefix">
+        <matcher template="empty" />
+        <matcher name="whitespace-remover" pattern="(.+) ">
+          <splitter name="prefix-split" pattern="\s">
+            <selector name="prefix-select">
+              <matcher name="another" pattern="another" />
+              <matcher name="nontoken" pattern="nontoken" />
+            </selector>
+          </splitter>
+        </matcher>
+      </selector>
+      <selector name="type-select">
+        <matcher name="any" pattern="\[type\:creature\]" />
+        <matcher name="creature-type" pattern="\[creaturetype\:.+\]" />
+      </selector>
+      <selector name="postfix">
+        <matcher template="empty" />
+        <matcher name="you-control" pattern="you control" />
+        <matcher name="opponent-controls" pattern="opponent controls" />
+        <matcher name="with-counter" pattern="with (.+ counter) on it">
+          <matcher template="counter-type" />
+        </matcher>
+      </selector>
+    </matcher>
+  </selector>
+</splitter>

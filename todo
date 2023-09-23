@@ -6,6 +6,7 @@
 - creashed several times when opening and directly opening the counter-type parser AND what-in-cost parser (fix: first open root, then bake, then open the needed parser)
 - changing the name of the parser doesn't update it in the context menu
 - text transformers don't seem to be updating after updating their scripts
+- increasing selector count by more than 1 increases only once
 
 - implement node copying
 
