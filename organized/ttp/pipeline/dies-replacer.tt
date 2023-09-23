@@ -1,0 +1,1 @@
+{"name":"dies-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bdies\\b","Replacement":"die"}}

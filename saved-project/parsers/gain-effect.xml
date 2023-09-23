@@ -1,8 +1,19 @@
-<matcher name="gain-effect" pattern="(.+) gain (.+)">
-  <matcher name="who-gains" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
-  <matcher name="gains-what" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+<matcher name="gain-effect" pattern="^(.+) gain (.+?)( if .+)?$">
+  <selector template="permanent-in-effect" />
+  <splitter name="gains-split" pattern="\,\s|\sand\s">
+    <matcher name="gains-what" pattern="^(.+?)( until .+)?$">
+      <matcher template="keyword-ability" />
+      <selector name="is-until">
+        <matcher template="empty" />
+        <matcher name="until-eot" pattern=" until eot" />
+        <matcher name="until-your-next-turn" pattern=" until your next turn" />
+      </selector>
+    </matcher>
+  </splitter>
+  <selector name="if-clause-select">
+    <matcher template="empty" />
+    <matcher name="if-filter" pattern=" if (.+)">
+      <selector template="if-clause" />
+    </matcher>
+  </selector>
 </matcher>

@@ -1,0 +1,10 @@
+<splitter name="effect" pattern="\.\s|\,\sthen|\.\sthen">
+  <selector name="effect-select">
+    <matcher template="lose-life-and-gain-life" />
+    <matcher template="specific-life-gain-effect" />
+    <matcher template="tap-effect" />
+    <matcher template="put-counter-effect" />
+    <matcher template="deal-damage-effect" />
+    <matcher template="draw-cards-effect" />
+  </selector>
+</splitter>

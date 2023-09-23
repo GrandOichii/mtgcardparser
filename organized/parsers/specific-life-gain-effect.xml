@@ -1,0 +1,4 @@
+<matcher name="specific-life-gain-effect" pattern="(.+) gain (.+) life">
+  <selector template="player(s)-in-effect" />
+  <selector template="numeric" />
+</matcher>

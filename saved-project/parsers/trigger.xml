@@ -2,7 +2,7 @@
   <selector template="trigger-event" />
   <selector name="if-select">
     <matcher name="clause-extract" pattern="if (.+),">
-      <selector template="trigger-clause" />
+      <selector template="if-clause" />
     </matcher>
     <matcher template="empty" />
   </selector>

@@ -1,0 +1,1 @@
+{"name":"a-and-an-remover","template":"tt-simple-replacer","args":{"Pattern":"\\b(a|an)\\b","Replacement":""}}

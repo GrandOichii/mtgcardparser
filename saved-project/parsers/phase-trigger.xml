@@ -12,7 +12,7 @@
   </matcher>
   <selector name="if-check">
     <matcher template="empty" />
-    <selector template="trigger-clause" />
+    <selector template="if-clause" />
   </selector>
   <matcher template="effect" />
 </matcher>

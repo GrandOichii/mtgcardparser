@@ -1,0 +1,1 @@
+{"name":"enters-the-battlefield-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\benters the battlefield\\b","Replacement":"etb"}}

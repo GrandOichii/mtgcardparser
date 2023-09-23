@@ -1,4 +1,4 @@
-<matcher name="enchant-effect" pattern="enchant (.+)">
+<matcher name="enchant-effect" pattern="\[keywordability\:enchant\] (.+)">
   <matcher name="enchant-what" pattern="(.+)">
     <matcher template="TODO" />
   </matcher>

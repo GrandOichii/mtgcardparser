@@ -1,0 +1,1 @@
+{"name":"attacks-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\battacks\\b","Replacement":"attack"}}

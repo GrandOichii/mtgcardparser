@@ -1,0 +1,3 @@
+<matcher name="tap-effect" pattern="tap (.+)">
+  <selector template="permanent(s)-in-effect" />
+</matcher>

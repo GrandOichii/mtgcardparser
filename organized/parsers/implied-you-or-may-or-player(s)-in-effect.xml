@@ -1,0 +1,7 @@
+<selector name="implied-you-or-may-or-player(s)-in-effect">
+  <matcher template="empty" />
+  <matcher name="may" pattern="(.+) may ">
+    <selector template="player(s)-in-effect" />
+  </matcher>
+  <selector template="player(s)-in-effect" />
+</selector>

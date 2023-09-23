@@ -1,0 +1,1 @@
+{"name":"creature-type-surround","template":"tt-filesourcesurrounder","args":{"File path":"../data/creature-types.txt","Surround":"creaturetype"}}

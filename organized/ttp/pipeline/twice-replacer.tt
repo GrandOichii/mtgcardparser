@@ -1,0 +1,1 @@
+{"name":"twice-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\btwice\\b","Replacement":"2 times"}}

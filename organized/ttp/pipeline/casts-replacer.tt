@@ -1,0 +1,1 @@
+{"name":"casts-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bcasts\\b","Replacement":"cast"}}

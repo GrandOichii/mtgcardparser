@@ -1,0 +1,1 @@
+{"name":"when-cardname-replacer","template":"tt-simple-replacer","args":{"Pattern":"when \\[cardname\\]","Replacement":"whenever [cardname]"}}

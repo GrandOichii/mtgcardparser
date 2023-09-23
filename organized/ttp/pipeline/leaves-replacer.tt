@@ -1,0 +1,1 @@
+{"name":"leaves-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bleaves\\b","Replacement":"leave"}}

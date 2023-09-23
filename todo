@@ -17,3 +17,4 @@ Parsers:
 - remove -1/+1 counter from another [type:enchantment] you control: yous gain 1 life
 - where x is ... target - don't know if legal by rules to reference a target in where clause
 - whenever you cast spell each turn - BAD
+- whenever equipped merfolk die - BAD, but don't know how to fix

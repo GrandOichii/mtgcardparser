@@ -1,0 +1,1 @@
+{"name":"exerts-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bexerts\\b","Replacement":"exert"}}

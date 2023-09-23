@@ -1,0 +1,1 @@
+{"name":"enchantments-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\benchantments\\b","Replacement":"enchantment"}}

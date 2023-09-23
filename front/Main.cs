@@ -84,7 +84,7 @@ public partial class Main : CanvasLayer
 		GetNode<TabContainer>("MainControl/TabContainer").CurrentTab = 2;
 		SampleSizeNode.Value = CardsListNode.ItemCount;
 		OnSampleRandomPressed();
-		Load("../saved-project");
+		Load("../organized");
 	}
 	
 	public override void _Process(double delta) {
@@ -340,7 +340,7 @@ public partial class Main : CanvasLayer
 		if (!trace.Parsed)
 			index = uIndex;
 		if (!index.ContainsKey(trace.Parent)) index.Add(trace.Parent, new());
-		index[trace.Parent].Add(trace.Text);
+		index[trace.Parent].Add(trace.Text.Replace(' ', '_'));
 		foreach (var child in trace.ChildrenTraces)
 			FillTextIndicies(child, pIndex, uIndex);
 	}

@@ -10,7 +10,7 @@
               <matcher name="another" pattern="another" />
               <matcher name="nontoken" pattern="nontoken" />
               <matcher name="enchanted" pattern="enchanted" />
-              <matcher name="equipped" pattern="equipped" />          
+              <matcher name="equipped" pattern="equipped" />
             </selector>
           </splitter>
         </matcher>

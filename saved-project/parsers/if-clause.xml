@@ -1,4 +1,4 @@
-<selector name="trigger-clause">
+<selector name="if-clause">
   <matcher name="attacked-or-blocked-this-turn" pattern="(.+) attacked this turn">
     <selector template="single-player" />
   </matcher>

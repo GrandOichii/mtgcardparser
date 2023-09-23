@@ -1,0 +1,1 @@
+{"name":"end-of-turn-replacer","template":"tt-simple-replacer","args":{"Pattern":"\\bend of turn\\b","Replacement":"eot"}}
