@@ -1,0 +1,3 @@
+<matcher name="become-monarch-effect" pattern="(.+) becomes? monarch">
+  <selector template="single-player-in-effect" />
+</matcher>

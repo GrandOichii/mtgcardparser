@@ -1,1 +1,3 @@
-<selector name="permanent(s)-in-effect" />
+<selector name="permanent(s)-in-effect">
+  <matcher template="true" />
+</selector>

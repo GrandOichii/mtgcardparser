@@ -1,0 +1,9 @@
+<matcher name="mill-effect" pattern="(.* )?mills (.+)">
+  <selector template="implied-you-or-may-or-player(s)-in-effect" />
+  <selector name="how-much">
+    <matcher name="single-card" pattern="card" />
+    <matcher name="2+-cards" pattern="(.+) cards">
+      <selector template="numeric" />
+    </matcher>
+  </selector>
+</matcher>

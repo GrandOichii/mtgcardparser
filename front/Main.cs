@@ -85,6 +85,7 @@ public partial class Main : CanvasLayer
 		SampleSizeNode.Value = CardsListNode.ItemCount;
 		OnSampleRandomPressed();
 		Load("../organized");
+//		Load("../saved-project");
 	}
 	
 	public override void _Process(double delta) {

@@ -1,0 +1,3 @@
+<matcher name="shuffle-effect" pattern="(.* )?shuffles?">
+  <selector template="implied-you-or-may-or-player(s)-in-effect" />
+</matcher>

@@ -1,1 +1,3 @@
-<selector name="counter-type" />
+<selector name="counter-type">
+  <matcher template="true" />
+</selector>

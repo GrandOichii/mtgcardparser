@@ -1,4 +1,4 @@
-<matcher name="draw-cards-effect" pattern="(.* )?draw (.+) cards?">
+<matcher name="scry-effect" pattern="(.* )?scry (.+)">
   <selector template="implied-you-or-may-or-player(s)-in-effect" />
   <selector template="numeric" />
 </matcher>

@@ -1,10 +1,21 @@
-<splitter name="effect" pattern="\.\s|\,\sthen|\.\sthen">
-  <selector name="effect-select">
-    <matcher template="lose-life-and-gain-life" />
-    <matcher template="specific-life-gain-effect" />
-    <matcher template="tap-effect" />
-    <matcher template="put-counter-effect" />
-    <matcher template="deal-damage-effect" />
-    <matcher template="draw-cards-effect" />
-  </selector>
-</splitter>
+<matcher name="effect" pattern="(.+)">
+  <splitter name="split" pattern="\.\s|\,\sthen\s|\.\sthen\s">
+    <selector name="select">
+      <matcher template="lose-life-and-gain-life-effect" />
+      <matcher template="specific-life-gain-effect" />
+      <matcher template="tap-effect" />
+      <matcher template="put-counter-effect" />
+      <matcher template="deal-damage-effect" />
+      <matcher template="draw-cards-effect" />
+      <matcher template="discard-cards-effect" />
+      <matcher template="exile-effect" />
+      <matcher template="become-monarch-effect" />
+      <matcher template="destroy-effect" />
+      <matcher template="token-creation" />
+      <matcher template="mill-effect" />
+      <matcher template="shuffle-effect" />
+      <matcher template="scry-effect" />
+      <matcher template="untap-effect" />
+    </selector>
+  </splitter>
+</matcher>

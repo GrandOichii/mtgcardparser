@@ -1,0 +1,30 @@
+<matcher name="token-creation" pattern="(.* )?creates? (.+)">
+  <selector template="implied-you-or-may-or-player(s)-in-effect" />
+  <matcher name="split" pattern="(.* )tokens?( .*)">
+    <matcher name="number-checker" pattern="(\d+ )?(.+)">
+      <selector name="numeric-select">
+        <matcher template="empty" />
+        <matcher name="whitespace-remover" pattern="(.+) ">
+          <selector template="numeric" />
+        </matcher>
+      </selector>
+      <selector name="token-type">
+        <matcher name="named-token" pattern="(\w+) ">
+          <matcher template="true" />
+        </matcher>
+        <matcher name="token-extractor" pattern="(\d+\/\d+) (.+) \[type\:creature\] ">
+          <matcher name="power-toughness" pattern="(\d+)\/(\d+)">
+            <selector template="numeric" />
+            <selector template="numeric" />
+          </matcher>
+          <matcher name="additional-info" pattern="(.+)">
+            <matcher template="true" />
+          </matcher>
+        </matcher>
+      </selector>
+    </matcher>
+    <matcher name="postfix" pattern="(.+)">
+      <matcher template="true" />
+    </matcher>
+  </matcher>
+</matcher>

@@ -1,3 +1,4 @@
+- add script tool for sorting alphabetically the parsers for better readability
 - reducing the number of children in a pnode doesn't do anything
 - add exporting a local node to a template
 - right clicking to add nodes doesn't add them to correct mouse position
@@ -7,6 +8,7 @@
 - changing the name of the parser doesn't update it in the context menu
 - text transformers don't seem to be updating after updating their scripts
 - increasing selector count by more than 1 increases only once
+- had 3 local parsers called test, changed one of them => all of them changed
 
 - implement node copying
 

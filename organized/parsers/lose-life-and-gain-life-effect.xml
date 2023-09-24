@@ -1,4 +1,4 @@
-<matcher name="lose-life-and-gain-life" pattern="(.+ lose .+ life) and (.+ gain .+ life)">
+<matcher name="lose-life-and-gain-life-effect" pattern="(.+ lose .+ life) and (.+ gain .+ life)">
   <matcher template="lose-life-effect" />
   <matcher template="specific-life-gain-effect" />
 </matcher>

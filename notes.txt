@@ -66,3 +66,14 @@ Parsed: False
         null
     (static-effect: whenever event, effect.)
     Parsed: False
+
+- For each -
+e:Card draw
+e:Life gain
+e:Energy getting
+s:etb-with
+e:copy spell/ability
+Akiri gets +1/+0 for each artifact you control
+At the beginning of your precombat main phase, add {B} for each charge counter on Altar of Shadows.
+e:Discard
+Cost reduction

@@ -1,4 +1,4 @@
-<matcher name="triggered-ability" pattern="whenever (.+), (.+)">
+<matcher name="triggered-ability" pattern="whenever (.+?), (.+)">
   <matcher template="TODO" />
-  <splitter template="effect" />
+  <matcher template="effect" />
 </matcher>

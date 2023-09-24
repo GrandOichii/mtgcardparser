@@ -1,5 +1,4 @@
-<matcher name="put-counter-effect" pattern="(.* )?puts? (.+) counter on (.+)">
+<matcher name="destroy-effect" pattern="(.* )?destroys? (.+)">
   <selector template="implied-you-or-may-or-player(s)-in-effect" />
-  <selector template="counter-type" />
   <selector template="permanent(s)-in-effect" />
 </matcher>

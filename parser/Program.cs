@@ -104,6 +104,12 @@ class Program {
 
     private static Random Rnd = new();
     private static void GenerateRandomCards() {
+        var pattern = new Regex("\\.\\s|\\,\\sthen\\s");
+        var text = "Draw a card, then discard a card";
+        var split = pattern.Split(text);
+        foreach (var s in split)
+            System.Console.WriteLine(s);
+        return;
         var testPath = "../saved-project";
         // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
         System.Console.WriteLine("Loading...");
