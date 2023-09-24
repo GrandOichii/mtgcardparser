@@ -1,0 +1,15 @@
+<matcher name="cast-event" pattern="(.+) casts? (.+)">
+  <selector template="player-in-event" />
+  <selector name="what">
+    <matcher name="spell" pattern="(.+ )?spell( .+)?">
+      <splitter name="type-split" pattern="\,\s|\sor\s">
+        <matcher name="test" pattern="(.+)">
+          <matcher template="TODO" />
+        </matcher>
+      </splitter>
+      <selector name="spell-postfix">
+        <matcher template="empty" />
+      </selector>
+    </matcher>
+  </selector>
+</matcher>

@@ -1,6 +1,4 @@
 <matcher name="untap-effect" pattern="(.* )?untaps? (.+)">
   <selector template="implied-you-or-may-or-player(s)-in-effect" />
-  <matcher name="test" pattern="(.+)">
-    <matcher template="TODO" />
-  </matcher>
+  <selector template="permanent(s)-in-effect" />
 </matcher>

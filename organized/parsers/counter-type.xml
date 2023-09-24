@@ -1,3 +1,8 @@
 <selector name="counter-type">
-  <matcher template="true" />
+  <matcher name="stats-modifier" pattern="(.+)\/(.+)">
+    <matcher template="power-toughness-modifier" />
+    <matcher template="power-toughness-modifier" />
+  </matcher>
+  <matcher name="keyword-ability" pattern="\[keywordability\:.+\]" />
+  <matcher name="single-word" pattern="\w+" />
 </selector>

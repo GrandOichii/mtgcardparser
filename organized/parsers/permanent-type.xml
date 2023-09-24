@@ -1,0 +1,4 @@
+<selector name="permanent-type">
+  <matcher name="any-permanent" pattern="permanent" />
+  <matcher name="specific-type" pattern="\[type\:.+\]" />
+</selector>

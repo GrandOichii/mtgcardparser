@@ -1,0 +1,7 @@
+<matcher name="power-toughness-modifier" pattern="(\+|\-)(\d+)">
+  <selector name="sign">
+    <matcher name="plus" pattern="\+" />
+    <matcher name="minus" pattern="\-" />
+  </selector>
+  <selector template="numeric" />
+</matcher>

@@ -1,5 +1,7 @@
 <matcher name="deal-damage-effect" pattern="(.+) deal (.+) damage to (.+)">
   <selector template="permanent(s)-in-effect" />
   <selector template="numeric" />
-  <selector template="permanent(s)-in-effect" />
+  <matcher name="test" pattern="(.+)">
+    <matcher template="TODO" />
+  </matcher>
 </matcher>

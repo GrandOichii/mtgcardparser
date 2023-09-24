@@ -6,7 +6,7 @@
     </selector>
   </matcher>
   <matcher name="died-in-a-specific-turn" pattern="(.+) died (.+) turn">
-    <selector template="permanent(s)-in-event" />
+    <matcher template="TODO" />
     <matcher name="testtest" pattern="(.+)">
       <matcher template="TODO" />
     </matcher>

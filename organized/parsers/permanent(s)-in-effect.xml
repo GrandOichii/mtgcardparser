@@ -1,3 +1,20 @@
 <selector name="permanent(s)-in-effect">
-  <matcher template="true" />
+  <matcher name="cardname" pattern="\[cardname\]" />
+  <matcher name="referenced-card" pattern="it" />
+  <matcher name="target" pattern="(.+ )?target (.+)">
+    <selector name="target-prefix">
+      <matcher template="empty" />
+      <matcher name="up-to" pattern="up to (.+) ">
+        <selector template="numeric" />
+      </matcher>
+    </selector>
+    <matcher template="true" />
+  </matcher>
+  <matcher name="all" pattern="all (.+)">
+    <matcher template="true" />
+  </matcher>
+  <matcher name="referenced-permanent" pattern="that (.+)">
+    <selector template="permanent-type" />
+  </matcher>
+  <matcher name="referenced-cards" pattern="them" />
 </selector>

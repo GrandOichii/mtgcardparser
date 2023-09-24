@@ -3,4 +3,5 @@
   <matcher template="dies-event" />
   <matcher template="become-blocked-event" />
   <matcher template="leaves-the-battlefield-event" />
+  <matcher template="cast-event" />
 </selector>
