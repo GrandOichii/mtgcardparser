@@ -1,0 +1,9 @@
+<matcher name="become-blocked-event" pattern="(.+) becomes? blocked( .*)?">
+  <selector template="single-permanent-in-event" />
+  <selector name="postfix">
+    <matcher template="empty" />
+    <matcher name="test" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </selector>
+</matcher>

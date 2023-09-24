@@ -1,0 +1,9 @@
+<matcher name="dies-event" pattern="(.+) dies?( .*)?">
+  <selector template="permanent(s)-in-event" />
+  <selector name="postfix">
+    <matcher template="empty" />
+    <matcher name="test" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </selector>
+</matcher>

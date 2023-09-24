@@ -1,0 +1,9 @@
+<matcher name="leaves-the-battlefield-event" pattern="(.+) leaves? battlefield( .*)?">
+  <selector template="single-permanent-in-event" />
+  <selector name="postfix">
+    <matcher template="empty" />
+    <matcher name="test" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </selector>
+</matcher>

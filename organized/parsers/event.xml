@@ -1,0 +1,6 @@
+<selector name="event">
+  <matcher template="etb-event" />
+  <matcher template="dies-event" />
+  <matcher template="become-blocked-event" />
+  <matcher template="leaves-the-battlefield-event" />
+</selector>

@@ -1,0 +1,14 @@
+<selector name="if-clause">
+  <matcher name="was-kicked" pattern="it was kicked( .+)?">
+    <selector name="kicked-postfix">
+      <matcher template="empty" />
+      <matcher template="TODO" />
+    </selector>
+  </matcher>
+  <matcher name="died-in-a-specific-turn" pattern="(.+) died (.+) turn">
+    <selector template="permanent(s)-in-event" />
+    <matcher name="testtest" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </matcher>
+</selector>

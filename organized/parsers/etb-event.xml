@@ -1,0 +1,11 @@
+<matcher name="etb-event" pattern="(.+) etb( .*)?">
+  <splitter name="what-split" pattern="\,\s|\sor\s">
+    <selector template="permanent(s)-in-event" />
+  </splitter>
+  <selector name="postfix">
+    <matcher template="empty" />
+    <matcher name="test1" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </selector>
+</matcher>

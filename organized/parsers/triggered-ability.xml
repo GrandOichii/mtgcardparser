@@ -1,4 +1,16 @@
-<matcher name="triggered-ability" pattern="whenever (.+?), (.+)">
-  <matcher template="TODO" />
+<matcher name="triggered-ability" pattern="whenever (.+?)(, if .+)?, (.+?)(\. this ability .+)?">
+  <selector template="event" />
+  <selector name="if-clause-checker">
+    <matcher template="empty" />
+    <matcher name="prefix-remover" pattern=", if (.+)">
+      <selector template="if-clause" />
+    </matcher>
+  </selector>
   <matcher template="effect" />
+  <selector name="trigger-restricton-check">
+    <matcher template="empty" />
+    <matcher name="tes" pattern="(.+)">
+      <matcher template="TODO" />
+    </matcher>
+  </selector>
 </matcher>
