@@ -1,3 +1,3 @@
 <selector name="player(s)-in-effect">
-  <matcher template="true" />
+  <matcher name="you" pattern="you" />
 </selector>

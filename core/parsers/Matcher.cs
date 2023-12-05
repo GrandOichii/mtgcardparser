@@ -86,7 +86,7 @@ public class Matcher : PNode {
     }
 
     public override List<string>? GenerateAllPossibleTexts(Dictionary<PNode, List<ParseTrace>> index) {
-        if (Name == "TODO") return null;
+        if (Name == "TODO" || Name == "true") return null;
         if (Name == "aa") return null;
         // if (Name == "trigger") return null;
         if (Name == "x-extractor") return null;

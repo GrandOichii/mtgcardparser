@@ -104,19 +104,20 @@ class Program {
 
     private static Random Rnd = new();
     private static void GenerateRandomCards() {
-        var pattern = new Regex("\\.\\s|\\,\\sthen\\s");
-        var text = "Draw a card, then discard a card";
-        var split = pattern.Split(text);
-        foreach (var s in split)
-            System.Console.WriteLine(s);
-        return;
-        var testPath = "../saved-project";
+        // var pattern = new Regex("\\.\\s|\\,\\sthen\\s");
+        // var text = "Draw a card, then discard a card";
+        // var split = pattern.Split(text);
+        // foreach (var s in split)
+        //     System.Console.WriteLine(s);
+        // return;
+        // var testPath = "../saved-project";
+        var testPath = "../organized";
         // testPath = "C:\\Users\\ihawk\\code\\mtgcardparser\\saved-project";
         System.Console.WriteLine("Loading...");
         var project = Project.Load(testPath);
         
         // var text = "{1}: Put a charge counter on Test1."; // this generates bad text
-        // var text = "{T}: Draw 1 card."; // this doesn't 
+        var text = "{T}: Draw 1 card."; // this doesn't 
         
         System.Console.WriteLine("Parcing...");
         var result = project.Do(new Card("Test1", text));
