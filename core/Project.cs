@@ -3,14 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace MtgCardParser;
 
-public class ParseTrace {
-    public PNode Parent { get; }
-    public string Text { get; }
-    public bool Parsed { get; set; } = false;
-    public List<ParseTrace?> ChildrenTraces { get; } = new();
-    public ParseTrace(PNode parent, String text) { Parent = parent; Text = text; }
-}
-
+using Parsers;
+using TextTransformers;
 
 public class Project {
     private static readonly string MANIFEST_FILE = "manifest.json";

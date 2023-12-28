@@ -1,8 +1,17 @@
-namespace MtgCardParser;
+namespace MtgCardParser.Parsers;
 
 using System.Xml;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+
+public class ParseTrace {
+    public PNode Parent { get; }
+    public string Text { get; }
+    public bool Parsed { get; set; } = false;
+    public List<ParseTrace?> ChildrenTraces { get; } = new();
+    public ParseTrace(PNode parent, String text) { Parent = parent; Text = text; }
+}
 
 
 public abstract class PNode {

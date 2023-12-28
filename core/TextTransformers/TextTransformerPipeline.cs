@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using NLua;
 
-namespace MtgCardParser;
+namespace MtgCardParser.TextTransformers;
 
 public class TextTransformerPipeline {
     private static readonly string MANIFEST_FILE = "manifest.json";

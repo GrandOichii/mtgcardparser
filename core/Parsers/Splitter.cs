@@ -1,4 +1,4 @@
-namespace MtgCardParser;
+namespace MtgCardParser.Parsers;
 using System.Xml;
 
 using System.Text.RegularExpressions;

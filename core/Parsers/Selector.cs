@@ -1,4 +1,4 @@
-namespace MtgCardParser;
+namespace MtgCardParser.Parsers;
 using System.Xml;
 
 public class Selector : PNode {

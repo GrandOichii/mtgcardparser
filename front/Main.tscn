@@ -179,17 +179,8 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="AddSampleCard" from="." to="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="AddCard"]
-[connection signal="AddSampleCard" from="." to="MainControl/TabContainer/TTP/HBoxContainer/VBoxContainer2/CardsList" method="AddCard"]
-[connection signal="CardAdded" from="." to="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" method="UpdateCard"]
-[connection signal="ClearSampled" from="." to="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" method="ClearCards"]
-[connection signal="ProjectLoaded" from="." to="MainControl/TabContainer/TTP" method="OnProjectLoaded"]
-[connection signal="ProjectLoaded" from="." to="MainControl/TabContainer/TTP/TTEditor" method="OnMainProjectLoaded"]
-[connection signal="ProjectLoaded" from="." to="MainControl/TabContainer/Parsers" method="OnMainProjectLoaded"]
 [connection signal="close_requested" from="CardViewWindow" to="." method="OnCardViewWindowCloseRequested"]
-[connection signal="CardClicked" from="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/CardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampleRandom" to="." method="OnSampleRandomPressed"]
-[connection signal="CardClicked" from="MainControl/TabContainer/Cards/VBoxContainer/HBoxContainer/VBoxContainer/SampledCardsList" to="." method="ViewCard"]
 [connection signal="pressed" from="MainControl/TabContainer/Cards/VBoxContainer/DownloadCardsButton" to="." method="OnDownloadCardsButtonPressed"]
 [connection signal="request_completed" from="MainControl/TabContainer/Cards/VBoxContainer/DownloadCardsButton/BulkDataRequest" to="." method="OnBulkDataRequestRequestCompleted"]
 [connection signal="request_completed" from="MainControl/TabContainer/Cards/VBoxContainer/DownloadCardsButton/CardsDownloadRequest" to="." method="OnCardsDownloadRequestRequestCompleted"]

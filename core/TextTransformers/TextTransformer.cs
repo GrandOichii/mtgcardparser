@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using NLua;
 
-namespace MtgCardParser;
+namespace MtgCardParser.TextTransformers;
 
 public abstract class TextTransformerTemplate {
     public string Name { get; set; } = "";
